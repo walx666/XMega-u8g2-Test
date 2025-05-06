@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "u8g2.h": "c",
+        "spi_master.h": "c",
+        "usb_protocol.h": "c",
+        "conf_usb.h": "c",
+        "udi_cdc.h": "c",
+        "app_usb.h": "c",
+        "u8x8.h": "c"
+    }
+}

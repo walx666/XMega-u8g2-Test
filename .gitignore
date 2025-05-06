@@ -1,0 +1,166 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+*.lis
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.bin
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Compiler
+icc/
+Bcpp/**
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+!build.cmd
+!clean.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+
+# Rest
+Output/**
+batch/**
+bin/**
+bma.bat
+clean.bat
+clone.bat
+hm9.bat
+makemake.bat
+hmczip.bat
+GM.bat
+ToDo.txt
+rp5.bat
+/gnuclinux
+/.settings
+*.csv
+clean
+makemake
+hmczip
+makeicc.bat
+debug/*
+zip/*
+*.bak
+*.tmp
+*.ls
+*.s28
+*.7z
+
+# Linux Tools
+Tools/bin/make
+Tools/bin/ScanToDo
+Tools/bin/MakeMake
+Tools/bin/rm.exe
+Tools/bin/mv.exe
+Tools/bin/mkdir.exe
+Tools/bin/*.dll
+Tools/bin/cp.exe
+Tools/bin/mkdir1.exe
+Tools/bin/echo1.exe
+Tools/bin/sed.exe
+Tools/bin/test.exe
+Tools/bin/plink.exe
+#Tools/bin/avrdude*
+
+gnuclinux/**
+
+# Dateien die beim Compilieren entstehen
+Boot.*
+Clone*.*
+*.dmp
+src/Fonts.inc
+src/Men2Hex.h
+src/Men2Hex.inc
+src/Men2HexD.h
+src/Men2Hex.fca
+src/Appl.h
+src/Appl.inc
+src/Appl.ofl
+src/Symbols.inc
+src/*.exe
+src/GitVer.*
+src/Version.*
+src/Settings.txt
+*.lss
+*.eep
+*.usersignatures
+*.cof
+*.dbg
+*.Len
+*.lst
+*.mnu
+*.mp
+*.i
+*.s
+
+# Archives
+/*.7z
+/*.zip
+
+# Entwicklungsumgebungen
+#.settings/**
+#.cproject
+#.project
+#.vscode/**
+.vscode/*.log
+*.pnproj
+*.pnps
+
+build/**
+Release*/**
+Debug*/**
+
+Tools/bin/sed.exe
+Tools/bin/grep.exe
+Tools/bin/gawk.exe
+Tools/bin/# info.txt
+
+eep/**
+
+/m2h
+/m2h/**
+#m2h/altem2h/**
+
+debug.log
+.VSCodeCounter/**
+*-error.txt
