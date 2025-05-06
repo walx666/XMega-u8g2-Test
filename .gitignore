@@ -131,6 +131,7 @@ gnuclinux/**
 *.pnproj
 *.pnps
 
+.vs/**
 build/**
 Release*/**
 Debug*/**

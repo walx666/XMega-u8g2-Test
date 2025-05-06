@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "XMega-LCDu8g2-Test-384c3", "XMega-LCDu8g2-Test-384c3.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+		Release-AdafruitI2C-Oled|AVR = Release-AdafruitI2C-Oled|AVR
+		Release-SSD1306_I2C_64X32|AVR = Release-SSD1306_I2C_64X32|AVR
+		Release-XiamenSPI128X64|AVR = Release-XiamenSPI128X64|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Deploy.0 = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-AdafruitI2C-Oled|AVR.ActiveCfg = Release-AdafruitI2C-Oled|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-AdafruitI2C-Oled|AVR.Build.0 = Release-AdafruitI2C-Oled|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-SSD1306_I2C_64X32|AVR.ActiveCfg = Release-SSD1306_I2C_64X32|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-SSD1306_I2C_64X32|AVR.Build.0 = Release-SSD1306_I2C_64X32|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-XiamenSPI128X64|AVR.ActiveCfg = Release-XiamenSPI128X64|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release-XiamenSPI128X64|AVR.Build.0 = Release-XiamenSPI128X64|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
