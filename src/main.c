@@ -151,13 +151,15 @@ int main (void)
 	irq_initialize_vectors();
 	cpu_irq_enable();
 
-#if (BOARD == XMEGA_A3BU_XPLAINED) || (BOARD == XMEGA_C3_XPLAINED)
+   #if (BOARD == XMEGA_A3BU_XPLAINED) || (BOARD == XMEGA_C3_XPLAINED)
 	/* The status LED must be used as LED2, so we turn off
 	 * the green led which is in the same packaging. */
 	ioport_set_pin_high(LED3_GPIO);
 	ioport_configure_pin(LCD_DBG0,	IOPORT_DIR_OUTPUT | IOPORT_INIT_HIGH);
-#endif
+   #endif
+   #if (BOARD == XMEGA_C3_XPLAINED)
     rtc_init();
+   #endif
     stdio_usb_init(); /* Initialize STDIO and start USB */
 
 	// Start USB stack to authorize VBus monitoring

@@ -105,22 +105,7 @@ Tools/bin/plink.exe
 gnuclinux/**
 
 # Dateien die beim Compilieren entstehen
-Boot.*
-Clone*.*
 *.dmp
-src/Fonts.inc
-src/Men2Hex.h
-src/Men2Hex.inc
-src/Men2HexD.h
-src/Men2Hex.fca
-src/Appl.h
-src/Appl.inc
-src/Appl.ofl
-src/Symbols.inc
-src/*.exe
-src/GitVer.*
-src/Version.*
-src/Settings.txt
 *.lss
 *.eep
 *.usersignatures
@@ -131,7 +116,7 @@ src/Settings.txt
 *.mnu
 *.mp
 *.i
-*.s
+#*.s
 
 # Archives
 /*.7z
