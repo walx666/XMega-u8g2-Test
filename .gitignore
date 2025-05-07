@@ -132,7 +132,7 @@ gnuclinux/**
 *.pnps
 
 .vs/**
-build/**
+build*/**
 Release*/**
 Debug*/**
 

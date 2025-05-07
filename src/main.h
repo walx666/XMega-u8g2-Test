@@ -86,6 +86,9 @@ void main_resume_action(void);
  */
 void main_cdc_set_dtr(uint8_t port, bool b_enable);
 
+
+void SetAllLeds (uint8_t ledstate);
+
 #ifdef USB_DEVICE_LPM_SUPPORT
 /*! \brief Enters the application in low power mode
  * Callback called when USB host sets LPM suspend state

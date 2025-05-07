@@ -33,7 +33,13 @@
 /*
  * Support and FAQ: visit <a href="https://www.microchip.com/support/">Microchip Support</a>
  */
+#if 	defined(XMEGA_C3_XPLAINED)
+#include <asf-xmega-c3.h>
+ #elif 	defined(XMEGA_A3BU_XPLAINED)
+#include <asf-xmega-a3bu.h>
+ #else
 #include <asf.h>
+ #endif
 #include "app_touch.h"
 
 /**

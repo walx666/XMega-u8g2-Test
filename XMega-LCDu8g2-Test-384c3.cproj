@@ -11,7 +11,7 @@
     <Language>C</Language>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>XMega-LCDu8g2-Test-384c3</AssemblyName>
     <Name>XMega-LCDu8g2-Test-384c3</Name>
     <RootNamespace>XMega-LCDu8g2-Test-384c3</RootNamespace>
@@ -96,8 +96,8 @@
           <file path="src/ASF/xmega/drivers/nvm/nvm_asm.s" framework="" version="3.52.0" source="xmega\drivers\nvm\nvm_asm.s" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/xmega/drivers/nvm/nvm.h" framework="" version="3.52.0" source="xmega\drivers\nvm\nvm.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/xmega/drivers/pmic/pmic.h" framework="" version="3.52.0" source="xmega\drivers\pmic\pmic.h" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/xmega/drivers/rtc/rtc.c" framework="" version="" source="xmega/drivers/rtc/rtc.c" changed="False" content-id="Atmel.ASF" />
-          <file path="src/ASF/xmega/drivers/rtc/rtc.h" framework="" version="" source="xmega/drivers/rtc/rtc.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/rtc/rtc.c" framework="" version="" source="xmega\drivers\rtc\rtc.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/rtc/rtc.h" framework="" version="" source="xmega\drivers\rtc\rtc.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/xmega/drivers/sleep/sleep.h" framework="" version="3.52.0" source="xmega\drivers\sleep\sleep.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/xmega/drivers/tc/tc.c" framework="" version="" source="xmega/drivers/tc/tc.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/xmega/drivers/tc/tc.h" framework="" version="" source="xmega/drivers/tc/tc.h" changed="False" content-id="Atmel.ASF" />
@@ -265,7 +265,7 @@
       </AvrGcc>
     </ToolchainSettings>
     <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <BuildTarget>all</BuildTarget>
     <CleanTarget>clean</CleanTarget>
   </PropertyGroup>
@@ -378,7 +378,7 @@
 </AvrGcc>
     </ToolchainSettings>
     <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <BuildTarget>all</BuildTarget>
     <CleanTarget>clean</CleanTarget>
   </PropertyGroup>
@@ -489,7 +489,7 @@
       </AvrGcc>
     </ToolchainSettings>
     <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <BuildTarget>all</BuildTarget>
     <CleanTarget>clean</CleanTarget>
     <!--OutputPath>build\Release-XiamenSPI128X64\</OutputPath-->
@@ -601,7 +601,7 @@
       </AvrGcc>
     </ToolchainSettings>
     <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <BuildTarget>all</BuildTarget>
     <CleanTarget>clean</CleanTarget>
     <!--OutputPath>build\Release-AdafruitI2C-Oled\</OutputPath-->
@@ -713,7 +713,7 @@
       </AvrGcc>
     </ToolchainSettings>
     <UsesExternalMakeFile>False</UsesExternalMakeFile>
-    <OutputDirectory>$(MSBuildProjectDirectory)\build\$(Configuration)</OutputDirectory>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <BuildTarget>all</BuildTarget>
     <CleanTarget>clean</CleanTarget>
     <!--OutputPath>build\Release-SSD1306_I2C_64X32\</OutputPath-->
@@ -1353,7 +1353,8 @@
     <None Include="src\ASF\xmega\drivers\tc\tc.h">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\asf.h">
+    <!--None Include="src\asf.h"-->
+    <None Include="src\asf-xmega-c3.h">
       <SubType>compile</SubType>
     </None>
     <None Include="src\config\conf_board.h">

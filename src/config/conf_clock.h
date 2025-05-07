@@ -47,12 +47,27 @@
 
 #define CONFIG_OSC_AUTOCAL_RC32MHZ_REF_OSC  OSC_ID_USBSOF
 
+ #if 0
+/* Clk cpu/per	= 24Mhz ( 48MHz / 2) */
 #define CONFIG_SYSCLK_SOURCE     SYSCLK_SRC_RC32MHZ
 #define CONFIG_SYSCLK_PSADIV     SYSCLK_PSADIV_2
+#define CONFIG_SYSCLK_PSBCDIV    SYSCLK_PSBCDIV_1_1*/
+ #else
+/* Clk cpu/per	= 32Mhz ( 2MHz * 16) */
+#define CONFIG_PLL0_SOURCE       PLL_SRC_RC2MHZ
+#define CONFIG_PLL0_MUL          16
+#define CONFIG_PLL0_DIV          1
+//
+#define CONFIG_SYSCLK_SOURCE     SYSCLK_SRC_PLL
+#define CONFIG_SYSCLK_PSADIV     SYSCLK_PSADIV_1
 #define CONFIG_SYSCLK_PSBCDIV    SYSCLK_PSBCDIV_1_1
+ #endif
 
+ #if	defined(XMEGA_C3_XPLAINED)
 #define CONFIG_RTC_SOURCE        SYSCLK_RTCSRC_TOSC 
-
+ #elif	defined(XMEGA_A3BU_XPLAINED)
+//define CONFIG_RTC32_SOURCE        SYSCLK_RTCSRC_TOSC 
+ #endif
 /*
  * Use external board OSC (8MHz)
  * Clk pll     = 48MHz (used by USB)

@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief XMEGA-C3 Xplained board configuration template
+ * \brief XMEGA-C3 / XMEGA-A3BU Xplained board configuration template
  *
  */
 /*
@@ -17,7 +17,7 @@
 //#define  USART_ON_PORTD
 //#define  USART_ON_PORTE
 
-
+#ifdef XMEGA_C3_XPLAINED
 // Initialize SPI and control pins for UG_2832HSWEG04 OLED controller
 //#define CONF_BOARD_OLED_UG_2832HSWEG04
 
@@ -33,6 +33,18 @@
 // Initialize Analog Comparator pin and input signal pin
 // for Analog Filter (lowpass RC @ 159 Hz)
 //#define CONF_BOARD_ANALOG_FILTER
+#endif
+
+// Initialize IO pins for the LCD controller
+#ifdef XMEGA_A3BU_XPLAINED
+//#define CONF_BOARD_C12832A1Z
+
+// Initialize IO pins for the DataFlash
+//#define CONF_BOARD_AT45DBX
+
+// Initialize IO pins for use with Analog Comparator
+//#define CONF_BOARD_ENABLE_AC_PINS
+#endif
 
 // Initialize IO pins for use with USART 0 on port C
 #ifdef USART_ON_PORTC
@@ -44,8 +56,8 @@
 #define USART_SYSCLK        SYSCLK_USART0
 #define USART_PORT_SYSCLK   SYSCLK_PORT_C
 #define USART_PORT          PORTC
-#define USART_PORT_PIN_TX   (1<<3)  // PC3 (TXC0)
-#define USART_PORT_PIN_RX   (1<<2)  // PC2 (RXC0)
+#define USART_PORT_PIN_TX   (1<<3)  /* PC3 (TXC0) */
+#define USART_PORT_PIN_RX   (1<<2)  /* PC2 (RXC0) */
 #endif
 
 // Initialize IO pins for use with USART 0 on port D
@@ -58,8 +70,8 @@
 #define USART_SYSCLK        SYSCLK_USART0
 #define USART_PORT_SYSCLK   SYSCLK_PORT_D
 #define USART_PORT          PORTD
-#define USART_PORT_PIN_TX   (1<<3)  // PC3 (TXC0)
-#define USART_PORT_PIN_RX	(1<<2)  // PC2 (RXC0)
+#define USART_PORT_PIN_TX   (1<<3)  /* PD3 (TXD0) */
+#define USART_PORT_PIN_RX	(1<<2)  /* PD2 (RXD0) */
 #endif
 
 // Initialize IO pins for use with USART 0 on port E
@@ -72,8 +84,8 @@
 #define USART_SYSCLK        SYSCLK_USART0
 #define USART_PORT_SYSCLK   SYSCLK_PORT_E
 #define USART_PORT          PORTE
-#define USART_PORT_PIN_TX   (1<<3)  // PC3 (TXC0)
-#define USART_PORT_PIN_RX   (1<<2)  // PC2 (RXC0)
+#define USART_PORT_PIN_TX   (1<<3)  /* PE3 (TXE0) */
+#define USART_PORT_PIN_RX   (1<<2)  /* PE2 (RXE0) */
 #endif
 
 #endif // CONF_BOARD_H
