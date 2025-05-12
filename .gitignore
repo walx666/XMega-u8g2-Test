@@ -147,6 +147,6 @@ eep/**
 /m2h/**
 #m2h/altem2h/**
 
-debug.log
+*.log
 .VSCodeCounter/**
 *-error.txt

@@ -1,0 +1,307 @@
+{
+    "env": {
+        //"myCompilerPath": "${env:GCCAVR}/bin/avr-gcc.exe",
+        "myCompilerPath" : "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/avr-gcc.exe",
+        "myIncludePaths_XMEGAA" : [
+            //"${env:GCCAVR}/avr/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/packs/atmel/XMEGAA_DFP/1.3.146/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/include/**"
+        ],
+        "myIncludePaths_XMEGAC" : [
+            //"${env:GCCAVR}/avr/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/packs/atmel/XMEGAC_DFP/1.3.117/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/include/**"
+        ],
+        "myIncludePaths_XMEGAD" : [
+            //"${env:GCCAVR}/avr/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/packs/atmel/XMEGAD_DFP/1.4.131/include/**",
+            "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/toolchain/avr8/avr8-gnu-toolchain/include/**"
+        ]
+    },
+    "configurations": [
+        {
+            "name": "ATxmega128C3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAC}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA128C3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega128C3",
+                "__AVR_ATxmega128C3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega192C3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAC}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA192C3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega192C3",
+                "__AVR_ATxmega192C3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega256C3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAC}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA256C3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega256C3",
+                "__AVR_ATxmega256C3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega384C3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAC}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA384C3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega384C3",
+                "__AVR_ATxmega384C3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega384C3-Xplained",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAC}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA384C3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega384C3",
+                "__AVR_ATxmega384C3__",
+                "F_CPU=32000000",
+                "BOARD=XMEGA_C3_XPLAINED",
+                "IOPORT_XMEGA_COMPAT",
+                "ACCESS_USB_ENABLED",
+                "LCD_XIAMEN_240X128"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega256A3BU",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAA}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA256A3BU__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega256A3BU",
+                "__AVR_ATxmega256A3BU__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },  
+        {
+            "name": "ATxmega256A3BU-Xplained",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAA}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA256A3BU__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega256A3BU",
+                "__AVR_ATxmega256A3BU__",
+                "F_CPU=32000000",
+                "BOARD=XMEGA_A3BU_XPLAINED",
+                "IOPORT_XMEGA_COMPAT",
+                "ACCESS_USB_ENABLED",
+                "LCD_NHDC_128X32"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath":"${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },        
+        {
+            "name": "ATxmega128D3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAD}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA128D3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega192D3",
+                "__AVR_ATxmega128D3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega192D3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAD}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA192D3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega192D3",
+                "__AVR_ATxmega192D3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega256D3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAD}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA256D3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega256D3",
+                "__AVR_ATxmega256D3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        },
+        {
+            "name": "ATxmega384D3",
+            "includePath": [ 
+                "${myIncludePaths_XMEGAD}" ,
+                "${workspaceFolder}/src/**" 
+            ],
+            "defines": [
+                "__GNUC__",
+                "USE_CONFIG_H=",
+                "_DEBUG",
+                "__AVR__",
+                "__AVR_XMEGA__=",
+                "__AVR_XMEGA256D3__",
+                "__AVR_HAVE_ELPMX__",
+                "__flash=",
+                "_PROTECTED_WRITE=",
+                "ATxmega384D3",
+                "__AVR_ATxmega384D3__",
+                "F_CPU=32000000"
+            ],
+            "intelliSenseMode": "gcc-x86",
+            "compilerPath" : "${myCompilerPath}",
+            "cStandard": "c99",
+            "cppStandard": "c++98"
+        }
+    ],
+    "version": 4
+}

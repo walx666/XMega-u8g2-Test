@@ -64,11 +64,17 @@ static volatile bool main_b_cdc_enable = false;
 	Results :
 	---------
 	LCD_XIAMEN_240X128:
+		u8g2_SendBuffer() only
+		LCD_PAGED==0 -> @32MHz, ~5,7ms
+		u8g2_SendBuffer() and Display-Rendering inf FrameBuffer
 		LCD_PAGED==0 -> @24MHz : 50-55ms	@32MHz, 30-39ms
 		LCD_PAGED==1 -> @24MHz : 205-210ms	@32MHz, 136-167
 		LCD_PAGED==2 -> @24MHz : 120-140ms	@32MHz, 85-101
 
 	LCD_XIAMEN_128X64:
+		u8g2_SendBuffer() only
+		LCD_PAGED==0 -> @32MHz, ~1,6ms
+		u8g2_SendBuffer() and Display-Rendering inf FrameBuffer
 		LCD_PAGED==0 -> @24MHz : 25-27ms	@32MHz, 18,4ms (17-19ms)
 		LCD_PAGED==1 -> @24MHz : 70-74ms	@32MHz,
 		LCD_PAGED==2 -> @24MHz : 41-46ms	@32MHz,
@@ -148,6 +154,7 @@ static volatile bool main_b_cdc_enable = false;
 #define LCD_Select_Cmd()    arch_ioport_set_pin_level(LCD_DC_PIN, true)
 
 #define LCD_DBG0            J3_PIN7
+#define LCD_DBG1            J3_PIN5
 
 #define PDC7_SYSCLK_OUT		IOPORT_CREATE_PIN(PORTC, 7)
 
@@ -182,15 +189,12 @@ int main (void)
 	 * the green led which is in the same packaging. */
 	LED_Off(LED3_GPIO);
 	ioport_configure_pin(LCD_DBG0,	IOPORT_DIR_OUTPUT | IOPORT_INIT_HIGH);
-	//rtc_init();
+	ioport_configure_pin(LCD_DBG1,	IOPORT_DIR_OUTPUT | IOPORT_INIT_HIGH);
    #endif
    #ifdef LCD_BACKLIGHT_PIN
 	ioport_configure_pin(LCD_BACKLIGHT_PIN, IOPORT_DIR_OUTPUT | IOPORT_INIT_HIGH);
    #endif
-   #if (BOARD == XMEGA_C3_XPLAINED)
-    //rtc_init();
-   #else
-   #endif
+    rtc_init();
     stdio_usb_init(); /* Initialize STDIO and start USB */
 
 	// Start USB stack to authorize VBus monitoring
@@ -326,7 +330,9 @@ int main (void)
 		#if LCD_PAGED
 		} while( u8g2_NextPage(&u8g2) );		
 		#else
+		gpio_set_pin_low(LCD_DBG1);
 		u8g2_SendBuffer(&u8g2);
+		gpio_set_pin_high(LCD_DBG1);
 		#endif
 		cnt1--;
 		if (++cnt2>9999)

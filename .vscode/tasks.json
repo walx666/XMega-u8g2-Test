@@ -1,0 +1,626 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    //"terminal.integrated.defaultProfile.windows": "Power2shell",
+    // "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    "options": {
+        "env": {
+            "AS7PATH": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/",
+            "AS7EXE": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/atmelstudio.exe",
+            //"ProjName": "LFTD_ABIC",
+            //"Cpu": "ATxmega256C3",
+            "XBootComPort": "COM5",
+            //"XBootBaud": "921600",
+            //"OSTYPE": "${input:ProjCompilerIn}",
+            // "avrprog_addcmds": "erase -ee",
+            //"CreateCloneBin": "1",
+            //"DEBUG": "1",
+        }
+    },
+    "inputs": [
+        { // CMD_GetSerialPortWindows
+            "id": "CMD_GetSerialPortWindows",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "powershell [System.IO.Ports.SerialPort]::getportnames()|Sort"
+                //"command": "[System.IO.Ports.SerialPort]::getportnames()"
+                //"command": " mode.com|findstr /I COM"
+            },
+        },
+        { // CMD_GetSerialPortWLS
+            "id": "CMD_GetSerialPortWLS",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                //"command": "ls /dev/ttyS*"
+                "command": "ls /dev/ttyACM* /dev/ttyUSB* 2>/dev/null"
+                //"command": "ls /dev/ttyS*"
+            },
+        },
+        { // CMD_GetSerialPortLinux
+            "id": "CMD_GetSerialPortLinux",
+            "type": "pickString",
+            "description": "Bitte Comport auswaehlen!",
+            "options": [
+                "COM1",
+                "COM2",
+                "COM3",
+                "COM4",
+                "COM5",
+                "COM6",
+                "/dev/ttyS0",
+                "/dev/ttyS1",
+                "/dev/ttyS2",
+                "/dev/ttyS3",
+                "/dev/ttyS4",
+                "/dev/ttyS5",
+                "/dev/ttyUSB0",
+                "/dev/ttyUSB1",
+                "/dev/ttyUSB2",
+                "/dev/ttyUSB3",
+                "/dev/ttyUSB4",
+                "/dev/ttyUSB5",
+            ],
+            "default": "COM3"
+        },
+        { // CMD_ProjNameInWindows
+            "id": "CMD_ProjNameInWindows",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "powershell \"Get-ChildItem \"${workspaceFolder}\\*.cproj\" | sort LastWriteTime -Descending | Foreach-Object {$_.BaseName}\""
+                //"command": "powershell ls ${workspaceFolder}/m2h/*.m2h"
+                //"command": " mode.com|findstr /I COM"
+                //"command": "[System.IO.Ports.SerialPort]::getportnames()"
+            },
+        },
+        { // ProjNameIn
+            "type": "pickString",
+            "id": "ProjNameIn",
+            "description": "Bitte Projekt auswaehlen!",
+            "options": [
+                "XMega-LCDu8g2-Test-256a3bu",
+                "XMega-LCDu8g2-Test-384c3"
+            ],
+        },
+        { // ProjCpuIn
+            "type": "pickString",
+            "id": "ProjCpuIn",
+            "description": "Bitte host CPU auswaehlen!",
+            "options": [
+                //"ATxmega128C3",
+                //"ATxmega256C3",
+                //"ATxmega192C3",
+                "ATxmega384C3",
+                //"ATxmega128D3",
+                //"ATxmega192D3",
+                //"ATxmega256D3",
+                //"ATxmega384D3",
+                "ATxmega256A3BU",
+            ],
+            //"default": "ATxmega384C3",
+        },
+        { // ProjMcuIn
+            "type": "pickString",
+            "id": "ProjMcuIn",
+            "description": "Bitte host MCU auswaehlen!",
+            "options": [
+                "avr1",         // classic AVR core without data RAM
+                "avr2",         // classic AVR core with up to 8K program memory
+                "avr25",        // classic AVR core with up to 8K program memory plus the MOVW instruction
+                "avr3",         // classic AVR core with up to 64K program memory
+                "avr31",        // classic AVR core with up to 128K program memory
+                "avr35",        // (tiny1634) classic AVR core with up to 64K program memory plus the MOVW instruction
+                "avr4",         // enhanced AVR core with up to 8K program memory
+                "avr5",         // (hmc1x) enhanced AVR core with up to 64K program memory
+                "avr51",        // enhanced AVR core with up to 128K program memory
+                "avr6",         // enhanced AVR core with up to 256K program memory
+                "avrxmega2",    // XMEGA, > 8K, < 64K FLASH, < 64K RAM
+                "avrxmega3",    // XMEGA, RAM + FLASH < 64K, Flash visible in RAM
+                "avrxmega4",    // XMEGA, > 64K, <= 128K FLASH, <= 64K RAM
+                "avrxmega5",    // XMEGA, > 64K, <= 128K FLASH, > 64K RAM
+                "avrxmega6",    // (hmc2x) XMEGA, > 128K, <= 256K FLASH, <= 64K RAM
+                "avrxmega7",    // XMEGA, > 128K, <= 256K FLASH, > 64K RAM
+                "tiny", // "ATtiny1634",
+            ],
+            "default": "avrxmega6",
+        },
+        { // ProjCompilerIn
+            "type": "pickString",
+            "id": "ProjCompilerIn",
+            "description": "Bitte Compiler auswaehlen!",
+            "options": [
+                "avrgcc",
+                "icc",
+            ],
+            "default": "avrgcc",
+        },
+        { // ComPortIn
+            "type": "pickString",
+            "id": "ComPortIn",
+            "description": "Bitte Comport auswaehlen!",
+            "options": [
+                "COM1",
+                "COM2",
+                "COM3",
+                "COM4",
+                "COM5",
+                "COM6",
+                "COM7",
+                "COM8",
+                "COM9",
+                "COM10",
+                "/dev/ttyS0",
+                "/dev/ttyS1",
+                "/dev/ttyUSB0",
+                "/dev/ttyUSB1",
+            ],
+            "default": "COM3"
+        },
+        { // ComBaudrateIn
+            "type": "pickString",
+            "id": "ComBaudrateIn",
+            "description": "Bitte Baudrate auswaehlen!",
+            "options": [
+                "9600",
+                "19200",
+                "38400",
+                "57600",
+                "115200",
+                "230400",
+                "406800",
+                "921600",
+            ],
+            "default": "9600"
+        },
+        { // xprogIn
+            "type": "pickString",
+            "id": "xprogIn",
+            "description": "What type of component do you want to create?",
+            "options": [
+                "xboot-app",
+                "xboot-app-eepext",
+                "xboot-usersig",
+                "xboot-i2c",
+                "xboot",
+                "xboot-eepint",
+                "xboot-eepext",
+                "xboot-erase",
+                "xboot-eepint-clr-first4bytes",
+                "xboot-eepext-clr-first16bytes"
+            ],
+            //"default": "xboot",
+        },
+        { // XBootPartIn
+            "type": "pickString",
+            "id": "XBootPartIn",
+            "description": "What type of component do you want to create?",
+            "options": [
+                "hmc1x",
+                "hmc2x",
+                "hmc2x-256c3",
+                "hmc2x-256d3",
+                "hmc2x-128c3",
+                "hmc2x-128d3",
+                "hmc2x-192c3",
+                "hmc2x-192d3",
+                "hmc2x-384c3",
+                "hmc2x-384d3",
+            ],
+            "default": "hmc2x",
+        },
+        { // Configuration
+            "type": "pickString",
+            "id": "ConfigurationIn",
+            "description": "What type of component do you want to create?",
+            "options": [
+                "Debug",
+                "Release",
+                "Release-AdafruitI2C-Oled",
+                "Release-NHDC12832",
+                "Release-SSD1306_I2C_64X32",
+                "Release-XiamenSPI128X64",
+            ],
+            //"default": "Release",
+        },
+    ],
+    "tasks": [
+        { // list serial ports
+            "label": "list serial ports",
+            "type": "shell",
+            "group": "test",
+            "command": "echo ${input:CMD_GetSerialPortWindows}",
+            "linux": {
+                "command": "echo ${input:CMD_GetSerialPortLinux}"
+            },
+            "problemMatcher": []
+        },
+        { // build AtmelStudio
+            "label": "build",
+            "type": "shell",
+            "group": "build",
+            "dependsOrder": "sequence",
+            "dependsOn": ["delete build.log"],
+            "options": {
+                //"env": {
+                  //  "AS7PATH": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/",
+                    //"AS7EXE": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/atmelstudio.exe",
+                    //"PATH": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/:${env:PATH}",
+                    //"PATH": "${env:AS7PATH}:${env:PATH}",
+                //},
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/atmelstudio.exe",
+            //"command": "${env:AS7EXE}",
+            //"command": "${AS7PATH}/atmelstudio.exe",
+            //"command": "${workspaceFolder}\\atmelstudio.exe",
+            "args": [
+                "${input:CMD_ProjNameInWindows}.cproj",
+                "/build",
+                "${input:ConfigurationIn}",
+                "/out",
+                "${workspaceFolder}/build.log",
+            ],
+            "presentation": {
+                "focus": true
+            },
+            "problemMatcher": {
+                "base": "$gcc",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}/src"
+                ]
+            }
+        },
+        { // delete build.log
+            "label": "delete build.log",
+            "type": "shell",
+            "group": "build",
+            "command": "rm",
+            "args": [
+                "${workspaceFolder}\\build.log",
+                "-ErrorAction",
+                "SilentlyContinue"
+            ],
+            "problemMatcher": []
+        },
+        { // open build.log
+            "label": "open build.log",
+            "type": "shell",
+            "group": "build",
+            "command": "${workspaceFolder}\\build.log",
+            "problemMatcher": []
+        },
+        { // make clean all
+            "label": "make clean all",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                //"-s",
+                "clean",
+                "all",
+                "ProjName=${input:CMD_ProjNameInLinux}",
+                "Compiler=avrgcc"
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe",
+                "args": [
+                    //"-s",
+                    "clean",
+                    "all",
+                    "ProjName=${input:CMD_ProjNameInWindows}",
+                    "Compiler=${input:ProjCompilerIn}"
+                ],
+            },
+            "problemMatcher": [
+                {
+                    "owner": "make",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "severity": "error",
+                    "pattern": {
+                        "regexp": "^(?:![E]\\s)(.*)\\(([0-9]+)\\):(.*)",
+                        "file": 2,
+                        "line": 3,
+                        "message": 4
+                    }
+                },
+                {
+                    "owner": "make",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "severity": "warning",
+                    "pattern": [
+                        {
+                            "regexp": "^(?:![TW]\\s)(.*)\\(([0-9]+)\\):(.*)",
+                            "file": 2,
+                            "line": 3,
+                            "message": 4
+                        },
+                        {
+                            "regexp": "(.*)\\n(!W\\s\\[warning\\])(.*)",
+                            "file": 1,
+                            "message": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        { // make clean
+            "label": "make clean",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe",
+            },
+            "args": [
+                //"-s",
+                "clean"
+            ],
+            "problemMatcher": []
+        },
+        { // make src
+            "label": "make src",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                //"-s",
+                "-C",
+                "src",
+                "clean",
+                "all",
+                "ProjName=${input:CMD_ProjNameInLinux}",
+                "Compiler=avrgcc"
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe",
+                "args": [
+                    //"-s",
+                    "-C",
+                    "src",
+                    "clean",
+                    "all",
+                    "ProjName=${input:CMD_ProjNameInWindows}",
+                    "Compiler=${input:ProjCompilerIn}"
+                ],
+            },
+            "problemMatcher": [
+                {    
+                    "base": "$gcc",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}/src"
+                    ]
+                },
+                {
+                    //"owner": "make",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "severity": "error",
+                    "pattern": {
+                        "regexp": "^(?:![E]\\s)(.*)\\(([0-9]+)\\):(.*)",
+                        "file": 2,
+                        "line": 3,
+                        "message": 4
+                    }
+                },
+                {
+                    //"owner": "make",
+                    "fileLocation": [
+                        "relative",
+                        "${workspaceRoot}"
+                    ],
+                    "severity": "warning",
+                    "pattern": [
+                        {
+                            "regexp": "^(?:![TW]\\s)(.*)\\(([0-9]+)\\):(.*)",
+                            "file": 2,
+                            "line": 3,
+                            "message": 4
+                        },
+                        {
+                            "regexp": "(.*)\\n(!W\\s\\[warning\\])(.*)",
+                            "file": 1,
+                            "message": 2
+                        }
+                    ]
+                }
+            ]
+        },
+        { // monitor (pio)
+            "label": "monitor (pio)",
+            "type": "shell",
+            "group": "test",
+            "command": "${env:userprofile}/.platformio/penv/Scripts/pio.exe",
+            "args": [
+                "device",
+                "monitor",
+                "-p","${input:CMD_GetSerialPortWLS}",
+                "-b","${input:ComBaudrateIn}",
+                "--encoding","Latin1"
+            ],
+            "windows": {
+                "command": "${env:userprofile}/.platformio/penv/Scripts/pio.exe",
+                "args": [
+                    "device",
+                    "monitor",
+                    "-p","${input:CMD_GetSerialPortWindows}",
+                    "-b","${input:ComBaudrateIn}",
+                    "--encoding","Latin1"
+                ],
+            },
+            "presentation": {
+                "focus": true
+            },
+            "problemMatcher": []
+        },
+        { // plink serial
+            "label": "plink-serial",
+            "type": "shell",
+            "group": "test",
+            "command": "${workspaceFolder}/Tools/bin/plink.exe",
+            "args": [
+                "-serial",
+                "\\\\.\\${input:CMD_GetSerialPortWindows}",
+                "-sercfg",
+                "${input:ComBaudrateIn},8,1,n,n"
+            ],
+            "presentation": {
+                "focus": true
+            },
+            "problemMatcher": []
+        },
+        { // flash (avrdude)
+            "label": "flash (avrdude)",
+            "type": "shell",
+            "group": "test",
+            "command": "${workspaceFolder}/Tools/bin/avrdude.exe",
+            "args": [
+                "-c",
+                "avr109",
+                "-p",
+                "${input:ProjCpuIn}",
+                "-P",
+                "${input:CMD_GetSerialPortWindows}",
+                "-b",
+                "115200",
+                "-U",
+                "flash:w:'${workspaceFolder}\\${input:ConfigurationIn}\\${input:CMD_ProjNameInWindows}.hex':i",
+            ],
+            "problemMatcher": []
+        },
+        { // prog elf
+            "label": "prog elf",
+            "type": "shell",
+            "group": "test",
+            "command": "make",
+            "args": [
+                "-s",
+                "-C",
+                "src",
+                "Compiler=avrgcc",
+                "prog-elf",
+                "ProjName=${input:CMD_ProjNameInLinux}",
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe",
+                "args": [
+                    "-s",
+                    "-C",
+                    "src",
+                    "prog-elf",
+                    "ProjName=${input:CMD_ProjNameInWindows}",
+                ],
+            },
+            "problemMatcher": []
+        },
+        { // reset (atmelice_pdi)
+            "label": "reset (atmelice_pdi)",
+            "type": "shell",
+            "group": "test",
+            "command": "${workspaceFolder}/Tools/bin/avrdude.exe",
+            "args": [
+                "-c",
+                "atmelice_pdi",
+                "-B",
+                "2MHz",
+                "-p",
+                "x256c3",
+                "-F",
+                "-qq",
+            ],
+            "problemMatcher": []
+        },
+        { // get fuse2 (atmelice_pdi)
+            "label": "get fuses (atmelice_pdi)",
+            "type": "shell",
+            "group": "test",
+            "command": "${workspaceFolder}/Tools/bin/avrdude.exe",
+            "args": [
+                "-c",
+                "atmelice_pdi",
+                "-B",
+                "2MHz",
+                "-p",
+                "x256c3",
+                "-F",
+                "-qq",
+                "-U",
+                "fuse1:r:-:h",
+                "-U",
+                "fuse2:r:-:h",
+                "-U",
+                "fuse4:r:-:h",
+                "-U",
+                "fuse5:r:-:h",
+            ],
+            "problemMatcher": []
+        },
+        { // prog
+            "label": "prog",
+            "type": "shell",
+            "group": "test",
+            "command": "make",
+            "args": [
+                "-s",
+                "-C",
+                "src",
+                "Compiler=avrgcc",
+                "prog",
+                "ProjName=${input:CMD_ProjNameInLinux}",
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe",
+                "args": [
+                    "-s",
+                    "-C",
+                    "src",
+                    "prog",
+                    "ProjName=${input:CMD_ProjNameInWindows}",
+                ],
+            },
+            "problemMatcher": []
+        },
+        { // clean src
+            "label": "clean src",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                //"-s",
+                "-C",
+                "src",
+                "clean"
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe"
+            },
+            "problemMatcher": []
+        },
+        { // clean all
+            "label": "clean all",
+            "type": "shell",
+            "group": "build",
+            "command": "make",
+            "args": [
+                //"-s",
+                "clean"
+            ],
+            "windows": {
+                "command": "${workspaceFolder}/Tools/bin/make.exe"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
