@@ -1,4 +1,22 @@
 {
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.hideOnStartup": "always",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+          "source": "PowerShell",
+        //"args": ["-NoProfile"],
+        //"env": { "PATH" : "${env:PATH};${workspaceFolder}\\Tools\\bin;${workspaceFolder}\\icc\\bin;${env:GCCAVR}\\bin" },
+        //"env": { "PATH" : "${env:PATH};${workspaceFolder}\\Tools\\bin;${workspaceFolder}\\icc\\bin;${env:ProgramFiles}\\Git\\usr\\bin;${env:GCCAVR}\\bin" },0
+        "env": { 
+              //"GCCAVR" : "${env:ProgramData}\\#MyTools\\avr-gcc-9.1.0-x64-mingw",
+              "AS7PATH" : "${env:ProgramFiles(x86)}\\Atmel\\Studio\\7.0",
+              "AS7GCCAVR" : "${env:ProgramFiles(x86)}\\Atmel\\Studio\\7.0\\toolchain\\avr8\\avr8-gnu-toolchain",
+              "PATH" : "${env:PATH};${workspaceFolder}\\Tools\\bin;${env:ProgramFiles(x86)}\\Atmel\\Studio\\7.0;${env:ProgramFiles(x86)}\\Atmel\\Studio\\7.0\\toolchain\\avr8\\avr8-gnu-toolchain\\bin"
+            }
+        }
+    },
+  //C:\Program Files (x86)\Atmel\Studio\7.0\Extensions\Application
+
     "files.associations": {
         "*.c": "c",
         "*.h": "c"

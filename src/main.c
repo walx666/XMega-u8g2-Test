@@ -89,7 +89,7 @@ static volatile bool main_b_cdc_enable = false;
  #else
 #define	LCD_SPI_INTERFACE		&SPIC
  #endif
-#define LCD_SERIAL_CLOCKSPEED	12000000
+#define LCD_SERIAL_CLOCKSPEED	16000000 //12000000
 
 #ifdef LCD_USART_INTERFACE
 # include <usart_spi.h>

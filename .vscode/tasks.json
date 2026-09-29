@@ -621,6 +621,15 @@
                 "command": "${workspaceFolder}/Tools/bin/make.exe"
             },
             "problemMatcher": []
+        },
+        { // AS7Prompt
+            "label": "AS7Prompt",
+            "type": "shell",
+            "group": "test",
+            "command": "${env:ProgramFiles(x86)}/Atmel/Studio/7.0/Extensions/Application/StudioCommandPrompt.exe",
+            "args": [
+            ],
+            "problemMatcher": []
         }
     ]
 }
