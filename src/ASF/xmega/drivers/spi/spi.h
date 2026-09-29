@@ -73,7 +73,7 @@ int8_t spi_xmega_set_baud_div(SPI_t *spi, uint32_t baudrate, uint32_t clkper_hz)
  */
 static inline void spi_enable(SPI_t *spi)
 {
-	spi->CTRL |= SPI_ENABLE_bm;
+    spi->CTRL |= SPI_ENABLE_bm;
 }
 
 /*! \brief Disables the SPI.
@@ -86,7 +86,7 @@ static inline void spi_enable(SPI_t *spi)
  */
 static inline void spi_disable(SPI_t *spi)
 {
-	spi->CTRL &= ~SPI_ENABLE_bm;
+    spi->CTRL &= ~SPI_ENABLE_bm;
 }
 
 /*! \brief Tests if the SPI is enabled.
@@ -97,7 +97,7 @@ static inline void spi_disable(SPI_t *spi)
  */
 static inline bool spi_is_enabled(SPI_t *spi)
 {
-	return spi->CTRL & SPI_ENABLE_bm ? true : false;
+    return spi->CTRL & SPI_ENABLE_bm ? true : false;
 }
 
 /*! \brief Put one data byte to a SPI peripheral.
@@ -108,7 +108,7 @@ static inline bool spi_is_enabled(SPI_t *spi)
  */
 static inline void spi_put(SPI_t *spi, uint8_t data)
 {
-	spi->DATA = data;
+    spi->DATA = data;
 }
 
 /*! \brief Get one data byte to a SPI peripheral.
@@ -119,7 +119,7 @@ static inline void spi_put(SPI_t *spi, uint8_t data)
  */
 static inline uint8_t spi_get(SPI_t *spi)
 {
-	return spi->DATA;
+    return spi->DATA;
 }
 
 /*! \brief Tests if the SPI contains a received character.
@@ -130,7 +130,7 @@ static inline uint8_t spi_get(SPI_t *spi)
  */
 static inline bool spi_is_tx_ok(SPI_t *spi)
 {
-	return spi->STATUS & SPI_IF_bm ? true : false;
+    return spi->STATUS & SPI_IF_bm ? true : false;
 }
 
 /*! \brief Activate SPI master mode of a SPI peripheral
@@ -141,7 +141,7 @@ static inline bool spi_is_tx_ok(SPI_t *spi)
  */
 static inline void spi_enable_master_mode(SPI_t *spi)
 {
-	spi->CTRL |= SPI_MASTER_bm;
+    spi->CTRL |= SPI_MASTER_bm;
 }
 
 /*! \name Part Specific SPI Driver

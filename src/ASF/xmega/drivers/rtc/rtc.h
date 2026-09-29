@@ -124,7 +124,7 @@ void rtc_load_calibration(uint8_t error_value, uint8_t sign);
  */
 static inline void rtc_enable_correction(void)
 {
-	RTC.CTRL |= RTC_CORREN_bm;
+    RTC.CTRL |= RTC_CORREN_bm;
 }
 
 /**
@@ -132,7 +132,7 @@ static inline void rtc_enable_correction(void)
  */
 static inline void rtc_disable_correction(void)
 {
-	RTC.CTRL &= ~RTC_CORREN_bm;
+    RTC.CTRL &= ~RTC_CORREN_bm;
 }
 
 #endif
@@ -179,16 +179,16 @@ extern void rtc_init(void);
  * \subsection rtc_basic_use_case_setup_code Example code
  * Content of conf_rtc.h:
  * \code
-	#define CONFIG_RTC_PRESCALER       RTC_PRESCALER_DIV1024_gc
+    #define CONFIG_RTC_PRESCALER       RTC_PRESCALER_DIV1024_gc
 \endcode
  * Needed in conf_clock.h:
  * \code
-	#define CONFIG_RTC_SOURCE          SYSCLK_RTCSRC_ULP
+    #define CONFIG_RTC_SOURCE          SYSCLK_RTCSRC_ULP
 \endcode
  * Add to the initialization code:
  * \code
-	sysclk_init();
-	rtc_init();
+    sysclk_init();
+    rtc_init();
 \endcode
  *
  * \subsection rtc_basic_use_case_setup_flow Workflow
@@ -207,7 +207,7 @@ extern void rtc_init(void);
  * \subsection rtc_basic_use_case_usage_code Example code
  * Add to, e.g., main loop in application C-file:
  * \code
-	rtc_get_time();
+    rtc_get_time();
 \endcode
  *
  * \subsection rtc_basic_use_case_usage_flow Workflow
@@ -238,29 +238,29 @@ extern void rtc_init(void);
  * -# A \ref rtc_callback_t "callback" function, called alarm, that
  * reschedules the alarm must be provided by the user:
  * \code
-	static void alarm(uint32_t time)
-	{
-	    rtc_set_alarm(time);
-	}
+    static void alarm(uint32_t time)
+    {
+        rtc_set_alarm(time);
+    }
 \endcode
  *
  * \subsection rtc_use_case_1_setup_code Example code
  * Content of conf_rtc.h:
  * \code
-	#define CONFIG_RTC_PRESCALER       RTC_PRESCALER_DIV1024_gc
+    #define CONFIG_RTC_PRESCALER       RTC_PRESCALER_DIV1024_gc
 \endcode
  * Needed in conf_clock.h:
  * \code
-	#define CONFIG_RTC_SOURCE          SYSCLK_RTCSRC_ULP
+    #define CONFIG_RTC_SOURCE          SYSCLK_RTCSRC_ULP
 \endcode
  * Add to application initialization:
  * \code
-	pmic_init();
-	sysclk_init();
-	sleepmgr_init();
-	rtc_init();
-	rtc_set_callback(alarm);
-	cpu_irq_enable();
+    pmic_init();
+    sysclk_init();
+    sleepmgr_init();
+    rtc_init();
+    rtc_set_callback(alarm);
+    cpu_irq_enable();
 \endcode
  *
  * \subsection rtc_use_case_1_setup_flow Workflow
@@ -288,10 +288,10 @@ extern void rtc_init(void);
  *
  * \subsection rtc_use_case_1_usage_code Example code
  * \code
-	rtc_set_alarm_relative(0);
-	while (true) {
-	    sleepmgr_enter_sleep();
-	}
+    rtc_set_alarm_relative(0);
+    while (true) {
+        sleepmgr_enter_sleep();
+    }
 \endcode
  *
  * \subsection rtc_use_case_1_usage_flow Workflow
@@ -299,9 +299,9 @@ extern void rtc_init(void);
  *   - \code rtc_set_alarm_relative(0); \endcode
  * -# Sleep between each triggered alarm:
  *   - \code
-	while (true) {
-	    sleepmgr_enter_sleep();
-	}
+    while (true) {
+        sleepmgr_enter_sleep();
+    }
 \endcode
  */
 

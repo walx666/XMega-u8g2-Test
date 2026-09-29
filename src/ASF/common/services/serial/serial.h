@@ -136,11 +136,11 @@
  * configuration, but their parameters may be different, refer to corresponding header files.
  *
  * \code
-	#define USART_SERIAL                     &USARTD0
-	#define USART_SERIAL_BAUDRATE            9600
-	#define USART_SERIAL_CHAR_LENGTH         US_MR_CHRL_8_BIT
-	#define USART_SERIAL_PARITY              US_MR_PAR_NO
-	#define USART_SERIAL_STOP_BIT            false
+    #define USART_SERIAL                     &USARTD0
+    #define USART_SERIAL_BAUDRATE            9600
+    #define USART_SERIAL_CHAR_LENGTH         US_MR_CHRL_8_BIT
+    #define USART_SERIAL_PARITY              US_MR_PAR_NO
+    #define USART_SERIAL_STOP_BIT            false
 \endcode
  *
  * A variable for the received byte must be added:
@@ -148,16 +148,16 @@
  *
  * Add to application initialization:
  * \code
-	    sysclk_init();
+        sysclk_init();
 
-	    static usart_serial_options_t usart_options = {
-	       .baudrate = USART_SERIAL_BAUDRATE,
-	       .charlength = USART_SERIAL_CHAR_LENGTH,
-	       .paritytype = USART_SERIAL_PARITY,
-	       .stopbits = USART_SERIAL_STOP_BIT
-	    };
+        static usart_serial_options_t usart_options = {
+           .baudrate = USART_SERIAL_BAUDRATE,
+           .charlength = USART_SERIAL_CHAR_LENGTH,
+           .paritytype = USART_SERIAL_PARITY,
+           .stopbits = USART_SERIAL_STOP_BIT
+        };
 
-	    usart_serial_init(USART_SERIAL, &usart_options);
+        usart_serial_init(USART_SERIAL, &usart_options);
 \endcode
  *
  * \subsection serial_basic_use_case_setup_flow Workflow
@@ -165,12 +165,12 @@
  *   - \code sysclk_init(); \endcode
  * -# Create serial USART options struct:
  *   - \code
-	static usart_serial_options_t usart_options = {
-	   .baudrate = USART_SERIAL_BAUDRATE,
-	   .charlength = USART_SERIAL_CHAR_LENGTH,
-	   .paritytype = USART_SERIAL_PARITY,
-	   .stopbits = USART_SERIAL_STOP_BIT
-	};
+    static usart_serial_options_t usart_options = {
+       .baudrate = USART_SERIAL_BAUDRATE,
+       .charlength = USART_SERIAL_CHAR_LENGTH,
+       .paritytype = USART_SERIAL_PARITY,
+       .stopbits = USART_SERIAL_STOP_BIT
+    };
 \endcode
  * -# Initialize the serial service:
  *   - \code usart_serial_init(USART_SERIAL, &usart_options);\endcode
@@ -180,8 +180,8 @@
  * \subsection serial_basic_use_case_usage_code Example code
  * Add to application C-file:
  * \code
-	usart_serial_getchar(USART_SERIAL, &received_byte);
-	usart_serial_putchar(USART_SERIAL, received_byte);
+    usart_serial_getchar(USART_SERIAL, &received_byte);
+    usart_serial_putchar(USART_SERIAL, received_byte);
 \endcode
  *
  * \subsection serial_basic_use_case_usage_flow Workflow
@@ -217,25 +217,25 @@
  * configuration, but their parameters may be different, refer to corresponding header files.
  *
  * \code
-	#define USART_SERIAL                     &USARTD0
-	#define USART_SERIAL_BAUDRATE            9600
-	#define USART_SERIAL_CHAR_LENGTH         US_MR_CHRL_8_BIT
-	#define USART_SERIAL_PARITY              US_MR_PAR_NO
-	#define USART_SERIAL_STOP_BIT            false
+    #define USART_SERIAL                     &USARTD0
+    #define USART_SERIAL_BAUDRATE            9600
+    #define USART_SERIAL_CHAR_LENGTH         US_MR_CHRL_8_BIT
+    #define USART_SERIAL_PARITY              US_MR_PAR_NO
+    #define USART_SERIAL_STOP_BIT            false
 \endcode
  *
  * Add to application initialization:
  * \code
-	    sysclk_init();
+        sysclk_init();
 
-	    static usart_serial_options_t usart_options = {
-	       .baudrate = USART_SERIAL_BAUDRATE,
-	       .charlength = USART_SERIAL_CHAR_LENGTH,
-	       .paritytype = USART_SERIAL_PARITY,
-	       .stopbits = USART_SERIAL_STOP_BIT
-	    };
+        static usart_serial_options_t usart_options = {
+           .baudrate = USART_SERIAL_BAUDRATE,
+           .charlength = USART_SERIAL_CHAR_LENGTH,
+           .paritytype = USART_SERIAL_PARITY,
+           .stopbits = USART_SERIAL_STOP_BIT
+        };
 
-	    usart_serial_init(USART_SERIAL, &usart_options);
+        usart_serial_init(USART_SERIAL, &usart_options);
 \endcode
  *
  * \subsection serial_use_case_1_setup_flow Workflow
@@ -243,12 +243,12 @@
  *   - \code sysclk_init(); \endcode
  * -# Create USART options struct:
  *   - \code
-	static usart_serial_options_t usart_options = {
-	   .baudrate = USART_SERIAL_BAUDRATE,
-	   .charlength = USART_SERIAL_CHAR_LENGTH,
-	   .paritytype = USART_SERIAL_PARITY,
-	   .stopbits = USART_SERIAL_STOP_BIT
-	};
+    static usart_serial_options_t usart_options = {
+       .baudrate = USART_SERIAL_BAUDRATE,
+       .charlength = USART_SERIAL_CHAR_LENGTH,
+       .paritytype = USART_SERIAL_PARITY,
+       .stopbits = USART_SERIAL_STOP_BIT
+    };
 \endcode
  * -# Initialize in RS232 mode:
  *   - \code usart_serial_init(USART_SERIAL_EXAMPLE, &usart_options); \endcode
@@ -258,7 +258,7 @@
  * \subsection serial_use_case_1_usage_code Example code
  * Add to, e.g., main loop in application C-file:
  * \code
-	usart_serial_write_packet(USART_SERIAL, "Test String", strlen("Test String"));
+    usart_serial_write_packet(USART_SERIAL, "Test String", strlen("Test String"));
 \endcode
  *
  * \subsection serial_use_case_1_usage_flow Workflow

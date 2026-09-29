@@ -93,7 +93,7 @@ enum vbat_status_code {
  * The backup system is configured and had no issues while main power was
  * lost. Hence, all data stored in the backup domain is valid.
  */
-	VBAT_STATUS_OK,
+    VBAT_STATUS_OK,
 
 /**
  *  \brief No power detected on VBAT.
@@ -105,7 +105,7 @@ enum vbat_status_code {
  * therefore it is not possible to detect any voltage loss on the VBAT pin
  * during normal operation of the device.
  */
-	VBAT_STATUS_NO_POWER,
+    VBAT_STATUS_NO_POWER,
 
 /**
  *  \brief The backup system must be initialized.
@@ -114,7 +114,7 @@ enum vbat_status_code {
  * the VBAT pin. Since this is also the first start-up of the device, it is
  * necessary to initialize the RTC32.
  */
-	VBAT_STATUS_INIT,
+    VBAT_STATUS_INIT,
 
 /**
  *  \brief A POR was detected on the VBAT input.
@@ -128,7 +128,7 @@ enum vbat_status_code {
  * If a POR is detected on VBAT, it should always be treated as if the backup
  * system is in an unknown state, i.e., that all data is invalid.
  */
-	VBAT_STATUS_BBPOR,
+    VBAT_STATUS_BBPOR,
 
 /**
  * \brief A brown-out was detected on the VBAT input.
@@ -137,7 +137,7 @@ enum vbat_status_code {
  * is invalid. This can happen when the voltage on VBAT drops below the
  * brown-out detection level while main power is absent.
  */
-	VBAT_STATUS_BBBOD,
+    VBAT_STATUS_BBBOD,
 
 /**
  * \brief A failure was detected on the oscillator.
@@ -147,7 +147,7 @@ enum vbat_status_code {
  *
  * \todo Determine minimum period for detection of oscillator outage.
  */
-	VBAT_STATUS_XOSCFAIL,
+    VBAT_STATUS_XOSCFAIL,
 
 };
 
@@ -175,9 +175,9 @@ bool rtc_alarm_has_triggered(void);
  */
 static inline void rtc_set_alarm_relative(uint32_t offset)
 {
-	Assert(offset >= 2);
+    Assert(offset >= 2);
 
-	rtc_set_alarm(rtc_get_time() + offset);
+    rtc_set_alarm(rtc_get_time() + offset);
 }
 
 void rtc_init(void);
@@ -202,8 +202,8 @@ void rtc_init(void);
  * \subsection rtc32_basic_use_case_setup_code Example code
  * Add to the initialization code:
  * \code
-	sysclk_init();
-	rtc_init();
+    sysclk_init();
+    rtc_init();
 \endcode
  *
  * \subsection rtc32_basic_use_case_setup_flow Workflow
@@ -221,7 +221,7 @@ void rtc_init(void);
  * \subsection rtc32_basic_use_case_usage_code Example code
  * Add to, e.g., main loop in application C-file:
  * \code
-	rtc_get_time();
+    rtc_get_time();
 \endcode
  *
  * \subsection rtc32_basic_use_case_usage_flow Workflow
@@ -249,10 +249,10 @@ void rtc_init(void);
  * reschedules the alarm must be provided
  * by the user.
  * \code
-	static void alarm(uint32_t time)
-	{
-	    rtc_set_alarm(2);
-	}
+    static void alarm(uint32_t time)
+    {
+        rtc_set_alarm(2);
+    }
 \endcode
  * \note Since the next alarm will be rounded up to the next second pass, this
  * will actually happen in 3 seconds.
@@ -260,12 +260,12 @@ void rtc_init(void);
  * \subsection rtc32_use_case_1_setup_code Example code
  * Add to application initialization:
  * \code
-	pmic_init();
-	sysclk_init();
-	sleepmgr_init();
-	rtc_init();
-	rtc_set_callback(alarm);
-	cpu_irq_enable();
+    pmic_init();
+    sysclk_init();
+    sleepmgr_init();
+    rtc_init();
+    rtc_set_callback(alarm);
+    cpu_irq_enable();
 \endcode
  *
  * \subsection rtc32_use_case_1_setup_flow Workflow
@@ -292,10 +292,10 @@ void rtc_init(void);
  *
  * \subsection rtc32_use_case_1_usage_code Example code
  * \code
-	rtc_set_alarm_relative(3);
-	while (true) {
-	    sleepmgr_enter_sleep();
-	}
+    rtc_set_alarm_relative(3);
+    while (true) {
+        sleepmgr_enter_sleep();
+    }
 \endcode
  *
  * \subsection rtc32_use_case_1_usage_flow Workflow
@@ -306,9 +306,9 @@ void rtc_init(void);
  * value of 3 causes the alarm to be set of in 3-4 seconds.
  * -# Sleep between each triggered alarm:
  *   - \code 
-	while (true) {
-	    sleepmgr_enter_sleep();
-	}
+    while (true) {
+        sleepmgr_enter_sleep();
+    }
 \endcode
  */
 

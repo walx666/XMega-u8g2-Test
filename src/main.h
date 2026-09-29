@@ -52,7 +52,7 @@
 #define token_paste5(v, w, x, y, z) token_paste5_int(v, w, x, y, z)
 #endif
 
-#define TWIIF					TWIC
+#define TWIIF               TWIC
 
 /*! \brief Opens the communication port
  * This is called by CDC interface when USB Host enable it.

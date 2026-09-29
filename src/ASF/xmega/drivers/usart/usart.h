@@ -82,63 +82,63 @@ extern "C" {
 
 //! Lookup table containing baudctrl values for CPU frequency 2 Mhz
 static PROGMEM_DECLARE(uint16_t, baudctrl_2mhz[]) = {
-	0xE5BC, // Baud: 1200
-	0xC5AC, // Baud: 2400
-	0x859C, // Baud: 4800
-	0x0396, // Baud: 9600
-	0xC192, // Baud: 19200
-	0x2191, // Baud: 38400
-	0x9690, // Baud: 57600
+    0xE5BC, // Baud: 1200
+    0xC5AC, // Baud: 2400
+    0x859C, // Baud: 4800
+    0x0396, // Baud: 9600
+    0xC192, // Baud: 19200
+    0x2191, // Baud: 38400
+    0x9690, // Baud: 57600
 };
 
 //! Lookup table containing baudctrl values for CPU frequency 32 Mhz
 static PROGMEM_DECLARE(uint16_t, baudctrl_32mhz[]) = {
-	0x031D, // Baud: 1200
-	0x01ED, // Baud: 2400
-	0xFDDC, // Baud: 4800
-	0xF5CC, // Baud: 9600
-	0xE5BC, // Baud: 19200
-	0xC5AC, // Baud: 38400
-	0x6EA8, // Baud: 57600
+    0x031D, // Baud: 1200
+    0x01ED, // Baud: 2400
+    0xFDDC, // Baud: 4800
+    0xF5CC, // Baud: 9600
+    0xE5BC, // Baud: 19200
+    0xC5AC, // Baud: 38400
+    0x6EA8, // Baud: 57600
 };
 
 
 //! Input parameters when initializing RS232 and similar modes.
 typedef struct usart_rs232_options {
-	//! Set baud rate of the USART (unused in slave modes).
-	uint32_t baudrate;
+    //! Set baud rate of the USART (unused in slave modes).
+    uint32_t baudrate;
 
-	//! Number of bits to transmit as a character (5 to 9).
-	USART_CHSIZE_t charlength;
+    //! Number of bits to transmit as a character (5 to 9).
+    USART_CHSIZE_t charlength;
 
-	//! Parity type: USART_PMODE_DISABLED_gc, USART_PMODE_EVEN_gc,
-	//! USART_PMODE_ODD_gc.
-	USART_PMODE_t paritytype;
+    //! Parity type: USART_PMODE_DISABLED_gc, USART_PMODE_EVEN_gc,
+    //! USART_PMODE_ODD_gc.
+    USART_PMODE_t paritytype;
 
-	//! Number of stop bits between two characters:
-	//! true: 2 stop bits
-	//! false: 1 stop bit
-	bool stopbits;
+    //! Number of stop bits between two characters:
+    //! true: 2 stop bits
+    //! false: 1 stop bit
+    bool stopbits;
 
 } usart_rs232_options_t;
 
 //! Input parameters when initializing SPI master mode.
 typedef struct usart_spi_options {
-	//! Set baud rate of the USART in SPI mode.
-	uint32_t baudrate;
+    //! Set baud rate of the USART in SPI mode.
+    uint32_t baudrate;
 
-	//! SPI transmission mode.
-	uint8_t spimode;
+    //! SPI transmission mode.
+    uint8_t spimode;
 
-	uint8_t data_order;
+    uint8_t data_order;
 } usart_spi_options_t;
 
 //! USART interrupt levels
 enum usart_int_level_t {
-	USART_INT_LVL_OFF = 0x00,
-	USART_INT_LVL_LO = 0x01,
-	USART_INT_LVL_MED = 0x02,
-	USART_INT_LVL_HI = 0x03,
+    USART_INT_LVL_OFF = 0x00,
+    USART_INT_LVL_LO = 0x01,
+    USART_INT_LVL_MED = 0x02,
+    USART_INT_LVL_HI = 0x03,
 };
 
 /**
@@ -148,7 +148,7 @@ enum usart_int_level_t {
  */
 static inline void usart_rx_enable(USART_t *usart)
 {
-	(usart)->CTRLB |= USART_RXEN_bm;
+    (usart)->CTRLB |= USART_RXEN_bm;
 }
 
 /**
@@ -158,7 +158,7 @@ static inline void usart_rx_enable(USART_t *usart)
  */
 static inline void usart_rx_disable(USART_t *usart)
 {
-	(usart)->CTRLB &= ~USART_RXEN_bm;
+    (usart)->CTRLB &= ~USART_RXEN_bm;
 }
 
 /**
@@ -172,10 +172,10 @@ static inline void usart_rx_disable(USART_t *usart)
  *  \param twoStopBits Enable two stop bit mode. Use bool type.
  */
 static inline void usart_format_set(USART_t *usart, USART_CHSIZE_t charSize,
-		USART_PMODE_t parityMode, bool twoStopBits)
+        USART_PMODE_t parityMode, bool twoStopBits)
 {
-	(usart)->CTRLC = (uint8_t)charSize | parityMode
-		| (twoStopBits ? USART_SBMODE_bm : 0);
+    (usart)->CTRLC = (uint8_t)charSize | parityMode
+        | (twoStopBits ? USART_SBMODE_bm : 0);
 }
 
 /**
@@ -185,7 +185,7 @@ static inline void usart_format_set(USART_t *usart, USART_CHSIZE_t charSize,
  */
 static inline void usart_tx_enable(USART_t *usart)
 {
-	(usart)->CTRLB |= USART_TXEN_bm;
+    (usart)->CTRLB |= USART_TXEN_bm;
 }
 
 /**
@@ -195,7 +195,7 @@ static inline void usart_tx_enable(USART_t *usart)
  */
 static inline void usart_tx_disable(USART_t *usart)
 {
-	(usart)->CTRLB &= ~USART_TXEN_bm;
+    (usart)->CTRLB &= ~USART_TXEN_bm;
 }
 
 /**
@@ -207,10 +207,10 @@ static inline void usart_tx_disable(USART_t *usart)
  * \param level Interrupt level of the RXD interrupt.
  */
 static inline void usart_set_rx_interrupt_level(USART_t *usart,
-		enum usart_int_level_t level)
+        enum usart_int_level_t level)
 {
-	(usart)->CTRLA = ((usart)->CTRLA & ~USART_RXCINTLVL_gm) |
-			(level << USART_RXCINTLVL_gp);
+    (usart)->CTRLA = ((usart)->CTRLA & ~USART_RXCINTLVL_gm) |
+            (level << USART_RXCINTLVL_gp);
 }
 
 /**
@@ -222,10 +222,10 @@ static inline void usart_set_rx_interrupt_level(USART_t *usart,
  * \param level Interrupt level of the TXD interrupt.
  */
 static inline void usart_set_tx_interrupt_level(USART_t *usart,
-		enum usart_int_level_t level)
+        enum usart_int_level_t level)
 {
-	(usart)->CTRLA = ((usart)->CTRLA & ~USART_TXCINTLVL_gm) |
-			(level << USART_TXCINTLVL_gp);
+    (usart)->CTRLA = ((usart)->CTRLA & ~USART_TXCINTLVL_gm) |
+            (level << USART_TXCINTLVL_gp);
 }
 
 /**
@@ -238,10 +238,10 @@ static inline void usart_set_tx_interrupt_level(USART_t *usart,
  *              Use USART_DREINTLVL_t type.
  */
 static inline void usart_set_dre_interrupt_level(USART_t *usart,
-		enum usart_int_level_t level)
+        enum usart_int_level_t level)
 {
-	(usart)->CTRLA = ((usart)->CTRLA & ~USART_DREINTLVL_gm) |
-			(level << USART_DREINTLVL_gp);
+    (usart)->CTRLA = ((usart)->CTRLA & ~USART_DREINTLVL_gm) |
+            (level << USART_DREINTLVL_gp);
 }
 
 /**
@@ -260,7 +260,7 @@ static inline void usart_set_dre_interrupt_level(USART_t *usart,
  */
 static inline void usart_set_mode(USART_t *usart, USART_CMODE_t usartmode)
 {
-	(usart)->CTRLC = ((usart)->CTRLC & (~USART_CMODE_gm)) | usartmode;
+    (usart)->CTRLC = ((usart)->CTRLC & (~USART_CMODE_gm)) | usartmode;
 }
 
 /**
@@ -270,7 +270,7 @@ static inline void usart_set_mode(USART_t *usart, USART_CMODE_t usartmode)
  */
 static inline bool usart_data_register_is_empty(USART_t * usart)
 {
-	return (usart)->STATUS & USART_DREIF_bm;
+    return (usart)->STATUS & USART_DREIF_bm;
 }
 
 /**
@@ -282,7 +282,7 @@ static inline bool usart_data_register_is_empty(USART_t * usart)
  */
 static inline bool usart_rx_is_complete(USART_t * usart)
 {
-	return (usart)->STATUS & USART_RXCIF_bm;
+    return (usart)->STATUS & USART_RXCIF_bm;
 }
 
 /**
@@ -294,7 +294,7 @@ static inline bool usart_rx_is_complete(USART_t * usart)
  */
 static inline bool usart_tx_is_complete(USART_t * usart)
 {
-	return (usart)->STATUS & USART_TXCIF_bm;
+    return (usart)->STATUS & USART_TXCIF_bm;
 }
 
 /**
@@ -304,7 +304,7 @@ static inline bool usart_tx_is_complete(USART_t * usart)
  */
 static inline void usart_clear_tx_complete(USART_t * usart)
 {
-	(usart)->STATUS = USART_TXCIF_bm;
+    (usart)->STATUS = USART_TXCIF_bm;
 }
 
 /**
@@ -314,7 +314,7 @@ static inline void usart_clear_tx_complete(USART_t * usart)
  */
 static inline void usart_clear_rx_complete(USART_t *usart)
 {
-	(usart)->STATUS = USART_RXCIF_bm;
+    (usart)->STATUS = USART_RXCIF_bm;
 }
 
 /**
@@ -325,7 +325,7 @@ static inline void usart_clear_rx_complete(USART_t *usart)
  */
 static inline void usart_put(USART_t * usart, uint8_t txdata)
 {
-	(usart)->DATA = txdata;
+    (usart)->DATA = txdata;
 }
 
 /**
@@ -337,7 +337,7 @@ static inline void usart_put(USART_t * usart, uint8_t txdata)
  */
 static inline uint8_t usart_get(USART_t * usart)
 {
-	return (usart)->DATA;
+    return (usart)->DATA;
 }
 
 /**
@@ -349,13 +349,13 @@ static inline uint8_t usart_get(USART_t * usart)
  * \return The received data
  */
 static inline uint8_t usart_spi_transmit(USART_t * usart,
-		uint8_t txdata)
+        uint8_t txdata)
 {
-	while (usart_data_register_is_empty(usart) == false);
-	usart_put(usart, txdata);
-	while (!usart_tx_is_complete(usart));
-	usart_clear_tx_complete(usart);
-	return usart_get(usart);
+    while (usart_data_register_is_empty(usart) == false);
+    usart_put(usart, txdata);
+    while (!usart_tx_is_complete(usart));
+    usart_clear_tx_complete(usart);
+    return usart_get(usart);
 }
 
 bool usart_init_rs232(USART_t *usart, const usart_rs232_options_t *opt);
@@ -366,7 +366,7 @@ uint8_t usart_getchar(USART_t * usart);
 
 void usart_set_bsel_bscale_value(USART_t *usart, uint16_t bsel, uint8_t bscale);
 void usart_set_baudrate_precalculated(USART_t *usart, uint32_t baud,
-		uint32_t cpu_hz);
+        uint32_t cpu_hz);
 bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz);
 void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
 //! @}
@@ -408,24 +408,24 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  * The following configuration must be added to the project (typically to a 
  * conf_usart.h file, but it can also be added to your main application file.)
  * \code
-	#define USART_SERIAL                     &USARTD0
-	#define USART_SERIAL_BAUDRATE            9600
-	#define USART_SERIAL_CHAR_LENGTH         USART_CHSIZE_8BIT_gc
-	#define USART_SERIAL_PARITY              USART_PMODE_DISABLED_gc
-	#define USART_SERIAL_STOP_BIT            false
+    #define USART_SERIAL                     &USARTD0
+    #define USART_SERIAL_BAUDRATE            9600
+    #define USART_SERIAL_CHAR_LENGTH         USART_CHSIZE_8BIT_gc
+    #define USART_SERIAL_PARITY              USART_PMODE_DISABLED_gc
+    #define USART_SERIAL_STOP_BIT            false
 \endcode
  *
  * Add to application initialization:
  * \code
-	 sysclk_init();
-	 static usart_rs232_options_t USART_SERIAL_OPTIONS = {
-	    .baudrate = USART_SERIAL_BAUDRATE,
-	    .charlength = USART_SERIAL_CHAR_LENGTH,
-	    .paritytype = USART_SERIAL_PARITY,
-	    .stopbits = USART_SERIAL_STOP_BIT
-	 };
-	sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm);
-	usart_init_rs232(USART_SERIAL, &USART_SERIAL_OPTIONS);
+     sysclk_init();
+     static usart_rs232_options_t USART_SERIAL_OPTIONS = {
+        .baudrate = USART_SERIAL_BAUDRATE,
+        .charlength = USART_SERIAL_CHAR_LENGTH,
+        .paritytype = USART_SERIAL_PARITY,
+        .stopbits = USART_SERIAL_STOP_BIT
+     };
+    sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm);
+    usart_init_rs232(USART_SERIAL, &USART_SERIAL_OPTIONS);
 \endcode
  *
  * \subsection usart_basic_use_case_setup_flow Workflow
@@ -436,12 +436,12 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  *           this module. 
  * -# Create USART options struct:
  *   - \code
-	static usart_rs232_options_t USART_SERIAL_OPTIONS = {
-	   .baudrate = USART_SERIAL_BAUDRATE,
-	   .charlength = USART_SERIAL_CHAR_LENGTH,
-	   .paritytype = USART_SERIAL_PARITY,
-	   .stopbits = USART_SERIAL_STOP_BIT
-	};
+    static usart_rs232_options_t USART_SERIAL_OPTIONS = {
+       .baudrate = USART_SERIAL_BAUDRATE,
+       .charlength = USART_SERIAL_CHAR_LENGTH,
+       .paritytype = USART_SERIAL_PARITY,
+       .stopbits = USART_SERIAL_STOP_BIT
+    };
 \endcode
  * -# Enable the clock for the USART module:
  *   - \code sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm); \endcode
@@ -454,7 +454,7 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  * \subsection usart_basic_use_case_usage_code Example code
  * Add to application C-file:
  * \code
-	usart_putchar(USART_SERIAL, 'a');
+    usart_putchar(USART_SERIAL, 'a');
 \endcode
  *
  * \subsection usart_basic_use_case_usage_flow Workflow
@@ -485,11 +485,11 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  * -# The following configuration must be added to the project (typically to a 
  * conf_usart.h file, but it can also be added to your main application file.):
  * \code
-	#define USART_SERIAL                     &USARTD0
-	#define USART_SERIAL_BAUDRATE            9600
-	#define USART_SERIAL_CHAR_LENGTH         USART_CHSIZE_8BIT_gc
-	#define USART_SERIAL_PARITY              USART_PMODE_DISABLED_gc
-	#define USART_SERIAL_STOP_BIT            false
+    #define USART_SERIAL                     &USARTD0
+    #define USART_SERIAL_BAUDRATE            9600
+    #define USART_SERIAL_CHAR_LENGTH         USART_CHSIZE_8BIT_gc
+    #define USART_SERIAL_PARITY              USART_PMODE_DISABLED_gc
+    #define USART_SERIAL_STOP_BIT            false
 \endcode
  *
  * A variable for the received byte must be added:
@@ -497,15 +497,15 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  *
  * Add to application initialization:
  * \code
-	 sysclk_init();
-	 static usart_rs232_options_t USART_SERIAL_OPTIONS = {
-	    .baudrate = USART_SERIAL_BAUDRATE,
-	    .charlength = USART_SERIAL_CHAR_LENGTH,
-	    .paritytype = USART_SERIAL_PARITY,
-	    .stopbits = USART_SERIAL_STOP_BIT
-	 };
-	sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm);
-	usart_init_rs232(USART_SERIAL, &USART_SERIAL_OPTIONS);
+     sysclk_init();
+     static usart_rs232_options_t USART_SERIAL_OPTIONS = {
+        .baudrate = USART_SERIAL_BAUDRATE,
+        .charlength = USART_SERIAL_CHAR_LENGTH,
+        .paritytype = USART_SERIAL_PARITY,
+        .stopbits = USART_SERIAL_STOP_BIT
+     };
+    sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm);
+    usart_init_rs232(USART_SERIAL, &USART_SERIAL_OPTIONS);
 \endcode
  *
  * \subsection usart_use_case_1_setup_flow Workflow
@@ -516,12 +516,12 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  *           this module. 
  * -# Create USART options struct:
  *   - \code
-	static usart_rs232_options_t USART_SERIAL_OPTIONS = {
-	   .baudrate = USART_SERIAL_BAUDRATE,
-	   .charlength = USART_SERIAL_CHAR_LENGTH,
-	   .paritytype = USART_SERIAL_PARITY,
-	   .stopbits = USART_SERIAL_STOP_BIT
-	};
+    static usart_rs232_options_t USART_SERIAL_OPTIONS = {
+       .baudrate = USART_SERIAL_BAUDRATE,
+       .charlength = USART_SERIAL_CHAR_LENGTH,
+       .paritytype = USART_SERIAL_PARITY,
+       .stopbits = USART_SERIAL_STOP_BIT
+    };
 \endcode
  * -# Enable the clock for the USART module:
  *   - \code sysclk_enable_module(SYSCLK_PORT_D, PR_USART0_bm); \endcode
@@ -534,8 +534,8 @@ void usart_spi_set_baudrate(USART_t * usart, uint32_t baud, uint32_t cpu_hz);
  * \subsection usart_use_case_1_usage_code Example code
  * Add to, e.g., main loop in application C-file:
  * \code
-	received_byte = usart_getchar(USART_SERIAL);
-	usart_putchar(USART_SERIAL, received_byte);
+    received_byte = usart_getchar(USART_SERIAL);
+    usart_putchar(USART_SERIAL, received_byte);
 \endcode
  *
  * \subsection usart_use_case_1_usage_flow Workflow

@@ -143,7 +143,7 @@
 #  else
 //! \internal Number of start-up cycles for the board's XOSC.
 #   define BOARD_XOSC_STARTUP_CYCLES \
-		(BOARD_XOSC_HZ / 1000000 * BOARD_XOSC_STARTUP_US)
+        (BOARD_XOSC_HZ / 1000000 * BOARD_XOSC_STARTUP_US)
 
 #   if (BOARD_XOSC_TYPE == XOSC_TYPE_XTAL)
 #    if (BOARD_XOSC_STARTUP_CYCLES > 16384)
@@ -204,18 +204,18 @@
  */
 static inline void osc_enable_internal(uint8_t id)
 {
-	irqflags_t flags;
+    irqflags_t flags;
 
-	Assert(id != OSC_ID_USBSOF);
+    Assert(id != OSC_ID_USBSOF);
 
-	flags = cpu_irq_save();
-	OSC.CTRL |= id;
+    flags = cpu_irq_save();
+    OSC.CTRL |= id;
 #if (XMEGA_E && CONFIG_SYSCLK_RC8MHZ_LPM)
-	if(id == OSC_ID_RC8MHZ) {
-		OSC.CTRL |= OSC_RC8MLPM_bm;
-	}
+    if(id == OSC_ID_RC8MHZ) {
+        OSC.CTRL |= OSC_RC8MLPM_bm;
+    }
 #endif
-	cpu_irq_restore(flags);
+    cpu_irq_restore(flags);
 }
 
 #if defined(BOARD_XOSC_HZ) || defined(__DOXYGEN__)
@@ -230,59 +230,59 @@ static inline void osc_enable_internal(uint8_t id)
  */
 static inline void osc_enable_external(uint8_t id)
 {
-	irqflags_t flags;
+    irqflags_t flags;
 
-	Assert(id == OSC_ID_XOSC);
+    Assert(id == OSC_ID_XOSC);
 
 #ifndef CONFIG_XOSC_32KHZ_LPM
 #  if (XMEGA_E && (BOARD_XOSC_TYPE == XOSC_TYPE_EXTERNAL) && defined(CONFIG_XOSC_EXTERNAL_PC4))
-	OSC.XOSCCTRL = OSC_XOSCSEL4_bm;
+    OSC.XOSCCTRL = OSC_XOSCSEL4_bm;
 #  else
-	OSC.XOSCCTRL = BOARD_XOSC_TYPE | (CONFIG_XOSC_STARTUP << 2) |
-			CONFIG_XOSC_RANGE;
+    OSC.XOSCCTRL = BOARD_XOSC_TYPE | (CONFIG_XOSC_STARTUP << 2) |
+            CONFIG_XOSC_RANGE;
 #  endif
 #else
-	OSC.XOSCCTRL = BOARD_XOSC_TYPE | (CONFIG_XOSC_STARTUP << 2) |
-			CONFIG_XOSC_RANGE | OSC_X32KLPM_bm;
+    OSC.XOSCCTRL = BOARD_XOSC_TYPE | (CONFIG_XOSC_STARTUP << 2) |
+            CONFIG_XOSC_RANGE | OSC_X32KLPM_bm;
 #endif /* CONFIG_XOSC_32KHZ_LPM */
 
-	flags = cpu_irq_save();
-	OSC.CTRL |= id;
-	cpu_irq_restore(flags);
+    flags = cpu_irq_save();
+    OSC.CTRL |= id;
+    cpu_irq_restore(flags);
 }
 #else
 
 static inline void osc_enable_external(uint8_t id)
 {
-	Assert(false); // No external oscillator on the selected board
+    Assert(false); // No external oscillator on the selected board
 }
 #endif
 
 static inline void osc_disable(uint8_t id)
 {
-	irqflags_t flags;
+    irqflags_t flags;
 
-	Assert(id != OSC_ID_USBSOF);
+    Assert(id != OSC_ID_USBSOF);
 
-	flags = cpu_irq_save();
-	OSC.CTRL &= ~id;
-	cpu_irq_restore(flags);
+    flags = cpu_irq_save();
+    OSC.CTRL &= ~id;
+    cpu_irq_restore(flags);
 }
 
 static inline void osc_enable(uint8_t id)
 {
-	if (id != OSC_ID_XOSC) {
-		osc_enable_internal(id);
-	} else {
-		osc_enable_external(id);
-	}
+    if (id != OSC_ID_XOSC) {
+        osc_enable_internal(id);
+    } else {
+        osc_enable_external(id);
+    }
 }
 
 static inline bool osc_is_ready(uint8_t id)
 {
-	Assert(id != OSC_ID_USBSOF);
+    Assert(id != OSC_ID_USBSOF);
 
-	return OSC.STATUS & id;
+    return OSC.STATUS & id;
 }
 
 //! \name XMEGA-Specific Oscillator Features
@@ -314,85 +314,85 @@ static inline bool osc_is_ready(uint8_t id)
  */
 static inline void osc_enable_autocalibration(uint8_t id, uint8_t ref_id)
 {
-	irqflags_t flags;
+    irqflags_t flags;
 
-	flags = cpu_irq_save();
-	switch (id) {
-	case OSC_ID_RC2MHZ:
+    flags = cpu_irq_save();
+    switch (id) {
+    case OSC_ID_RC2MHZ:
 #if !XMEGA_E
-		Assert((ref_id == OSC_ID_RC32KHZ) || (ref_id == OSC_ID_XOSC));
-		if (ref_id == OSC_ID_XOSC) {
-			osc_enable(OSC_ID_RC32KHZ);
-			OSC.DFLLCTRL |= OSC_RC2MCREF_bm;
-		} else {
-			OSC.DFLLCTRL &= ~(OSC_RC2MCREF_bm);
-		}
-		DFLLRC2M.CTRL |= DFLL_ENABLE_bm;
+        Assert((ref_id == OSC_ID_RC32KHZ) || (ref_id == OSC_ID_XOSC));
+        if (ref_id == OSC_ID_XOSC) {
+            osc_enable(OSC_ID_RC32KHZ);
+            OSC.DFLLCTRL |= OSC_RC2MCREF_bm;
+        } else {
+            OSC.DFLLCTRL &= ~(OSC_RC2MCREF_bm);
+        }
+        DFLLRC2M.CTRL |= DFLL_ENABLE_bm;
 #endif
-		break;
+        break;
 
-	case OSC_ID_RC32MHZ:
+    case OSC_ID_RC32MHZ:
 #if XMEGA_AU || XMEGA_B || XMEGA_C || XMEGA_E
-		Assert((ref_id == OSC_ID_RC32KHZ)
-				|| (ref_id == OSC_ID_XOSC)
+        Assert((ref_id == OSC_ID_RC32KHZ)
+                || (ref_id == OSC_ID_XOSC)
 # if !XMEGA_E
-				|| (ref_id == OSC_ID_USBSOF)
+                || (ref_id == OSC_ID_USBSOF)
 #endif
-				);
+                );
 
-		OSC.DFLLCTRL &= ~(OSC_RC32MCREF_gm);
+        OSC.DFLLCTRL &= ~(OSC_RC32MCREF_gm);
 
-		if (ref_id == OSC_ID_XOSC) {
-			osc_enable(OSC_ID_RC32KHZ);
-			OSC.DFLLCTRL |= OSC_RC32MCREF_XOSC32K_gc;
-		}
-		else if (ref_id == OSC_ID_RC32KHZ) {
-			OSC.DFLLCTRL |= OSC_RC32MCREF_RC32K_gc;
-		}
+        if (ref_id == OSC_ID_XOSC) {
+            osc_enable(OSC_ID_RC32KHZ);
+            OSC.DFLLCTRL |= OSC_RC32MCREF_XOSC32K_gc;
+        }
+        else if (ref_id == OSC_ID_RC32KHZ) {
+            OSC.DFLLCTRL |= OSC_RC32MCREF_RC32K_gc;
+        }
 # if !XMEGA_E
-		else if (ref_id == OSC_ID_USBSOF) {
-			/*
-			 * Calibrate 32MRC at 48MHz using USB SOF
-			 * 48MHz / 1kHz = 0xBB80
-			 */
-			DFLLRC32M.COMP1 = 0x80;
-			DFLLRC32M.COMP2 = 0xBB;
-			OSC.DFLLCTRL |= OSC_RC32MCREF_USBSOF_gc;
-		}
+        else if (ref_id == OSC_ID_USBSOF) {
+            /*
+             * Calibrate 32MRC at 48MHz using USB SOF
+             * 48MHz / 1kHz = 0xBB80
+             */
+            DFLLRC32M.COMP1 = 0x80;
+            DFLLRC32M.COMP2 = 0xBB;
+            OSC.DFLLCTRL |= OSC_RC32MCREF_USBSOF_gc;
+        }
 # endif
 #else
-		Assert((ref_id == OSC_ID_RC32KHZ) ||
-				(ref_id == OSC_ID_XOSC));
+        Assert((ref_id == OSC_ID_RC32KHZ) ||
+                (ref_id == OSC_ID_XOSC));
 
 # if defined(OSC_RC32MCREF_gm)
-		OSC.DFLLCTRL &= ~(OSC_RC32MCREF_gm);
+        OSC.DFLLCTRL &= ~(OSC_RC32MCREF_gm);
 # endif
 
-		if (ref_id == OSC_ID_XOSC) {
-			osc_enable(OSC_ID_RC32KHZ);
+        if (ref_id == OSC_ID_XOSC) {
+            osc_enable(OSC_ID_RC32KHZ);
 # if defined(OSC_RC32MCREF_gm)
-			OSC.DFLLCTRL |= OSC_RC32MCREF_XOSC32K_gc;
+            OSC.DFLLCTRL |= OSC_RC32MCREF_XOSC32K_gc;
 # else
-			OSC.DFLLCTRL |= OSC_RC32MCREF_bm;
+            OSC.DFLLCTRL |= OSC_RC32MCREF_bm;
 # endif
-		}
-		else if (ref_id == OSC_ID_RC32KHZ) {
+        }
+        else if (ref_id == OSC_ID_RC32KHZ) {
 # if defined(OSC_RC32MCREF_gm)
-			OSC.DFLLCTRL |= OSC_RC32MCREF_RC32K_gc;
+            OSC.DFLLCTRL |= OSC_RC32MCREF_RC32K_gc;
 # else
-			OSC.DFLLCTRL &= ~(OSC_RC32MCREF_bm);
+            OSC.DFLLCTRL &= ~(OSC_RC32MCREF_bm);
 # endif
-		}
+        }
 #endif
 
-		DFLLRC32M.CTRL |= DFLL_ENABLE_bm;
-		break;
+        DFLLRC32M.CTRL |= DFLL_ENABLE_bm;
+        break;
 
-	default:
-		Assert(false);
-		break;
-	}
-	cpu_irq_restore(flags);
+    default:
+        Assert(false);
+        break;
+    }
+    cpu_irq_restore(flags);
 }
 
 /**
@@ -407,21 +407,21 @@ static inline void osc_enable_autocalibration(uint8_t id, uint8_t ref_id)
  */
 static inline void osc_disable_autocalibration(uint8_t id)
 {
-	switch (id) {
-	case OSC_ID_RC2MHZ:
+    switch (id) {
+    case OSC_ID_RC2MHZ:
 #if !XMEGA_E
-		DFLLRC2M.CTRL = 0;
+        DFLLRC2M.CTRL = 0;
 #endif
-		break;
+        break;
 
-	case OSC_ID_RC32MHZ:
-		DFLLRC32M.CTRL = 0;
-		break;
+    case OSC_ID_RC32MHZ:
+        DFLLRC32M.CTRL = 0;
+        break;
 
-	default:
-		Assert(false);
-		break;
-	}
+    default:
+        Assert(false);
+        break;
+    }
 }
 
 /**
@@ -435,59 +435,59 @@ static inline void osc_disable_autocalibration(uint8_t id)
  */
 static inline void osc_user_calibration(uint8_t id, uint16_t calib)
 {
-	switch (id) {
-	case OSC_ID_RC2MHZ:
+    switch (id) {
+    case OSC_ID_RC2MHZ:
 #if !XMEGA_E
-		DFLLRC2M.CALA=LSB(calib);
-		DFLLRC2M.CALB=MSB(calib);
+        DFLLRC2M.CALA=LSB(calib);
+        DFLLRC2M.CALB=MSB(calib);
 #endif
-		break;
+        break;
 
-	case OSC_ID_RC32MHZ:
-		DFLLRC32M.CALA=LSB(calib);
-		DFLLRC32M.CALB=MSB(calib);
-		break;
+    case OSC_ID_RC32MHZ:
+        DFLLRC32M.CALA=LSB(calib);
+        DFLLRC32M.CALB=MSB(calib);
+        break;
 
 #if XMEGA_E
-	case OSC_ID_RC8MHZ:
-		OSC.RC8MCAL=LSB(calib);
-		break;
+    case OSC_ID_RC8MHZ:
+        OSC.RC8MCAL=LSB(calib);
+        break;
 #endif
 
-	default:
-		Assert(false);
-		break;
-	}
+    default:
+        Assert(false);
+        break;
+    }
 }
 //@}
 
 static inline uint32_t osc_get_rate(uint8_t id)
 {
-	Assert(id != OSC_ID_USBSOF);
+    Assert(id != OSC_ID_USBSOF);
 
-	switch (id) {
-	case OSC_ID_RC2MHZ:
-		return 2000000UL;
+    switch (id) {
+    case OSC_ID_RC2MHZ:
+        return 2000000UL;
 
-	case OSC_ID_RC32MHZ:
+    case OSC_ID_RC32MHZ:
 #ifdef CONFIG_OSC_RC32_CAL
-		return CONFIG_OSC_RC32_CAL;
+        return CONFIG_OSC_RC32_CAL;
 #else
-		return 32000000UL;
+        return 32000000UL;
 #endif
 
-	case OSC_ID_RC32KHZ:
-		return 32768UL;
+    case OSC_ID_RC32KHZ:
+        return 32768UL;
 
 #ifdef BOARD_XOSC_HZ
-	case OSC_ID_XOSC:
-		return BOARD_XOSC_HZ;
+    case OSC_ID_XOSC:
+        return BOARD_XOSC_HZ;
 #endif
 
-	default:
-		Assert(false);
-		return 0;
-	}
+    default:
+        Assert(false);
+        return 0;
+    }
 }
 
 #endif /* __ASSEMBLY__ */

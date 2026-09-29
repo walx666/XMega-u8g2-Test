@@ -53,7 +53,7 @@ extern "C" {
 
 //! Default Config Spi Master Dummy Field
 #ifndef CONFIG_USART_SPI_DUMMY
-	#define CONFIG_USART_SPI_DUMMY              0xFF
+    #define CONFIG_USART_SPI_DUMMY              0xFF
 #endif
 //! @}
 
@@ -89,8 +89,8 @@ typedef uint32_t board_spi_select_id_t;
 
 //! \brief Polled SPI device definition
 struct usart_spi_device {
-	//! Board specific select id
-	port_pin_t id;
+    //! Board specific select id
+    port_pin_t id;
 };
 
 /*! \brief Initializes the USART in SPI master mode.
@@ -115,8 +115,8 @@ extern void usart_spi_init(USART_t *usart);
  * \param sel_id    Board specific select id
  */
 extern void usart_spi_setup_device(USART_t *usart, struct usart_spi_device *device,
-		spi_flags_t flags, unsigned long baud_rate,
-		board_spi_select_id_t sel_id);
+        spi_flags_t flags, unsigned long baud_rate,
+        board_spi_select_id_t sel_id);
 
 /*! \brief Enables the USART for the specified USART in SPI mode.
  *
@@ -173,7 +173,7 @@ extern void usart_spi_deselect_device(USART_t *usart, struct usart_spi_device *d
  */
 __always_inline static void usart_spi_write_single(USART_t *usart, uint8_t data)
 {
-	usart_spi_transmit(usart, data);
+    usart_spi_transmit(usart, data);
 }
 
 /**
@@ -198,7 +198,7 @@ extern status_code_t usart_spi_write_packet(USART_t *usart,const uint8_t *data, 
  */
 inline static void usart_spi_read_single(USART_t *usart, uint8_t *data)
 {
-	*data = usart_spi_transmit(usart, CONFIG_USART_SPI_DUMMY);
+    *data = usart_spi_transmit(usart, CONFIG_USART_SPI_DUMMY);
 }
 
 /**
@@ -224,7 +224,7 @@ extern status_code_t usart_spi_read_packet(USART_t *usart, uint8_t *data, size_t
  */
 inline static bool usart_spi_is_tx_empty(USART_t *usart)
 {
-	return usart_data_register_is_empty(usart);
+    return usart_data_register_is_empty(usart);
 }
 
 /*! \brief Check whether the USART in SPI master mode contains a received character.
@@ -236,7 +236,7 @@ inline static bool usart_spi_is_tx_empty(USART_t *usart)
  */
 inline static bool usart_spi_is_rx_ready(USART_t *usart)
 {
-	return usart_rx_is_complete(usart);
+    return usart_rx_is_complete(usart);
 }
 
 /*! \brief Check if the USART Transmit Register is empty.
@@ -248,7 +248,7 @@ inline static bool usart_spi_is_rx_ready(USART_t *usart)
  */
 inline static bool usart_spi_is_tx_ready(USART_t *usart)
 {
-	return usart_data_register_is_empty(usart);
+    return usart_data_register_is_empty(usart);
 }
 
 /*! \brief Tests if the USART in SPI mode contains a received character.
@@ -259,7 +259,7 @@ inline static bool usart_spi_is_tx_ready(USART_t *usart)
  */
 inline static bool usart_spi_is_rx_full(USART_t *usart)
 {
-	return usart_rx_is_complete(usart);
+    return usart_rx_is_complete(usart);
 }
 
 #ifdef __cplusplus

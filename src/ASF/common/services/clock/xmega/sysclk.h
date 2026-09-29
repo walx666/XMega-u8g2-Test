@@ -75,7 +75,7 @@ extern "C" {
  * \subsection sysclk_quickstart_use_case_1_setup_steps Initialization code
  * Add to the application initialization code:
  * \code
-	sysclk_init();
+    sysclk_init();
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_1_setup_steps_workflow Workflow
@@ -86,16 +86,16 @@ extern "C" {
  *   Add or uncomment the following in your conf_clock.h header file, commenting out all other
  *   definitions of the same symbol(s):
  *   \code
-	   #define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLL
+       #define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLL
 
-	   // Fpll0 = (Fclk * PLL_mul) / PLL_div
-	   #define CONFIG_PLL0_SOURCE          PLL_SRC_XOSC
-	   #define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
-	   #define CONFIG_PLL0_DIV             1
+       // Fpll0 = (Fclk * PLL_mul) / PLL_div
+       #define CONFIG_PLL0_SOURCE          PLL_SRC_XOSC
+       #define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
+       #define CONFIG_PLL0_DIV             1
 
-	   // Fbus = Fsys / (2 ^ BUS_div)
-	   #define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
-	   #define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_2
+       // Fbus = Fsys / (2 ^ BUS_div)
+       #define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
+       #define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_2
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_1_example_workflow Workflow
@@ -105,16 +105,16 @@ extern "C" {
  *   \code #define CONFIG_PLL0_SOURCE            PLL_SRC_XOSC \endcode
  *  -# Configure the PLL0 module to multiply the external oscillator XOSC frequency up to 32MHz:
  *   \code
-	#define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
-	#define CONFIG_PLL0_DIV             1
+    #define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
+    #define CONFIG_PLL0_DIV             1
 \endcode
  *   \note For user boards, \c BOARD_XOSC_HZ should be defined in the board \c conf_board.h configuration
  *         file as the frequency of the crystal attached to XOSC.
  *  -# Configure the main CPU clock and slow peripheral bus to run at 16MHz, run the fast peripheral bus
  *     at the full 32MHz speed:
  *    \code
-	#define CONFIG_SYSCLK_PSADIV       SYSCLK_PSADIV_1
-	#define CONFIG_SYSCLK_PSBCDIV      SYSCLK_PSBCDIV_1_2
+    #define CONFIG_SYSCLK_PSADIV       SYSCLK_PSADIV_1
+    #define CONFIG_SYSCLK_PSBCDIV      SYSCLK_PSBCDIV_1_2
 \endcode
  *    \note Some dividers are powers of two, while others are integer division factors. Refer to the
  *          formulas in the conf_clock.h template commented above each division define.
@@ -137,7 +137,7 @@ extern "C" {
  * \subsection sysclk_quickstart_use_case_2_setup_steps Initialization code
  * Add to the application initialization code:
  * \code
-	sysclk_init();
+    sysclk_init();
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_2_setup_steps_workflow Workflow
@@ -148,21 +148,21 @@ extern "C" {
  *   Add or uncomment the following in your conf_clock.h header file, commenting out all other
  *   definitions of the same symbol(s):
  *   \code
-	   #define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLL
+       #define CONFIG_SYSCLK_SOURCE        SYSCLK_SRC_PLL
 
-	   // Fpll0 = (Fclk * PLL_mul) / PLL_div
-	   #define CONFIG_PLL0_SOURCE          PLL_SRC_XOSC
-	   #define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
-	   #define CONFIG_PLL0_DIV             1
+       // Fpll0 = (Fclk * PLL_mul) / PLL_div
+       #define CONFIG_PLL0_SOURCE          PLL_SRC_XOSC
+       #define CONFIG_PLL0_MUL             (32000000UL / BOARD_XOSC_HZ)
+       #define CONFIG_PLL0_DIV             1
 
-	   // Fbus = Fsys / (2 ^ BUS_div)
-	   #define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
-	   #define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_1
+       // Fbus = Fsys / (2 ^ BUS_div)
+       #define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
+       #define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_1
 
-	   #define CONFIG_USBCLK_SOURCE        USBCLK_SRC_RCOSC
-	   #define CONFIG_OSC_RC32_CAL         48000000UL
-	   #define CONFIG_OSC_AUTOCAL          OSC_ID_RC32MHZ
-	   #define CONFIG_OSC_AUTOCAL_REF_OSC  OSC_ID_USBSOF
+       #define CONFIG_USBCLK_SOURCE        USBCLK_SRC_RCOSC
+       #define CONFIG_OSC_RC32_CAL         48000000UL
+       #define CONFIG_OSC_AUTOCAL          OSC_ID_RC32MHZ
+       #define CONFIG_OSC_AUTOCAL_REF_OSC  OSC_ID_USBSOF
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_2_example_workflow Workflow
@@ -172,21 +172,21 @@ extern "C" {
  *   \code #define CONFIG_PLL0_SOURCE             PLL_SRC_XOSC \endcode
  *  -# Configure the PLL0 module to multiply the external oscillator XOSC frequency up to 32MHz:
  *   \code
-	#define CONFIG_PLL0_MUL              (32000000UL / BOARD_XOSC_HZ)
-	#define CONFIG_PLL0_DIV              1
+    #define CONFIG_PLL0_MUL              (32000000UL / BOARD_XOSC_HZ)
+    #define CONFIG_PLL0_DIV              1
 \endcode
  *   \note For user boards, \c BOARD_XOSC_HZ should be defined in the board \c conf_board.h configuration
  *         file as the frequency of the crystal attached to XOSC.
  *  -# Configure the main CPU and peripheral bus clocks to run at 32MHz:
  *    \code
-	#define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
-	#define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_2
+    #define CONFIG_SYSCLK_PSADIV        SYSCLK_PSADIV_1
+    #define CONFIG_SYSCLK_PSBCDIV       SYSCLK_PSBCDIV_1_2
 \endcode
  *    \note Some dividers are powers of two, while others are integer division factors. Refer to the
  *          formulas in the conf_clock.h template commented above each division define.
  *  -# Configure the USB module clock to use the internal fast (32MHz) RC oscillator:
  *    \code
-	#define CONFIG_USBCLK_SOURCE        USBCLK_SRC_RCOSC
+    #define CONFIG_USBCLK_SOURCE        USBCLK_SRC_RCOSC
 \endcode
  *    \note When the internal RC oscillator is used for the USB module, it must be recalibrated to 48MHz for
  *          the USB peripheral to function. If this oscillator is then used as the main system clock source,
@@ -195,9 +195,9 @@ extern "C" {
  *  -# Configure the internal fast (32MHz) RC oscillator to calibrate to 48MHz using the USB Start of Frame (SOF)
  *     as the calibration reference:
  *    \code
-	#define CONFIG_OSC_RC32_CAL         48000000UL
-	#define CONFIG_OSC_AUTOCAL          OSC_ID_RC32MHZ
-	#define CONFIG_OSC_AUTOCAL_REF_OSC  OSC_ID_USBSOF
+    #define CONFIG_OSC_RC32_CAL         48000000UL
+    #define CONFIG_OSC_AUTOCAL          OSC_ID_RC32MHZ
+    #define CONFIG_OSC_AUTOCAL_REF_OSC  OSC_ID_USBSOF
 \endcode
  */
 
@@ -219,7 +219,7 @@ extern "C" {
  * \subsection sysclk_quickstart_use_case_3_setup_steps Initialization code
  * Add to the application initialization code:
  * \code
-	sysclk_init();
+    sysclk_init();
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_3_setup_steps_workflow Workflow
@@ -230,38 +230,38 @@ extern "C" {
  *   Add or uncomment the following in your conf_clock.h header file,
  *   commenting out all other definitions of the same symbol(s):
  *   \code
-	   #define CONFIG_SYSCLK_SOURCE                SYSCLK_SRC_RC2MHZ
+       #define CONFIG_SYSCLK_SOURCE                SYSCLK_SRC_RC2MHZ
 
-	   #define CONFIG_OSC_AUTOCAL_RC2MHZ_REF_OSC   OSC_ID_RC32KHZ
+       #define CONFIG_OSC_AUTOCAL_RC2MHZ_REF_OSC   OSC_ID_RC32KHZ
 
-	   #define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
-	   #define CONFIG_OSC_RC32_CAL                 48000000UL
-	   #define CONFIG_OSC_AUTOCAL_RC32MHZ_REF_OSC  OSC_ID_USBSOF
+       #define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
+       #define CONFIG_OSC_RC32_CAL                 48000000UL
+       #define CONFIG_OSC_AUTOCAL_RC32MHZ_REF_OSC  OSC_ID_USBSOF
 \endcode
  *
  * \subsection sysclk_quickstart_use_case_3_example_workflow Workflow
  *  -# Configure the main system clock to use the internal 2MHz RC oscillator
  *   as its source:
  *   \code
-	#define CONFIG_SYSCLK_SOURCE                SYSCLK_SRC_RC2MHZ
+    #define CONFIG_SYSCLK_SOURCE                SYSCLK_SRC_RC2MHZ
 \endcode
  *  -# Configure the 2MHz DFLL auto-calibration to use the internal 32KHz RC
  *   oscillator:
  *   \code
-	#define CONFIG_OSC_AUTOCAL_RC2MHZ_REF_OSC   OSC_ID_RC32KHZ
+    #define CONFIG_OSC_AUTOCAL_RC2MHZ_REF_OSC   OSC_ID_RC32KHZ
 \endcode
  *   \note For auto-calibration it's typically more relevant to use an external
  *        32KHz crystal. So if that's the case use OSC_ID_XOSC instead.
  *  -# Configure the USB module clock to use the internal fast (32MHz) RC oscillator:
  *   \code
-	#define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
+    #define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
 \endcode
  *  -# Configure the internal fast (32MHz) RC oscillator to calibrate to 48MHz
  *   using the USB Start of Frame (SOF) as the calibration reference:
  *   \code
-	#define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
-	#define CONFIG_OSC_RC32_CAL                 48000000UL
-	#define CONFIG_OSC_AUTOCAL_RC32MHZ_REF_OSC  OSC_ID_USBSOF
+    #define CONFIG_USBCLK_SOURCE                USBCLK_SRC_RCOSC
+    #define CONFIG_OSC_RC32_CAL                 48000000UL
+    #define CONFIG_OSC_AUTOCAL_RC32MHZ_REF_OSC  OSC_ID_USBSOF
 \endcode
  */
 
@@ -359,13 +359,13 @@ extern "C" {
 
 //! \name System Clock Port Numbers
 enum sysclk_port_id {
-	SYSCLK_PORT_GEN,   //!< Devices not associated with a specific port.
-	SYSCLK_PORT_A,     //!< Devices on PORTA
-	SYSCLK_PORT_B,     //!< Devices on PORTB
-	SYSCLK_PORT_C,     //!< Devices on PORTC
-	SYSCLK_PORT_D,     //!< Devices on PORTD
-	SYSCLK_PORT_E,     //!< Devices on PORTE
-	SYSCLK_PORT_F,     //!< Devices on PORTF
+    SYSCLK_PORT_GEN,   //!< Devices not associated with a specific port.
+    SYSCLK_PORT_A,     //!< Devices on PORTA
+    SYSCLK_PORT_B,     //!< Devices on PORTB
+    SYSCLK_PORT_C,     //!< Devices on PORTC
+    SYSCLK_PORT_D,     //!< Devices on PORTD
+    SYSCLK_PORT_E,     //!< Devices on PORTE
+    SYSCLK_PORT_F,     //!< Devices on PORTF
 };
 
 /*! \name Clocks not associated with any port
@@ -477,37 +477,37 @@ enum sysclk_port_id {
  */
 static inline uint32_t sysclk_get_main_hz(void)
 {
-	switch (CONFIG_SYSCLK_SOURCE) {
-	case SYSCLK_SRC_RC2MHZ:
-		return 2000000UL;
+    switch (CONFIG_SYSCLK_SOURCE) {
+    case SYSCLK_SRC_RC2MHZ:
+        return 2000000UL;
 #if XMEGA_E
-	case SYSCLK_SRC_RC8MHZ:
-		return 8000000UL;
+    case SYSCLK_SRC_RC8MHZ:
+        return 8000000UL;
 #endif
-	case SYSCLK_SRC_RC32MHZ:
+    case SYSCLK_SRC_RC32MHZ:
 #ifdef CONFIG_OSC_RC32_CAL
-		return CONFIG_OSC_RC32_CAL;
+        return CONFIG_OSC_RC32_CAL;
 #else
-		return 32000000UL;
+        return 32000000UL;
 #endif
 
-	case SYSCLK_SRC_RC32KHZ:
-		return 32768UL;
+    case SYSCLK_SRC_RC32KHZ:
+        return 32768UL;
 
 #ifdef BOARD_XOSC_HZ
-	case SYSCLK_SRC_XOSC:
-		return BOARD_XOSC_HZ;
+    case SYSCLK_SRC_XOSC:
+        return BOARD_XOSC_HZ;
 #endif
 
 #ifdef CONFIG_PLL0_SOURCE
-	case SYSCLK_SRC_PLL:
-		return pll_get_default_rate(0);
+    case SYSCLK_SRC_PLL:
+        return pll_get_default_rate(0);
 #endif
 
-	default:
-		//unhandled_case(CONFIG_SYSCLK_SOURCE);
-		return 0;
-	}
+    default:
+        //unhandled_case(CONFIG_SYSCLK_SOURCE);
+        return 0;
+    }
 }
 
 /**
@@ -519,32 +519,32 @@ static inline uint32_t sysclk_get_main_hz(void)
  */
 static inline uint32_t sysclk_get_per4_hz(void)
 {
-	uint8_t shift = 0;
+    uint8_t shift = 0;
 
 #if XMEGA_E
-	if (CONFIG_SYSCLK_PSADIV > SYSCLK_PSADIV_512) {
-		switch (CONFIG_SYSCLK_PSADIV) {
-			case SYSCLK_PSADIV_6:
-				return sysclk_get_main_hz() / 6;
-			case SYSCLK_PSADIV_10:
-				return sysclk_get_main_hz() / 10;
-			case SYSCLK_PSADIV_12:
-				return sysclk_get_main_hz() / 12;
-			case SYSCLK_PSADIV_24:
-				return sysclk_get_main_hz() / 24;
-			case SYSCLK_PSADIV_48:
-				return sysclk_get_main_hz() / 48;
-			default:
-				//unhandled_case;
-				return 0;
-		}
-	}
+    if (CONFIG_SYSCLK_PSADIV > SYSCLK_PSADIV_512) {
+        switch (CONFIG_SYSCLK_PSADIV) {
+            case SYSCLK_PSADIV_6:
+                return sysclk_get_main_hz() / 6;
+            case SYSCLK_PSADIV_10:
+                return sysclk_get_main_hz() / 10;
+            case SYSCLK_PSADIV_12:
+                return sysclk_get_main_hz() / 12;
+            case SYSCLK_PSADIV_24:
+                return sysclk_get_main_hz() / 24;
+            case SYSCLK_PSADIV_48:
+                return sysclk_get_main_hz() / 48;
+            default:
+                //unhandled_case;
+                return 0;
+        }
+    }
 #endif
-	if (CONFIG_SYSCLK_PSADIV & (1U << CLK_PSADIV_gp)) {
-		shift = (CONFIG_SYSCLK_PSADIV >> (1 + CLK_PSADIV_gp)) + 1;
-	}
+    if (CONFIG_SYSCLK_PSADIV & (1U << CLK_PSADIV_gp)) {
+        shift = (CONFIG_SYSCLK_PSADIV >> (1 + CLK_PSADIV_gp)) + 1;
+    }
 
-	return sysclk_get_main_hz() >> shift;
+    return sysclk_get_main_hz() >> shift;
 }
 
 /**
@@ -556,21 +556,21 @@ static inline uint32_t sysclk_get_per4_hz(void)
  */
 static inline uint32_t sysclk_get_per2_hz(void)
 {
-	switch (CONFIG_SYSCLK_PSBCDIV) {
-	case SYSCLK_PSBCDIV_1_1: /* Fall through */
-	case SYSCLK_PSBCDIV_1_2:
-		return sysclk_get_per4_hz();
+    switch (CONFIG_SYSCLK_PSBCDIV) {
+    case SYSCLK_PSBCDIV_1_1: /* Fall through */
+    case SYSCLK_PSBCDIV_1_2:
+        return sysclk_get_per4_hz();
 
-	case SYSCLK_PSBCDIV_4_1:
-		return sysclk_get_per4_hz() / 4;
+    case SYSCLK_PSBCDIV_4_1:
+        return sysclk_get_per4_hz() / 4;
 
-	case SYSCLK_PSBCDIV_2_2:
-		return sysclk_get_per4_hz() / 2;
+    case SYSCLK_PSBCDIV_2_2:
+        return sysclk_get_per4_hz() / 2;
 
-	default:
-		//unhandled_case(CONFIG_SYSCLK_PSBCDIV);
-		return 0;
-	}
+    default:
+        //unhandled_case(CONFIG_SYSCLK_PSBCDIV);
+        return 0;
+    }
 }
 
 /**
@@ -583,10 +583,10 @@ static inline uint32_t sysclk_get_per2_hz(void)
  */
 static inline uint32_t sysclk_get_per_hz(void)
 {
-	if (CONFIG_SYSCLK_PSBCDIV & (1U << CLK_PSBCDIV_gp))
-		return sysclk_get_per2_hz() / 2;
-	else
-		return sysclk_get_per2_hz();
+    if (CONFIG_SYSCLK_PSBCDIV & (1U << CLK_PSBCDIV_gp))
+        return sysclk_get_per2_hz() / 2;
+    else
+        return sysclk_get_per2_hz();
 }
 
 /**
@@ -596,7 +596,7 @@ static inline uint32_t sysclk_get_per_hz(void)
  */
 static inline uint32_t sysclk_get_cpu_hz(void)
 {
-	return sysclk_get_per_hz();
+    return sysclk_get_per_hz();
 }
 
 /**
@@ -609,252 +609,252 @@ static inline uint32_t sysclk_get_cpu_hz(void)
  */
 static inline uint32_t sysclk_get_peripheral_bus_hz(const volatile void *module)
 {
-	if (module == NULL) {
-		Assert(false);
-		return 0;
-	}
+    if (module == NULL) {
+        Assert(false);
+        return 0;
+    }
 #ifdef AES
-	else if (module == &AES) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &AES) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef EBI
-	else if (module == &EBI) {
-		return sysclk_get_per2_hz();
-	}
+    else if (module == &EBI) {
+        return sysclk_get_per2_hz();
+    }
 #endif
 #ifdef RTC
-	else if (module == &RTC) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &RTC) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef EVSYS
-	else if (module == &EVSYS) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &EVSYS) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef DMA
-	else if (module == &DMA) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &DMA) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef EDMA
-	else if (module == &EDMA) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &EDMA) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef ACA
-	else if (module == &ACA) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &ACA) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef ACB
-	else if (module == &ACB) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &ACB) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef ADCA
-	else if (module == &ADCA) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &ADCA) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef ADCB
-	else if (module == &ADCB) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &ADCB) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef DACA
-	else if (module == &DACA) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &DACA) {
+        return sysclk_get_per_hz();
+    }
 #endif
 // Workaround for bad XMEGA D header file
 #if !XMEGA_D
 #ifdef DACB
-	else if (module == &DACB) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &DACB) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #endif // Workaround end
 #ifdef FAULTC0
-	else if (module == &FAULTC0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &FAULTC0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef FAULTC1
-	else if (module == &FAULTC1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &FAULTC1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCC0
-	else if (module == &TCC0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCC0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCD0
-	else if (module == &TCD0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCD0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCE0
-	else if (module == &TCE0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCE0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCF0
-	else if (module == &TCF0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCF0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCC1
-	else if (module == &TCC1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCC1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCD1
-	else if (module == &TCD1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCD1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCE1
-	else if (module == &TCE1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCE1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCF1
-	else if (module == &TCF1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCF1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCC4
-	else if (module == &TCC4) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCC4) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCC5
-	else if (module == &TCC5) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCC5) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCD4
-	else if (module == &TCD4) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCD4) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TCD5
-	else if (module == &TCD5) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TCD5) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef HIRESC
-	else if (module == &HIRESC) {
-		return sysclk_get_per4_hz();
-	}
+    else if (module == &HIRESC) {
+        return sysclk_get_per4_hz();
+    }
 #endif
 #ifdef HIRESD
-	else if (module == &HIRESD) {
-		return sysclk_get_per4_hz();
-	}
+    else if (module == &HIRESD) {
+        return sysclk_get_per4_hz();
+    }
 #endif
 #ifdef HIRESE
-	else if (module == &HIRESE) {
-		return sysclk_get_per4_hz();
-	}
+    else if (module == &HIRESE) {
+        return sysclk_get_per4_hz();
+    }
 #endif
 #ifdef HIRESF
-	else if (module == &HIRESF) {
-		return sysclk_get_per4_hz();
-	}
+    else if (module == &HIRESF) {
+        return sysclk_get_per4_hz();
+    }
 #endif
 #ifdef SPIC
-	else if (module == &SPIC) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &SPIC) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef SPID
-	else if (module == &SPID) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &SPID) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef SPIE
-	else if (module == &SPIE) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &SPIE) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef SPIF
-	else if (module == &SPIF) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &SPIF) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTC0
-	else if (module == &USARTC0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTC0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTD0
-	else if (module == &USARTD0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTD0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTE0
-	else if (module == &USARTE0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTE0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTF0
-	else if (module == &USARTF0) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTF0) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTC1
-	else if (module == &USARTC1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTC1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTD1
-	else if (module == &USARTD1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTD1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTE1
-	else if (module == &USARTE1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTE1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef USARTF1
-	else if (module == &USARTF1) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &USARTF1) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TWIC
-	else if (module == &TWIC) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TWIC) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TWID
-	else if (module == &TWID) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TWID) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TWIE
-	else if (module == &TWIE) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TWIE) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef TWIF
-	else if (module == &TWIF) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &TWIF) {
+        return sysclk_get_per_hz();
+    }
 #endif
 #ifdef XCL
-	else if (module == &XCL) {
-		return sysclk_get_per_hz();
-	}
+    else if (module == &XCL) {
+        return sysclk_get_per_hz();
+    }
 #endif
-	else {
-		Assert(false);
-		return 0;
-	}
+    else {
+        Assert(false);
+        return 0;
+    }
 }
 
 //@}
@@ -890,240 +890,240 @@ extern void sysclk_disable_module(enum sysclk_port_id port, uint8_t id);
  */
 static inline void sysclk_enable_peripheral_clock(const volatile void *module)
 {
-	if (module == NULL) {
-		Assert(false);
-	}
+    if (module == NULL) {
+        Assert(false);
+    }
 #ifdef AES
-	else if (module == &AES) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_AES);
-	}
+    else if (module == &AES) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_AES);
+    }
 #endif
 #ifdef EBI
-	else if (module == &EBI) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EBI);
-	}
+    else if (module == &EBI) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EBI);
+    }
 #endif
 #ifdef RTC
-	else if (module == &RTC) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
-	}
+    else if (module == &RTC) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
+    }
 #endif
 #ifdef EVSYS
-	else if (module == &EVSYS) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EVSYS);
-	}
+    else if (module == &EVSYS) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EVSYS);
+    }
 #endif
 #ifdef DMA
-	else if (module == &DMA) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_DMA);
-	}
+    else if (module == &DMA) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_DMA);
+    }
 #endif
 #ifdef EDMA
-	else if (module == &EDMA) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EDMA);
-	}
+    else if (module == &EDMA) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_EDMA);
+    }
 #endif
 #ifdef ACA
-	else if (module == &ACA) {
-		sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_AC);
-	}
+    else if (module == &ACA) {
+        sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_AC);
+    }
 #endif
 #ifdef ACB
-	else if (module == &ACB) {
-		sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_AC);
-	}
+    else if (module == &ACB) {
+        sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_AC);
+    }
 #endif
 #ifdef ADCA
-	else if (module == &ADCA) {
-		sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_ADC);
-	}
+    else if (module == &ADCA) {
+        sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_ADC);
+    }
 #endif
 #ifdef ADCB
-	else if (module == &ADCB) {
-		sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_ADC);
-	}
+    else if (module == &ADCB) {
+        sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_ADC);
+    }
 #endif
 #ifdef DACA
-	else if (module == &DACA) {
-		sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_DAC);
-	}
+    else if (module == &DACA) {
+        sysclk_enable_module(SYSCLK_PORT_A, SYSCLK_DAC);
+    }
 #endif
 // Workaround for bad XMEGA D header file
 #if !XMEGA_D
 #ifdef DACB
-	else if (module == &DACB) {
-		sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_DAC);
-	}
+    else if (module == &DACB) {
+        sysclk_enable_module(SYSCLK_PORT_B, SYSCLK_DAC);
+    }
 #endif
 #endif // Workaround end
 #ifdef TCC0
-	else if (module == &TCC0) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC0);
-	}
+    else if (module == &TCC0) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCD0
-	else if (module == &TCD0) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC0);
-	}
+    else if (module == &TCD0) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCE0
-	else if (module == &TCE0) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TC0);
-	}
+    else if (module == &TCE0) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCF0
-	else if (module == &TCF0) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TC0);
-	}
+    else if (module == &TCF0) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCC1
-	else if (module == &TCC1) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC1);
-	}
+    else if (module == &TCC1) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCD1
-	else if (module == &TCD1) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC1);
-	}
+    else if (module == &TCD1) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCE1
-	else if (module == &TCE1) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TC1);
-	}
+    else if (module == &TCE1) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCF1
-	else if (module == &TCF1) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TC1);
-	}
+    else if (module == &TCF1) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCC4
-	else if (module == &TCC4) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC4);
-	}
+    else if (module == &TCC4) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC4);
+    }
 #endif
 #ifdef TCC5
-	else if (module == &TCC5) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC5);
-	}
+    else if (module == &TCC5) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TC5);
+    }
 #endif
 #ifdef TCD4
-	else if (module == &TCD4) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC4);
-	}
+    else if (module == &TCD4) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC4);
+    }
 #endif
 #ifdef TCD5
-	else if (module == &TCD5) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC5);
-	}
+    else if (module == &TCD5) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TC5);
+    }
 #endif
 #ifdef HIRESC
-	else if (module == &HIRESC) {
-			sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESC) {
+            sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESD
-	else if (module == &HIRESD) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESD) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESE
-	else if (module == &HIRESE) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESE) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESF
-	else if (module == &HIRESF) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESF) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_HIRES);
+    }
 #endif
 #ifdef SPIC
-	else if (module == &SPIC) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_SPI);
-	}
+    else if (module == &SPIC) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPID
-	else if (module == &SPID) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_SPI);
-	}
+    else if (module == &SPID) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPIE
-	else if (module == &SPIE) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_SPI);
-	}
+    else if (module == &SPIE) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPIF
-	else if (module == &SPIF) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_SPI);
-	}
+    else if (module == &SPIF) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_SPI);
+    }
 #endif
 #ifdef USARTC0
-	else if (module == &USARTC0) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_USART0);
-	}
+    else if (module == &USARTC0) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTD0
-	else if (module == &USARTD0) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_USART0);
-	}
+    else if (module == &USARTD0) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTE0
-	else if (module == &USARTE0) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_USART0);
-	}
+    else if (module == &USARTE0) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTF0
-	else if (module == &USARTF0) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_USART0);
-	}
+    else if (module == &USARTF0) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTC1
-	else if (module == &USARTC1) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_USART1);
-	}
+    else if (module == &USARTC1) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTD1
-	else if (module == &USARTD1) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_USART1);
-	}
+    else if (module == &USARTD1) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTE1
-	else if (module == &USARTE1) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_USART1);
-	}
+    else if (module == &USARTE1) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTF1
-	else if (module == &USARTF1) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_USART1);
-	}
+    else if (module == &USARTF1) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_USART1);
+    }
 #endif
 #ifdef TWIC
-	else if (module == &TWIC) {
-		sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TWI);
-	}
+    else if (module == &TWIC) {
+        sysclk_enable_module(SYSCLK_PORT_C, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWID
-	else if (module == &TWID) {
-		sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TWI);
-	}
+    else if (module == &TWID) {
+        sysclk_enable_module(SYSCLK_PORT_D, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWIE
-	else if (module == &TWIE) {
-		sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TWI);
-	}
+    else if (module == &TWIE) {
+        sysclk_enable_module(SYSCLK_PORT_E, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWIF
-	else if (module == &TWIF) {
-		sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TWI);
-	}
+    else if (module == &TWIF) {
+        sysclk_enable_module(SYSCLK_PORT_F, SYSCLK_TWI);
+    }
 #endif
 #ifdef XCL
-	else if (module == &XCL) {
-		sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_XCL);
-	}
+    else if (module == &XCL) {
+        sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_XCL);
+    }
 #endif
-	else {
-		Assert(false);
-	}
+    else {
+        Assert(false);
+    }
 }
 
 /**
@@ -1136,240 +1136,240 @@ static inline void sysclk_enable_peripheral_clock(const volatile void *module)
  */
 static inline void sysclk_disable_peripheral_clock(const volatile void *module)
 {
-	if (module == NULL) {
-		Assert(false);
-	}
+    if (module == NULL) {
+        Assert(false);
+    }
 #ifdef AES
-	else if (module == &AES) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_AES);
-	}
+    else if (module == &AES) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_AES);
+    }
 #endif
 #ifdef EBI
-	else if (module == &EBI) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EBI);
-	}
+    else if (module == &EBI) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EBI);
+    }
 #endif
 #ifdef RTC
-	else if (module == &RTC) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
-	}
+    else if (module == &RTC) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
+    }
 #endif
 #ifdef EVSYS
-	else if (module == &EVSYS) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EVSYS);
-	}
+    else if (module == &EVSYS) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EVSYS);
+    }
 #endif
 #ifdef DMA
-	else if (module == &DMA) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_DMA);
-	}
+    else if (module == &DMA) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_DMA);
+    }
 #endif
 #ifdef EDMA
-	else if (module == &EDMA) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EDMA);
-	}
+    else if (module == &EDMA) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_EDMA);
+    }
 #endif
 #ifdef ACA
-	else if (module == &ACA) {
-		sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_AC);
-	}
+    else if (module == &ACA) {
+        sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_AC);
+    }
 #endif
 #ifdef ACB
-	else if (module == &ACB) {
-		sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_AC);
-	}
+    else if (module == &ACB) {
+        sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_AC);
+    }
 #endif
 #ifdef ADCA
-	else if (module == &ADCA) {
-		sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_ADC);
-	}
+    else if (module == &ADCA) {
+        sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_ADC);
+    }
 #endif
 #ifdef ADCB
-	else if (module == &ADCB) {
-		sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_ADC);
-	}
+    else if (module == &ADCB) {
+        sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_ADC);
+    }
 #endif
 #ifdef DACA
-	else if (module == &DACA) {
-		sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_DAC);
-	}
+    else if (module == &DACA) {
+        sysclk_disable_module(SYSCLK_PORT_A, SYSCLK_DAC);
+    }
 #endif
 // Workaround for bad XMEGA D header file
 #if !XMEGA_D
 #ifdef DACB
-	else if (module == &DACB) {
-		sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_DAC);
-	}
+    else if (module == &DACB) {
+        sysclk_disable_module(SYSCLK_PORT_B, SYSCLK_DAC);
+    }
 #endif
 #endif // Workaround end
 #ifdef TCC0
-	else if (module == &TCC0) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC0);
-	}
+    else if (module == &TCC0) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCD0
-	else if (module == &TCD0) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC0);
-	}
+    else if (module == &TCD0) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCE0
-	else if (module == &TCE0) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TC0);
-	}
+    else if (module == &TCE0) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCF0
-	else if (module == &TCF0) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TC0);
-	}
+    else if (module == &TCF0) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TC0);
+    }
 #endif
 #ifdef TCC1
-	else if (module == &TCC1) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC1);
-	}
+    else if (module == &TCC1) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCD1
-	else if (module == &TCD1) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC1);
-	}
+    else if (module == &TCD1) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCE1
-	else if (module == &TCE1) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TC1);
-	}
+    else if (module == &TCE1) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCF1
-	else if (module == &TCF1) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TC1);
-	}
+    else if (module == &TCF1) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TC1);
+    }
 #endif
 #ifdef TCC4
-	else if (module == &TCC4) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC4);
-	}
+    else if (module == &TCC4) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC4);
+    }
 #endif
 #ifdef TCC5
-	else if (module == &TCC5) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC5);
-	}
+    else if (module == &TCC5) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TC5);
+    }
 #endif
 #ifdef TCD4
-	else if (module == &TCD4) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC4);
-	}
+    else if (module == &TCD4) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC4);
+    }
 #endif
 #ifdef TCD5
-	else if (module == &TCD5) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC5);
-	}
+    else if (module == &TCD5) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TC5);
+    }
 #endif
 #ifdef HIRESC
-	else if (module == &HIRESC) {
-			sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESC) {
+            sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESD
-	else if (module == &HIRESD) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESD) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESE
-	else if (module == &HIRESE) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESE) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_HIRES);
+    }
 #endif
 #ifdef HIRESF
-	else if (module == &HIRESF) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_HIRES);
-	}
+    else if (module == &HIRESF) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_HIRES);
+    }
 #endif
 #ifdef SPIC
-	else if (module == &SPIC) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_SPI);
-	}
+    else if (module == &SPIC) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPID
-	else if (module == &SPID) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_SPI);
-	}
+    else if (module == &SPID) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPIE
-	else if (module == &SPIE) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_SPI);
-	}
+    else if (module == &SPIE) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_SPI);
+    }
 #endif
 #ifdef SPIF
-	else if (module == &SPIF) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_SPI);
-	}
+    else if (module == &SPIF) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_SPI);
+    }
 #endif
 #ifdef USARTC0
-	else if (module == &USARTC0) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_USART0);
-	}
+    else if (module == &USARTC0) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTD0
-	else if (module == &USARTD0) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_USART0);
-	}
+    else if (module == &USARTD0) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTE0
-	else if (module == &USARTE0) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_USART0);
-	}
+    else if (module == &USARTE0) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTF0
-	else if (module == &USARTF0) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_USART0);
-	}
+    else if (module == &USARTF0) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_USART0);
+    }
 #endif
 #ifdef USARTC1
-	else if (module == &USARTC1) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_USART1);
-	}
+    else if (module == &USARTC1) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTD1
-	else if (module == &USARTD1) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_USART1);
-	}
+    else if (module == &USARTD1) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTE1
-	else if (module == &USARTE1) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_USART1);
-	}
+    else if (module == &USARTE1) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_USART1);
+    }
 #endif
 #ifdef USARTF1
-	else if (module == &USARTF1) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_USART1);
-	}
+    else if (module == &USARTF1) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_USART1);
+    }
 #endif
 #ifdef TWIC
-	else if (module == &TWIC) {
-		sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TWI);
-	}
+    else if (module == &TWIC) {
+        sysclk_disable_module(SYSCLK_PORT_C, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWID
-	else if (module == &TWID) {
-		sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TWI);
-	}
+    else if (module == &TWID) {
+        sysclk_disable_module(SYSCLK_PORT_D, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWIE
-	else if (module == &TWIE) {
-		sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TWI);
-	}
+    else if (module == &TWIE) {
+        sysclk_disable_module(SYSCLK_PORT_E, SYSCLK_TWI);
+    }
 #endif
 #ifdef TWIF
-	else if (module == &TWIF) {
-		sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TWI);
-	}
+    else if (module == &TWIF) {
+        sysclk_disable_module(SYSCLK_PORT_F, SYSCLK_TWI);
+    }
 #endif
 #ifdef XCL
-	else if (module == &XCL) {
-		sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_XCL);
-	}
+    else if (module == &XCL) {
+        sysclk_disable_module(SYSCLK_PORT_GEN, SYSCLK_XCL);
+    }
 #endif
-	else {
-		Assert(false);
-	}
+    else {
+        Assert(false);
+    }
 }
 
 /**
@@ -1384,10 +1384,10 @@ static inline void sysclk_disable_peripheral_clock(const volatile void *module)
  * \retval false If the clock for module \a id on \a port is disabled.
  */
 static inline bool sysclk_module_is_enabled(enum sysclk_port_id port,
-		uint8_t id)
+        uint8_t id)
 {
-	uint8_t mask = *((uint8_t *)&PR.PRGEN + port);
-	return (mask & id) == 0;
+    uint8_t mask = *((uint8_t *)&PR.PRGEN + port);
+    return (mask & id) == 0;
 }
 
 #if XMEGA_AU || XMEGA_B || XMEGA_C || defined(__DOXYGEN__)
@@ -1432,7 +1432,7 @@ void sysclk_disable_usb(void);
  */
 static inline void sysclk_set_prescalers(uint8_t psadiv, uint8_t psbcdiv)
 {
-	ccp_write_io((uint8_t *)&CLK.PSCTRL, psadiv | psbcdiv);
+    ccp_write_io((uint8_t *)&CLK.PSCTRL, psadiv | psbcdiv);
 }
 
 /**
@@ -1443,7 +1443,7 @@ static inline void sysclk_set_prescalers(uint8_t psadiv, uint8_t psbcdiv)
  */
 static inline void sysclk_set_source(uint8_t src)
 {
-	ccp_write_io((uint8_t *)&CLK.CTRL, src);
+    ccp_write_io((uint8_t *)&CLK.CTRL, src);
 }
 
 /**
@@ -1454,7 +1454,7 @@ static inline void sysclk_set_source(uint8_t src)
  */
 static inline void sysclk_lock(void)
 {
-	ccp_write_io((uint8_t *)&CLK.LOCK, CLK_LOCK_bm);
+    ccp_write_io((uint8_t *)&CLK.LOCK, CLK_LOCK_bm);
 }
 
 //@}
@@ -1473,27 +1473,27 @@ static inline void sysclk_lock(void)
  */
 static inline void sysclk_rtcsrc_enable(uint8_t id)
 {
-	Assert((id & ~CLK_RTCSRC_gm) == 0);
+    Assert((id & ~CLK_RTCSRC_gm) == 0);
 
-	switch (id) {
-	case SYSCLK_RTCSRC_RCOSC:
+    switch (id) {
+    case SYSCLK_RTCSRC_RCOSC:
 #if !XMEGA_A && !XMEGA_D
-	case SYSCLK_RTCSRC_RCOSC32:
+    case SYSCLK_RTCSRC_RCOSC32:
 #endif
-		osc_enable(OSC_ID_RC32KHZ);
-		osc_wait_ready(OSC_ID_RC32KHZ);
-		break;
-	case SYSCLK_RTCSRC_TOSC:
-	case SYSCLK_RTCSRC_TOSC32:
+        osc_enable(OSC_ID_RC32KHZ);
+        osc_wait_ready(OSC_ID_RC32KHZ);
+        break;
+    case SYSCLK_RTCSRC_TOSC:
+    case SYSCLK_RTCSRC_TOSC32:
 #if !XMEGA_A && !XMEGA_D
-	case SYSCLK_RTCSRC_EXTCLK:
+    case SYSCLK_RTCSRC_EXTCLK:
 #endif
-		osc_enable(OSC_ID_XOSC);
-		osc_wait_ready(OSC_ID_XOSC);
-		break;
-	}
+        osc_enable(OSC_ID_XOSC);
+        osc_wait_ready(OSC_ID_XOSC);
+        break;
+    }
 
-	CLK.RTCCTRL = id | CLK_RTCEN_bm;
+    CLK.RTCCTRL = id | CLK_RTCEN_bm;
 }
 
 /**
@@ -1501,7 +1501,7 @@ static inline void sysclk_rtcsrc_enable(uint8_t id)
  */
 static inline void sysclk_rtcsrc_disable(void)
 {
-	CLK.RTCCTRL = 0;
+    CLK.RTCCTRL = 0;
 }
 
 /** @} */

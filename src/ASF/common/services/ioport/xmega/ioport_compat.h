@@ -143,12 +143,12 @@ typedef uint8_t port_id_t;
 
 static inline PORT_t *ioport_pin_to_port(port_pin_t pin)
 {
-	return arch_ioport_pin_to_base(pin);
+    return arch_ioport_pin_to_base(pin);
 }
 
 static inline PORT_t *ioport_id_pin_to_port(port_id_t port)
 {
-	return arch_ioport_port_to_base(port);
+    return arch_ioport_port_to_base(port);
 }
 
 /**
@@ -160,7 +160,7 @@ static inline PORT_t *ioport_id_pin_to_port(port_id_t port)
  * parameters.
  */
 void ioport_configure_port_pin(void *port, pin_mask_t pin_mask,
-		port_pin_flags_t flags);
+        port_pin_flags_t flags);
 
 /**
  * \brief Select the port function for a single pin
@@ -171,8 +171,8 @@ void ioport_configure_port_pin(void *port, pin_mask_t pin_mask,
  */
 static inline void ioport_configure_pin(port_pin_t pin, port_pin_flags_t flags)
 {
-	ioport_configure_port_pin(arch_ioport_pin_to_base(pin),
-			arch_ioport_pin_to_mask(pin), flags);
+    ioport_configure_port_pin(arch_ioport_pin_to_base(pin),
+            arch_ioport_pin_to_mask(pin), flags);
 }
 
 /**
@@ -184,9 +184,9 @@ static inline void ioport_configure_pin(port_pin_t pin, port_pin_flags_t flags)
  * parameters.
  */
 static inline void ioport_configure_group(port_id_t port, pin_mask_t pin_mask,
-		port_pin_flags_t flags)
+        port_pin_flags_t flags)
 {
-	ioport_configure_port_pin(arch_ioport_port_to_base(port), pin_mask, flags);
+    ioport_configure_port_pin(arch_ioport_port_to_base(port), pin_mask, flags);
 }
 
 /**
@@ -202,7 +202,7 @@ static inline void ioport_configure_group(port_id_t port, pin_mask_t pin_mask,
  */
 static inline void ioport_set_value(port_pin_t pin, bool value)
 {
-	arch_ioport_set_pin_level(pin, value);
+    arch_ioport_set_pin_level(pin, value);
 }
 
 /**
@@ -215,7 +215,7 @@ static inline void ioport_set_value(port_pin_t pin, bool value)
  */
 static inline void ioport_set_pin_low(port_pin_t pin)
 {
-	arch_ioport_set_pin_level(pin, false);
+    arch_ioport_set_pin_level(pin, false);
 }
 
 /**
@@ -228,7 +228,7 @@ static inline void ioport_set_pin_low(port_pin_t pin)
  */
 static inline void ioport_set_pin_high(port_pin_t pin)
 {
-	arch_ioport_set_pin_level(pin, true);
+    arch_ioport_set_pin_level(pin, true);
 }
 
 /**
@@ -240,7 +240,7 @@ static inline void ioport_set_pin_high(port_pin_t pin)
  */
 static inline bool ioport_get_value(port_pin_t pin)
 {
-	return arch_ioport_get_pin_level(pin);
+    return arch_ioport_get_pin_level(pin);
 }
 
 /**
@@ -252,7 +252,7 @@ static inline bool ioport_get_value(port_pin_t pin)
  */
 static inline bool ioport_pin_is_high(port_pin_t pin)
 {
-	return (arch_ioport_get_pin_level(pin) == true);
+    return (arch_ioport_get_pin_level(pin) == true);
 }
 
 /**
@@ -264,7 +264,7 @@ static inline bool ioport_pin_is_high(port_pin_t pin)
  */
 static inline bool ioport_pin_is_low(port_pin_t pin)
 {
-	return (arch_ioport_get_pin_level(pin) == false);
+    return (arch_ioport_get_pin_level(pin) == false);
 }
 
 /**
@@ -274,7 +274,7 @@ static inline bool ioport_pin_is_low(port_pin_t pin)
  */
 static inline void ioport_toggle_pin(port_pin_t pin)
 {
-	arch_ioport_toggle_pin_level(pin);
+    arch_ioport_toggle_pin_level(pin);
 }
 
 /*! \brief Drives a group of I/O pin of a port to high level.
@@ -283,9 +283,9 @@ static inline void ioport_toggle_pin(port_pin_t pin)
  * \param port_mask The mask.
  */
 static inline void ioport_set_group_high(port_id_t port_id,
-		pin_mask_t port_mask)
+        pin_mask_t port_mask)
 {
-	arch_ioport_set_port_level(port_id, port_mask, port_mask);
+    arch_ioport_set_port_level(port_id, port_mask, port_mask);
 }
 
 /*! \brief Drives a group of I/O pin of a port to low level.
@@ -295,7 +295,7 @@ static inline void ioport_set_group_high(port_id_t port_id,
  */
 static inline void ioport_set_group_low(port_id_t port_id, pin_mask_t port_mask)
 {
-	arch_ioport_set_port_level(port_id, port_mask, 0);
+    arch_ioport_set_port_level(port_id, port_mask, 0);
 }
 
 /*! \brief Toggles a group of I/O pin of a port.
@@ -305,7 +305,7 @@ static inline void ioport_set_group_low(port_id_t port_id, pin_mask_t port_mask)
  */
 static inline void ioport_tgl_group(port_id_t port_id, pin_mask_t port_mask)
 {
-	arch_ioport_toggle_port_level(port_id, port_mask);
+    arch_ioport_toggle_port_level(port_id, port_mask);
 }
 
 #endif /* IOPORT_COMPAT_H_ */

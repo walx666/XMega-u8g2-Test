@@ -212,9 +212,9 @@
 #define AT86RFX_SPI_SCK              IOPORT_CREATE_PIN(PORTC, 7)
 
 #define AT86RFX_INTC_INIT()          ioport_configure_pin(AT86RFX_IRQ_PIN, IOPORT_DIR_INPUT); \
-									 PORTC.PIN2CTRL = PORT_ISC0_bm; \
-									 PORTC.INT0MASK = PIN2_bm; \
-									 PORTC.INTFLAGS = PORT_INT0IF_bm;
+                                     PORTC.PIN2CTRL = PORT_ISC0_bm; \
+                                     PORTC.INT0MASK = PIN2_bm; \
+                                     PORTC.INTFLAGS = PORT_INT0IF_bm;
 
 #define AT86RFX_ISR()                ISR(PORTC_INT0_vect)
 

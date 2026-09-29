@@ -54,7 +54,7 @@
 #if defined(__GNUC__) || defined(__DOXYGEN__)
 # include <avr/pgmspace.h>
 # define PROGMEM_LOCATION(type, name, loc) \
-		type name __attribute__((section (#loc)))
+        type name __attribute__((section (#loc)))
 # define PROGMEM_DECLARE(type, name) const type name __attribute__((__progmem__))
 # define PROGMEM_STRING(x) PSTR(x)
 # define PROGMEM_STRING_T  PGM_P

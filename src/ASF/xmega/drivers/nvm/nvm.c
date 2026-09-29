@@ -58,30 +58,30 @@
  */
 void nvm_read_device_serial(struct nvm_device_serial *storage)
 {
-	storage->lotnum0 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM0));
-	storage->lotnum1 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM1));
-	storage->lotnum2 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM2));
-	storage->lotnum3 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM3));
-	storage->lotnum4 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM4));
-	storage->lotnum5 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(LOTNUM5));
+    storage->lotnum0 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM0));
+    storage->lotnum1 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM1));
+    storage->lotnum2 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM2));
+    storage->lotnum3 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM3));
+    storage->lotnum4 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM4));
+    storage->lotnum5 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(LOTNUM5));
 
-	storage->wafnum  = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(WAFNUM));
+    storage->wafnum  = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(WAFNUM));
 
-	storage->coordx0 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(COORDX0));
-	storage->coordx1 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(COORDX1));
-	storage->coordy0 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(COORDY0));
-	storage->coordy1 = nvm_read_production_signature_row(
-			nvm_get_production_signature_row_offset(COORDY1));
+    storage->coordx0 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(COORDX0));
+    storage->coordx1 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(COORDX1));
+    storage->coordy0 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(COORDY0));
+    storage->coordy1 = nvm_read_production_signature_row(
+            nvm_get_production_signature_row_offset(COORDY1));
 }
 
 //! @}
@@ -102,15 +102,15 @@ void nvm_read_device_serial(struct nvm_device_serial *storage)
  */
 uint8_t nvm_eeprom_read_byte(eeprom_addr_t addr)
 {
-	uint8_t data;
-	Assert(addr <= EEPROM_SIZE);
+    uint8_t data;
+    Assert(addr <= EEPROM_SIZE);
 
-	/* Wait until NVM is ready */
-	nvm_wait_until_ready();
-	eeprom_enable_mapping();
-	data = *(uint8_t*)(addr + MAPPED_EEPROM_START),
-	eeprom_disable_mapping();
-	return data;
+    /* Wait until NVM is ready */
+    nvm_wait_until_ready();
+    eeprom_enable_mapping();
+    data = *(uint8_t*)(addr + MAPPED_EEPROM_START),
+    eeprom_disable_mapping();
+    return data;
 }
 
 /**
@@ -122,10 +122,10 @@ uint8_t nvm_eeprom_read_byte(eeprom_addr_t addr)
  */
 void nvm_eeprom_read_buffer(eeprom_addr_t address, void *buf, uint16_t len)
 {
-	nvm_wait_until_ready();
-	eeprom_enable_mapping();
-	memcpy( buf,(void*)(address+MAPPED_EEPROM_START), len );
-	eeprom_disable_mapping();
+    nvm_wait_until_ready();
+    eeprom_enable_mapping();
+    memcpy( buf,(void*)(address+MAPPED_EEPROM_START), len );
+    eeprom_disable_mapping();
 }
 
 
@@ -141,29 +141,29 @@ void nvm_eeprom_read_buffer(eeprom_addr_t address, void *buf, uint16_t len)
  */
 void nvm_eeprom_write_byte(eeprom_addr_t address, uint8_t value)
 {
-	uint8_t old_cmd;
+    uint8_t old_cmd;
 
-	Assert(address <= EEPROM_SIZE);
-	/*  Flush buffer to make sure no unintentional data is written and load
-	 *  the "Page Load" command into the command register.
-	 */
-	old_cmd = NVM.CMD;
-	nvm_eeprom_flush_buffer();
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
-	nvm_eeprom_load_byte_to_buffer(address, value);
+    Assert(address <= EEPROM_SIZE);
+    /*  Flush buffer to make sure no unintentional data is written and load
+     *  the "Page Load" command into the command register.
+     */
+    old_cmd = NVM.CMD;
+    nvm_eeprom_flush_buffer();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
+    nvm_eeprom_load_byte_to_buffer(address, value);
 
-	// Set address to write to
-	NVM.ADDR2 = 0x00;
-	NVM.ADDR1 = (address >> 8) & 0xFF;
-	NVM.ADDR0 = address & 0xFF;
+    // Set address to write to
+    NVM.ADDR2 = 0x00;
+    NVM.ADDR1 = (address >> 8) & 0xFF;
+    NVM.ADDR0 = address & 0xFF;
 
-	/*  Issue EEPROM Atomic Write (Erase&Write) command. Load command, write
-	 *  the protection signature and execute command.
-	 */
-	NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
-	nvm_exec();
-	NVM.CMD = old_cmd;
+    /*  Issue EEPROM Atomic Write (Erase&Write) command. Load command, write
+     *  the protection signature and execute command.
+     */
+    NVM.CMD = NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc;
+    nvm_exec();
+    NVM.CMD = old_cmd;
 }
 
 /**
@@ -175,20 +175,20 @@ void nvm_eeprom_write_byte(eeprom_addr_t address, uint8_t value)
  */
 void nvm_eeprom_erase_and_write_buffer(eeprom_addr_t address, const void *buf, uint16_t len)
 {
-	while (len) {
-		if (((address%EEPROM_PAGE_SIZE)==0) && (len>=EEPROM_PAGE_SIZE)) {
-			// A full page can be written
-			nvm_eeprom_load_page_to_buffer((uint8_t*)buf);
-			nvm_eeprom_atomic_write_page(address/EEPROM_PAGE_SIZE);
-			address += EEPROM_PAGE_SIZE;
-			buf = (uint8_t*)buf + EEPROM_PAGE_SIZE;
-			len -= EEPROM_PAGE_SIZE;
-		} else {
-			nvm_eeprom_write_byte(address++, *(uint8_t*)buf);
-			buf = (uint8_t*)buf + 1;
-			len--;
-		}
-	}
+    while (len) {
+        if (((address%EEPROM_PAGE_SIZE)==0) && (len>=EEPROM_PAGE_SIZE)) {
+            // A full page can be written
+            nvm_eeprom_load_page_to_buffer((uint8_t*)buf);
+            nvm_eeprom_atomic_write_page(address/EEPROM_PAGE_SIZE);
+            address += EEPROM_PAGE_SIZE;
+            buf = (uint8_t*)buf + EEPROM_PAGE_SIZE;
+            len -= EEPROM_PAGE_SIZE;
+        } else {
+            nvm_eeprom_write_byte(address++, *(uint8_t*)buf);
+            buf = (uint8_t*)buf + 1;
+            len--;
+        }
+    }
 }
 
 
@@ -204,14 +204,14 @@ void nvm_eeprom_erase_and_write_buffer(eeprom_addr_t address, const void *buf, u
  */
 void nvm_eeprom_flush_buffer(void)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Flush EEPROM page buffer if necessary
-	if ((NVM.STATUS & NVM_EELOAD_bm) != 0) {
-		NVM.CMD = NVM_CMD_ERASE_EEPROM_BUFFER_gc;
-		nvm_exec();
-	}
+    // Flush EEPROM page buffer if necessary
+    if ((NVM.STATUS & NVM_EELOAD_bm) != 0) {
+        NVM.CMD = NVM_CMD_ERASE_EEPROM_BUFFER_gc;
+        nvm_exec();
+    }
 }
 
 /**
@@ -232,12 +232,12 @@ void nvm_eeprom_flush_buffer(void)
  */
 void nvm_eeprom_load_byte_to_buffer(uint8_t byte_addr, uint8_t value)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	eeprom_enable_mapping();
-	*(uint8_t*)(byte_addr + MAPPED_EEPROM_START) = value;
-	eeprom_disable_mapping();
+    eeprom_enable_mapping();
+    *(uint8_t*)(byte_addr + MAPPED_EEPROM_START) = value;
+    eeprom_disable_mapping();
 }
 
 
@@ -258,15 +258,15 @@ void nvm_eeprom_load_byte_to_buffer(uint8_t byte_addr, uint8_t value)
  */
 void nvm_eeprom_load_page_to_buffer(const uint8_t *values)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Load multiple bytes into page buffer
-	uint8_t i;
-	for (i = 0; i < EEPROM_PAGE_SIZE; ++i) {
-		nvm_eeprom_load_byte_to_buffer(i, *values);
-		++values;
-	}
+    // Load multiple bytes into page buffer
+    uint8_t i;
+    for (i = 0; i < EEPROM_PAGE_SIZE; ++i) {
+        nvm_eeprom_load_byte_to_buffer(i, *values);
+        ++values;
+    }
 }
 
 /**
@@ -284,21 +284,21 @@ void nvm_eeprom_load_page_to_buffer(const uint8_t *values)
  */
 void nvm_eeprom_atomic_write_page(uint8_t page_addr)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Calculate page address
-	uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
+    // Calculate page address
+    uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
 
-	Assert(address <= EEPROM_SIZE);
+    Assert(address <= EEPROM_SIZE);
 
-	// Set address
-	NVM.ADDR2 = 0x00;
-	NVM.ADDR1 = (address >> 8) & 0xFF;
-	NVM.ADDR0 = address & 0xFF;
+    // Set address
+    NVM.ADDR2 = 0x00;
+    NVM.ADDR1 = (address >> 8) & 0xFF;
+    NVM.ADDR0 = address & 0xFF;
 
-	// Issue EEPROM Atomic Write (Erase&Write) command
-	nvm_issue_command(NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc);
+    // Issue EEPROM Atomic Write (Erase&Write) command
+    nvm_issue_command(NVM_CMD_ERASE_WRITE_EEPROM_PAGE_gc);
 }
 
 /**
@@ -314,21 +314,21 @@ void nvm_eeprom_atomic_write_page(uint8_t page_addr)
  */
 void nvm_eeprom_split_write_page(uint8_t page_addr)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Calculate page address
-	uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
+    // Calculate page address
+    uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
 
-	Assert(address <= EEPROM_SIZE);
+    Assert(address <= EEPROM_SIZE);
 
-	// Set address
-	NVM.ADDR2 = 0x00;
-	NVM.ADDR1 = (address >> 8) & 0xFF;
-	NVM.ADDR0 = address & 0xFF;
+    // Set address
+    NVM.ADDR2 = 0x00;
+    NVM.ADDR1 = (address >> 8) & 0xFF;
+    NVM.ADDR0 = address & 0xFF;
 
-	// Issue EEPROM Split Write command
-	nvm_issue_command(NVM_CMD_WRITE_EEPROM_PAGE_gc);
+    // Issue EEPROM Split Write command
+    nvm_issue_command(NVM_CMD_WRITE_EEPROM_PAGE_gc);
 }
 
 /**
@@ -346,14 +346,14 @@ void nvm_eeprom_split_write_page(uint8_t page_addr)
  */
 void nvm_eeprom_fill_buffer_with_value(uint8_t value)
 {
-	nvm_eeprom_flush_buffer();
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
-	// Load multiple bytes into page buffer
-	uint8_t i;
-	for (i = 0; i < EEPROM_PAGE_SIZE; ++i) {
-		nvm_eeprom_load_byte_to_buffer(i, value);
-	}
+    nvm_eeprom_flush_buffer();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
+    // Load multiple bytes into page buffer
+    uint8_t i;
+    for (i = 0; i < EEPROM_PAGE_SIZE; ++i) {
+        nvm_eeprom_load_byte_to_buffer(i, value);
+    }
 }
 
 /**
@@ -366,21 +366,21 @@ void nvm_eeprom_fill_buffer_with_value(uint8_t value)
  */
 void nvm_eeprom_erase_bytes_in_page(uint8_t page_addr)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Calculate page address
-	uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
+    // Calculate page address
+    uint16_t address = (uint16_t)(page_addr * EEPROM_PAGE_SIZE);
 
-	Assert(address <= EEPROM_SIZE);
+    Assert(address <= EEPROM_SIZE);
 
-	// Set address
-	NVM.ADDR2 = 0x00;
-	NVM.ADDR1 = (address >> 8) & 0xFF;
-	NVM.ADDR0 = address & 0xFF;
+    // Set address
+    NVM.ADDR2 = 0x00;
+    NVM.ADDR1 = (address >> 8) & 0xFF;
+    NVM.ADDR0 = address & 0xFF;
 
-	// Issue EEPROM Erase command
-	nvm_issue_command(NVM_CMD_ERASE_EEPROM_PAGE_gc);
+    // Issue EEPROM Erase command
+    nvm_issue_command(NVM_CMD_ERASE_EEPROM_PAGE_gc);
 }
 
 /**
@@ -392,10 +392,10 @@ void nvm_eeprom_erase_bytes_in_page(uint8_t page_addr)
  */
 void nvm_eeprom_erase_page(uint8_t page_addr)
 {
-	// Mark all addresses to be deleted
-	nvm_eeprom_fill_buffer_with_value(0xff);
-	// Erase bytes
-	nvm_eeprom_erase_bytes_in_page(page_addr);
+    // Mark all addresses to be deleted
+    nvm_eeprom_fill_buffer_with_value(0xff);
+    // Erase bytes
+    nvm_eeprom_erase_bytes_in_page(page_addr);
 }
 
 
@@ -407,11 +407,11 @@ void nvm_eeprom_erase_page(uint8_t page_addr)
  */
 void nvm_eeprom_erase_bytes_in_all_pages(void)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Issue EEPROM Erase All command
-	nvm_issue_command(NVM_CMD_ERASE_EEPROM_gc);
+    // Issue EEPROM Erase All command
+    nvm_issue_command(NVM_CMD_ERASE_EEPROM_gc);
 }
 
 /**
@@ -421,10 +421,10 @@ void nvm_eeprom_erase_bytes_in_all_pages(void)
  */
 void nvm_eeprom_erase_all(void)
 {
-	// Mark all addresses to be deleted
-	nvm_eeprom_fill_buffer_with_value(0xff);
-	// Erase all pages
-	nvm_eeprom_erase_bytes_in_all_pages();
+    // Mark all addresses to be deleted
+    nvm_eeprom_fill_buffer_with_value(0xff);
+    // Erase all pages
+    nvm_eeprom_erase_bytes_in_all_pages();
 }
 
 //! @}
@@ -456,73 +456,73 @@ void nvm_eeprom_erase_all(void)
  */
 void nvm_issue_flash_range_crc(flash_addr_t start_addr, flash_addr_t end_addr)
 {
-	uint8_t old_cmd;
-	// Save current nvm command
-	old_cmd = NVM.CMD;
+    uint8_t old_cmd;
+    // Save current nvm command
+    old_cmd = NVM.CMD;
 
-	// Load the NVM CMD register with the Flash Range CRC command
-	NVM.CMD = NVM_CMD_FLASH_RANGE_CRC_gc;
+    // Load the NVM CMD register with the Flash Range CRC command
+    NVM.CMD = NVM_CMD_FLASH_RANGE_CRC_gc;
 
-	// Load the start byte address in the NVM Address Register
-	NVM.ADDR0 = start_addr & 0xFF;
-	NVM.ADDR1 = (start_addr >> 8) & 0xFF;
+    // Load the start byte address in the NVM Address Register
+    NVM.ADDR0 = start_addr & 0xFF;
+    NVM.ADDR1 = (start_addr >> 8) & 0xFF;
 #if (FLASH_SIZE >= 0x10000UL)
-	NVM.ADDR2 = (start_addr >> 16) & 0xFF;
+    NVM.ADDR2 = (start_addr >> 16) & 0xFF;
 #endif
 
-	// Load the end byte address in NVM Data Register
-	NVM.DATA0 = end_addr & 0xFF;
-	NVM.DATA1 = (end_addr >> 8) & 0xFF;
+    // Load the end byte address in NVM Data Register
+    NVM.DATA0 = end_addr & 0xFF;
+    NVM.DATA1 = (end_addr >> 8) & 0xFF;
 #if (FLASH_SIZE >= 0x10000UL)
-	NVM.DATA2 = (end_addr >> 16) & 0xFF;
+    NVM.DATA2 = (end_addr >> 16) & 0xFF;
 #endif
 
-	// Execute command
-	ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
+    // Execute command
+    ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
 
-	// Restore command register
-	NVM.CMD = old_cmd;
+    // Restore command register
+    NVM.CMD = old_cmd;
 }
 
 /**
  * \brief Read buffer within the application section
  *
- * \param address	the address to where to read
- * \param buf		pointer to the data
- * \param len		the number of bytes to read
+ * \param address   the address to where to read
+ * \param buf       pointer to the data
+ * \param len       the number of bytes to read
  */
 void nvm_flash_read_buffer(flash_addr_t address, void *buf, uint16_t len)
 {
 #if (FLASH_SIZE>0x10000)
-	uint32_t opt_address = address;
+    uint32_t opt_address = address;
 #else
-	uint16_t opt_address = (uint16_t)address;
+    uint16_t opt_address = (uint16_t)address;
 #endif
-	nvm_wait_until_ready();
-	while ( len ) {
-		*(uint8_t*)buf = nvm_flash_read_byte(opt_address);
-		buf=(uint8_t*)buf+1;
-		opt_address++;
-		len--;
-	}
+    nvm_wait_until_ready();
+    while ( len ) {
+        *(uint8_t*)buf = nvm_flash_read_byte(opt_address);
+        buf=(uint8_t*)buf+1;
+        opt_address++;
+        len--;
+    }
 }
 
 /**
  * \brief Read buffer within the user section
  *
- * \param address	the address to where to read
- * \param buf		pointer to the data
- * \param len		the number of bytes to read
+ * \param address   the address to where to read
+ * \param buf       pointer to the data
+ * \param len       the number of bytes to read
  */
 void nvm_user_sig_read_buffer(flash_addr_t address, void *buf, uint16_t len)
 {
-	uint16_t opt_address = (uint16_t)address&(FLASH_PAGE_SIZE-1);
-	while ( len ) {
-		*(uint8_t*)buf = nvm_read_user_signature_row(opt_address);
-		buf=(uint8_t*)buf+1;
-		opt_address++;
-		len--;
-	}
+    uint16_t opt_address = (uint16_t)address&(FLASH_PAGE_SIZE-1);
+    while ( len ) {
+        *(uint8_t*)buf = nvm_read_user_signature_row(opt_address);
+        buf=(uint8_t*)buf+1;
+        opt_address++;
+        len--;
+    }
 }
 
 /**
@@ -537,55 +537,55 @@ void nvm_user_sig_read_buffer(flash_addr_t address, void *buf, uint16_t len)
  * Set b_blank_check to false if all application flash is erased before.
  */
 void nvm_user_sig_write_buffer(flash_addr_t address, const void *buf,
-	uint16_t len, bool b_blank_check)
+    uint16_t len, bool b_blank_check)
 {
-	uint16_t w_value;
-	uint16_t page_pos;
-	uint16_t opt_address = (uint16_t)address;
-	bool b_flag_erase = false;
+    uint16_t w_value;
+    uint16_t page_pos;
+    uint16_t opt_address = (uint16_t)address;
+    bool b_flag_erase = false;
 
-	while ( len ) {
-		for (page_pos=0; page_pos<FLASH_PAGE_SIZE; page_pos+=2 ) {
-			if (b_blank_check) {
-				// Read flash to know if the erase command is mandatory
-				LSB(w_value) = nvm_read_user_signature_row(page_pos);
-				MSB(w_value) = nvm_read_user_signature_row(page_pos+1);
-				if (w_value!=0xFFFF) {
-					b_flag_erase = true; // The page is not empty
-				}
-			}else{
-				w_value = 0xFFFF;
-			}
-			// Update flash buffer
-			if (len) {
-				if (opt_address == page_pos) {
-					// The MSB of flash word must be changed
-					// because the address is even
-					len--;
-					opt_address++;
-					LSB(w_value)=*(uint8_t*)buf;
-					buf=(uint8_t*)buf+1;
-				}
-			}
-			if (len) {
-				if (opt_address == (page_pos+1)) {
-					// The LSB of flash word must be changed
-					// because the user buffer is not empty
-					len--;
-					opt_address++;
-					MSB(w_value)=*(uint8_t*)buf;
-					buf=(uint8_t*)buf+1;
-				}
-			}
-			// Load flash buffer
-			nvm_flash_load_word_to_buffer(page_pos,w_value);
-		}
-	}
-	// Write flash buffer
-	if (b_flag_erase) {
-		nvm_flash_erase_user_section();
-	}
-	nvm_flash_write_user_page();
+    while ( len ) {
+        for (page_pos=0; page_pos<FLASH_PAGE_SIZE; page_pos+=2 ) {
+            if (b_blank_check) {
+                // Read flash to know if the erase command is mandatory
+                LSB(w_value) = nvm_read_user_signature_row(page_pos);
+                MSB(w_value) = nvm_read_user_signature_row(page_pos+1);
+                if (w_value!=0xFFFF) {
+                    b_flag_erase = true; // The page is not empty
+                }
+            }else{
+                w_value = 0xFFFF;
+            }
+            // Update flash buffer
+            if (len) {
+                if (opt_address == page_pos) {
+                    // The MSB of flash word must be changed
+                    // because the address is even
+                    len--;
+                    opt_address++;
+                    LSB(w_value)=*(uint8_t*)buf;
+                    buf=(uint8_t*)buf+1;
+                }
+            }
+            if (len) {
+                if (opt_address == (page_pos+1)) {
+                    // The LSB of flash word must be changed
+                    // because the user buffer is not empty
+                    len--;
+                    opt_address++;
+                    MSB(w_value)=*(uint8_t*)buf;
+                    buf=(uint8_t*)buf+1;
+                }
+            }
+            // Load flash buffer
+            nvm_flash_load_word_to_buffer(page_pos,w_value);
+        }
+    }
+    // Write flash buffer
+    if (b_flag_erase) {
+        nvm_flash_erase_user_section();
+    }
+    nvm_flash_write_user_page();
 }
 
 /**
@@ -600,71 +600,71 @@ void nvm_user_sig_write_buffer(flash_addr_t address, const void *buf,
  * Set b_blank_check to false if all application flash is erased before.
  */
 void nvm_flash_erase_and_write_buffer(flash_addr_t address, const void *buf,
-	uint16_t len, bool b_blank_check)
+    uint16_t len, bool b_blank_check)
 {
-	uint16_t w_value;
-	uint16_t page_pos;
-	bool b_flag_erase;
+    uint16_t w_value;
+    uint16_t page_pos;
+    bool b_flag_erase;
 #if (FLASH_SIZE>0x10000)
-	uint32_t page_address;
-	uint32_t opt_address = address;
+    uint32_t page_address;
+    uint32_t opt_address = address;
 #else
-	uint16_t page_address;
-	uint16_t opt_address = (uint16_t)address;
+    uint16_t page_address;
+    uint16_t opt_address = (uint16_t)address;
 #endif
 
-	// Compute the start of the page to be modified
-	page_address = opt_address-(opt_address%FLASH_PAGE_SIZE);
+    // Compute the start of the page to be modified
+    page_address = opt_address-(opt_address%FLASH_PAGE_SIZE);
 
-	// For each page
-	while ( len ) {
-		b_flag_erase = false;
+    // For each page
+    while ( len ) {
+        b_flag_erase = false;
 
-		nvm_wait_until_ready();
-		for (page_pos=0; page_pos<FLASH_PAGE_SIZE; page_pos+=2 ) {
-			if (b_blank_check) {
-				// Read flash to know if the erase command is mandatory
-				w_value = nvm_flash_read_word(page_address);
-				if (w_value!=0xFFFF) {
-					b_flag_erase = true; // The page is not empty
-				}
-			}else{
-				w_value = 0xFFFF;
-			}
+        nvm_wait_until_ready();
+        for (page_pos=0; page_pos<FLASH_PAGE_SIZE; page_pos+=2 ) {
+            if (b_blank_check) {
+                // Read flash to know if the erase command is mandatory
+                w_value = nvm_flash_read_word(page_address);
+                if (w_value!=0xFFFF) {
+                    b_flag_erase = true; // The page is not empty
+                }
+            }else{
+                w_value = 0xFFFF;
+            }
 
-			// Update flash buffer
-			if (len) {
-				if (opt_address == page_address) {
-					// The MSB of flash word must be changed
-					// because the address is even
-					len--;
-					opt_address++;
-					LSB(w_value)=*(uint8_t*)buf;
-					buf=(uint8_t*)buf+1;
-				}
-			}
-			if (len) {
-				if (opt_address == (page_address+1)) {
-					// The LSB of flash word must be changed
-					// because the user buffer is not empty
-					len--;
-					opt_address++;
-					MSB(w_value)=*(uint8_t*)buf;
-					buf=(uint8_t*)buf+1;
-				}
-			}
-			// Load flash buffer
-			nvm_flash_load_word_to_buffer(page_address,w_value);
-			page_address+=2;
-		}
+            // Update flash buffer
+            if (len) {
+                if (opt_address == page_address) {
+                    // The MSB of flash word must be changed
+                    // because the address is even
+                    len--;
+                    opt_address++;
+                    LSB(w_value)=*(uint8_t*)buf;
+                    buf=(uint8_t*)buf+1;
+                }
+            }
+            if (len) {
+                if (opt_address == (page_address+1)) {
+                    // The LSB of flash word must be changed
+                    // because the user buffer is not empty
+                    len--;
+                    opt_address++;
+                    MSB(w_value)=*(uint8_t*)buf;
+                    buf=(uint8_t*)buf+1;
+                }
+            }
+            // Load flash buffer
+            nvm_flash_load_word_to_buffer(page_address,w_value);
+            page_address+=2;
+        }
 
-		// Write flash buffer
-		if (b_flag_erase) {
-			nvm_flash_atomic_write_app_page(page_address-FLASH_PAGE_SIZE);
-		}else{
-			nvm_flash_split_write_app_page(page_address-FLASH_PAGE_SIZE);
-		}
-	}
+        // Write flash buffer
+        if (b_flag_erase) {
+            nvm_flash_atomic_write_app_page(page_address-FLASH_PAGE_SIZE);
+        }else{
+            nvm_flash_split_write_app_page(page_address-FLASH_PAGE_SIZE);
+        }
+    }
 }
 
 //! @}
@@ -685,16 +685,16 @@ void nvm_flash_erase_and_write_buffer(flash_addr_t address, const void *buf,
  */
 uint8_t nvm_fuses_read(enum fuse_byte_t fuse)
 {
-	// Wait until NVM is ready
-	nvm_wait_until_ready();
+    // Wait until NVM is ready
+    nvm_wait_until_ready();
 
-	// Set address
-	NVM.ADDR0 = fuse;
+    // Set address
+    NVM.ADDR0 = fuse;
 
-	// Issue READ_FUSES command
-	nvm_issue_command(NVM_CMD_READ_FUSES_gc);
+    // Issue READ_FUSES command
+    nvm_issue_command(NVM_CMD_READ_FUSES_gc);
 
-	return NVM.DATA0;
+    return NVM.DATA0;
 }
 
 //! @}

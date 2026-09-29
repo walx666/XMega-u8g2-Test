@@ -50,19 +50,19 @@ extern "C" {
  */
 
 enum sleepmgr_mode {
-	//! Active mode.
-	SLEEPMGR_ACTIVE = 0,
-	//! Idle mode.
-	SLEEPMGR_IDLE,
-	//! Extended Standby mode.
-	SLEEPMGR_ESTDBY,
-	//! Power Save mode.
-	SLEEPMGR_PSAVE,
-	//! Standby mode.
-	SLEEPMGR_STDBY,
-	//! Power Down mode.
-	SLEEPMGR_PDOWN,
-	SLEEPMGR_NR_OF_MODES,
+    //! Active mode.
+    SLEEPMGR_ACTIVE = 0,
+    //! Idle mode.
+    SLEEPMGR_IDLE,
+    //! Extended Standby mode.
+    SLEEPMGR_ESTDBY,
+    //! Power Save mode.
+    SLEEPMGR_PSAVE,
+    //! Standby mode.
+    SLEEPMGR_STDBY,
+    //! Power Down mode.
+    SLEEPMGR_PDOWN,
+    SLEEPMGR_NR_OF_MODES,
 };
 
 /**
@@ -83,17 +83,17 @@ extern enum SLEEP_SMODE_enum sleepmgr_configs[];
 
 static inline void sleepmgr_sleep(const enum sleepmgr_mode sleep_mode)
 {
-	Assert(sleep_mode != SLEEPMGR_ACTIVE);
+    Assert(sleep_mode != SLEEPMGR_ACTIVE);
 #ifdef CONFIG_SLEEPMGR_ENABLE
-	sleep_set_mode(sleepmgr_configs[sleep_mode-1]);
-	sleep_enable();
+    sleep_set_mode(sleepmgr_configs[sleep_mode-1]);
+    sleep_enable();
 
-	cpu_irq_enable();
-	sleep_enter();
+    cpu_irq_enable();
+    sleep_enter();
 
-	sleep_disable();
+    sleep_disable();
 #else
-	cpu_irq_enable();
+    cpu_irq_enable();
 #endif /* CONFIG_SLEEPMGR_ENABLE */
 
 }

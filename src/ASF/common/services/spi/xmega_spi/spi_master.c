@@ -46,36 +46,36 @@
 void spi_master_init(SPI_t *spi)
 {
 #ifdef SPIA
-	if ((uint16_t)spi == (uint16_t)&SPIA) {
-		sysclk_enable_module(SYSCLK_PORT_A, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPIA) {
+        sysclk_enable_module(SYSCLK_PORT_A, PR_SPI_bm);
+    }
 #endif
 #ifdef SPIB
-	if ((uint16_t)spi == (uint16_t)&SPIB) {
-		sysclk_enable_module(SYSCLK_PORT_B, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPIB) {
+        sysclk_enable_module(SYSCLK_PORT_B, PR_SPI_bm);
+    }
 #endif
 #ifdef SPIC
-	if ((uint16_t)spi == (uint16_t)&SPIC) {
-		sysclk_enable_module(SYSCLK_PORT_C, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPIC) {
+        sysclk_enable_module(SYSCLK_PORT_C, PR_SPI_bm);
+    }
 #endif
 #ifdef SPID
-	if ((uint16_t)spi == (uint16_t)&SPID) {
-		sysclk_enable_module(SYSCLK_PORT_D, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPID) {
+        sysclk_enable_module(SYSCLK_PORT_D, PR_SPI_bm);
+    }
 #endif
 #ifdef SPIE
-	if ((uint16_t)spi == (uint16_t)&SPIE) {
-		sysclk_enable_module(SYSCLK_PORT_E, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPIE) {
+        sysclk_enable_module(SYSCLK_PORT_E, PR_SPI_bm);
+    }
 #endif
 #ifdef SPIF
-	if ((uint16_t)spi == (uint16_t)&SPIF) {
-		sysclk_enable_module(SYSCLK_PORT_F, PR_SPI_bm);
-	}
+    if ((uint16_t)spi == (uint16_t)&SPIF) {
+        sysclk_enable_module(SYSCLK_PORT_F, PR_SPI_bm);
+    }
 #endif
-	spi_enable_master_mode(spi);
+    spi_enable_master_mode(spi);
 }
 
 /**
@@ -93,17 +93,17 @@ void spi_master_init(SPI_t *spi)
  * \param sel_id    Board specific select id
  */
 void spi_master_setup_device(SPI_t *spi, struct spi_device *device,
-		spi_flags_t flags, uint32_t baud_rate,
-		board_spi_select_id_t sel_id)
+        spi_flags_t flags, uint32_t baud_rate,
+        board_spi_select_id_t sel_id)
 {
-	if (spi_xmega_set_baud_div(spi, baud_rate, sysclk_get_cpu_hz()) < 0) {
-		Assert(false);
-		return;
-	}
+    if (spi_xmega_set_baud_div(spi, baud_rate, sysclk_get_cpu_hz()) < 0) {
+        Assert(false);
+        return;
+    }
 
-	/* Clear any set SPI mode flags and set them to the user-specified mode */
-	spi->CTRL = (spi->CTRL & ~SPI_MODE_gm) |
-			((flags << SPI_MODE_gp) & SPI_MODE_gm);
+    /* Clear any set SPI mode flags and set them to the user-specified mode */
+    spi->CTRL = (spi->CTRL & ~SPI_MODE_gm) |
+            ((flags << SPI_MODE_gp) & SPI_MODE_gm);
 }
 
 /**
@@ -119,14 +119,14 @@ void spi_master_setup_device(SPI_t *spi, struct spi_device *device,
  */
 status_code_t spi_write_packet(SPI_t *spi, const uint8_t *data, size_t len)
 {
-	while (len--) {
-		spi_write_single(spi, *data++);
-		
-		while (!spi_is_rx_full(spi)) {
-		}
-	}
-	
-	return STATUS_OK;
+    while (len--) {
+        spi_write_single(spi, *data++);
+        
+        while (!spi_is_rx_full(spi)) {
+        }
+    }
+    
+    return STATUS_OK;
 }
 
 /**
@@ -142,17 +142,17 @@ status_code_t spi_write_packet(SPI_t *spi, const uint8_t *data, size_t len)
  */
 status_code_t spi_read_packet(SPI_t *spi, uint8_t *data, size_t len)
 {
-	while (len--) {
-		spi_write_single(spi,CONFIG_SPI_MASTER_DUMMY); //Dummy write
+    while (len--) {
+        spi_write_single(spi,CONFIG_SPI_MASTER_DUMMY); //Dummy write
 
-		while (!spi_is_rx_full(spi)) {
-		}
-		
-		spi_read_single(spi, data);
-		data++;
-	}
-	
-	return STATUS_OK;
+        while (!spi_is_rx_full(spi)) {
+        }
+        
+        spi_read_single(spi, data);
+        data++;
+    }
+    
+    return STATUS_OK;
 }
 
 /**
@@ -166,7 +166,7 @@ status_code_t spi_read_packet(SPI_t *spi, uint8_t *data, size_t len)
  */
 void spi_select_device(SPI_t *spi, struct spi_device *device)
 {
-	ioport_set_pin_low(device->id);
+    ioport_set_pin_low(device->id);
 }
 
 /**
@@ -181,5 +181,5 @@ void spi_select_device(SPI_t *spi, struct spi_device *device)
  */
 void spi_deselect_device(SPI_t *spi, struct spi_device *device)
 {
-	ioport_set_pin_high(device->id);
+    ioport_set_pin_high(device->id);
 }

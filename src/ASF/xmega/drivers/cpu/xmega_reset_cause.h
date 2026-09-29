@@ -76,21 +76,21 @@ typedef uint8_t         reset_cause_t;
 
 static inline reset_cause_t reset_cause_get_causes(void)
 {
-	return (reset_cause_t)RST.STATUS;
+    return (reset_cause_t)RST.STATUS;
 }
 
 static inline void reset_cause_clear_causes(reset_cause_t causes)
 {
-	RST.STATUS = causes;
+    RST.STATUS = causes;
 }
 
 static inline void reset_do_soft_reset(void)
 {
-	ccp_write_io((void *)&RST.CTRL, RST_SWRST_bm);
+    ccp_write_io((void *)&RST.CTRL, RST_SWRST_bm);
 
-	while (1) {
-		/* Intentionally empty. */
-	}
+    while (1) {
+        /* Intentionally empty. */
+    }
 }
 
 //! @}

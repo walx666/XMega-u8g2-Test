@@ -64,7 +64,7 @@
  */
 static inline void sleep_enable(void)
 {
-	SLEEP.CTRL |= SLEEP_SEN_bm;
+    SLEEP.CTRL |= SLEEP_SEN_bm;
 }
 
 /**
@@ -72,7 +72,7 @@ static inline void sleep_enable(void)
  */
 static inline void sleep_disable(void)
 {
-	SLEEP.CTRL &= ~SLEEP_SEN_bm;
+    SLEEP.CTRL &= ~SLEEP_SEN_bm;
 }
 
 #elif defined(__GNUC__)
@@ -90,7 +90,7 @@ static inline void sleep_disable(void)
  */
 static inline void sleep_set_mode(enum SLEEP_SMODE_enum mode)
 {
-	SLEEP.CTRL = mode | (SLEEP.CTRL & ~SLEEP_SMODE_gm);
+    SLEEP.CTRL = mode | (SLEEP.CTRL & ~SLEEP_SMODE_gm);
 }
 
 //! @}
@@ -114,10 +114,10 @@ static inline void sleep_set_mode(enum SLEEP_SMODE_enum mode)
  * \subsection xmega_sleep_basic_usage_code Example code
  * Add to, e.g., the main loop in the application C-file:
  * \code
-	sleep_set_mode(SLEEP_SMODE_PDOWN_gc);
-	sleep_enable();
-	sleep_enter();
-	sleep_disable();
+    sleep_set_mode(SLEEP_SMODE_PDOWN_gc);
+    sleep_enable();
+    sleep_enter();
+    sleep_disable();
 \endcode
  *
  * \subsection xmega_sleep_basic_usage Workflow

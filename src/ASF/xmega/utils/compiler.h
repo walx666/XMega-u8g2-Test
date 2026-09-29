@@ -367,7 +367,7 @@ typedef struct
  */
 #ifndef ERROR_FUNC
 # define ERROR_FUNC(name, msg)                      \
-	extern int name(void)
+  extern int name(void)
 #endif
 
 //@}
@@ -388,11 +388,11 @@ ERROR_FUNC(compiler_demux_bad_size, "Invalid parameter size");
  *
  * Usage:
  * \code
-	 void foo8(uint8_t a, void *b);
-	 void foo16(uint16_t a, void *b);
-	 void foo32(uint32_t a, void *b);
+   void foo8(uint8_t a, void *b);
+   void foo16(uint16_t a, void *b);
+   void foo32(uint32_t a, void *b);
 
-	 #define foo(x, y)    compiler_demux_size(sizeof(x), foo, x, y)
+   #define foo(x, y)    compiler_demux_size(sizeof(x), foo, x, y)
 \endcode
  *
  * \param size Size of the datatype.
@@ -400,10 +400,10 @@ ERROR_FUNC(compiler_demux_bad_size, "Invalid parameter size");
  * \param ... List of parameters to pass to the function.
  */
 #define compiler_demux_size(size, func, ...)        \
-	(((size) == 1) ? func##8(__VA_ARGS__) :     \
-	 ((size) == 2) ? func##16(__VA_ARGS__) :    \
-	 ((size) == 4) ? func##32(__VA_ARGS__) :    \
-	 compiler_demux_bad_size())
+  (((size) == 1) ? func##8(__VA_ARGS__) :     \
+   ((size) == 2) ? func##16(__VA_ARGS__) :    \
+   ((size) == 4) ? func##32(__VA_ARGS__) :    \
+   compiler_demux_bad_size())
 
 //@}
 
@@ -416,9 +416,9 @@ ERROR_FUNC(compiler_demux_bad_size, "Invalid parameter size");
  * becomes.
  */
 #if (defined __GNUC__)
-	#define __always_inline     inline __attribute__((__always_inline__))
+  #define __always_inline     inline __attribute__((__always_inline__))
 #elif (defined __ICCAVR__)
-	#define __always_inline     _Pragma("inline=forced")
+  #define __always_inline     _Pragma("inline=forced")
 #endif
 
 //! \name Optimization Control
@@ -433,9 +433,9 @@ ERROR_FUNC(compiler_demux_bad_size, "Invalid parameter size");
  * optimization.
  */
 #if (defined __GNUC__)
-	#define __always_optimize   __attribute__((optimize(3)))
+  #define __always_optimize   __attribute__((optimize(3)))
 #elif (defined __ICCAVR__)
-	#define __always_optimize   _Pragma("optimize=high")
+  #define __always_optimize   _Pragma("optimize=high")
 #endif
 
 /**
@@ -564,13 +564,13 @@ ERROR_FUNC(compiler_demux_bad_size, "Invalid parameter size");
  */
 #if defined(_ASSERT_ENABLE_)
 #  if defined(TEST_SUITE_DEFINE_ASSERT_MACRO)
-	// Assert() is defined in unit_test/suite.h
+  // Assert() is defined in unit_test/suite.h
 #    include "unit_test/suite.h"
 #  else
 #    define Assert(expr) \
-	{\
-		if (!(expr)) while (true);\
-	}
+  {\
+    if (!(expr)) while (true);\
+  }
 #  endif
 #else
 #  define Assert(expr) ((void) 0)
@@ -645,42 +645,42 @@ int_fast8_t ilog2_undefined(void);
  */
 static inline int_fast8_t ilog2(uint32_t x)
 {
-	if (is_constant(x))
-		return ((x) & (1ULL << 31) ? 31 :
-			(x) & (1ULL << 30) ? 30 :
-			(x) & (1ULL << 29) ? 29 :
-			(x) & (1ULL << 28) ? 28 :
-			(x) & (1ULL << 27) ? 27 :
-			(x) & (1ULL << 26) ? 26 :
-			(x) & (1ULL << 25) ? 25 :
-			(x) & (1ULL << 24) ? 24 :
-			(x) & (1ULL << 23) ? 23 :
-			(x) & (1ULL << 22) ? 22 :
-			(x) & (1ULL << 21) ? 21 :
-			(x) & (1ULL << 20) ? 20 :
-			(x) & (1ULL << 19) ? 19 :
-			(x) & (1ULL << 18) ? 18 :
-			(x) & (1ULL << 17) ? 17 :
-			(x) & (1ULL << 16) ? 16 :
-			(x) & (1ULL << 15) ? 15 :
-			(x) & (1ULL << 14) ? 14 :
-			(x) & (1ULL << 13) ? 13 :
-			(x) & (1ULL << 12) ? 12 :
-			(x) & (1ULL << 11) ? 11 :
-			(x) & (1ULL << 10) ? 10 :
-			(x) & (1ULL <<  9) ?  9 :
-			(x) & (1ULL <<  8) ?  8 :
-			(x) & (1ULL <<  7) ?  7 :
-			(x) & (1ULL <<  6) ?  6 :
-			(x) & (1ULL <<  5) ?  5 :
-			(x) & (1ULL <<  4) ?  4 :
-			(x) & (1ULL <<  3) ?  3 :
-			(x) & (1ULL <<  2) ?  2 :
-			(x) & (1ULL <<  1) ?  1 :
-			(x) & (1ULL <<  0) ?  0 :
-			ilog2_undefined());
+  if (is_constant(x))
+    return ((x) & (1ULL << 31) ? 31 :
+      (x) & (1ULL << 30) ? 30 :
+      (x) & (1ULL << 29) ? 29 :
+      (x) & (1ULL << 28) ? 28 :
+      (x) & (1ULL << 27) ? 27 :
+      (x) & (1ULL << 26) ? 26 :
+      (x) & (1ULL << 25) ? 25 :
+      (x) & (1ULL << 24) ? 24 :
+      (x) & (1ULL << 23) ? 23 :
+      (x) & (1ULL << 22) ? 22 :
+      (x) & (1ULL << 21) ? 21 :
+      (x) & (1ULL << 20) ? 20 :
+      (x) & (1ULL << 19) ? 19 :
+      (x) & (1ULL << 18) ? 18 :
+      (x) & (1ULL << 17) ? 17 :
+      (x) & (1ULL << 16) ? 16 :
+      (x) & (1ULL << 15) ? 15 :
+      (x) & (1ULL << 14) ? 14 :
+      (x) & (1ULL << 13) ? 13 :
+      (x) & (1ULL << 12) ? 12 :
+      (x) & (1ULL << 11) ? 11 :
+      (x) & (1ULL << 10) ? 10 :
+      (x) & (1ULL <<  9) ?  9 :
+      (x) & (1ULL <<  8) ?  8 :
+      (x) & (1ULL <<  7) ?  7 :
+      (x) & (1ULL <<  6) ?  6 :
+      (x) & (1ULL <<  5) ?  5 :
+      (x) & (1ULL <<  4) ?  4 :
+      (x) & (1ULL <<  3) ?  3 :
+      (x) & (1ULL <<  2) ?  2 :
+      (x) & (1ULL <<  1) ?  1 :
+      (x) & (1ULL <<  0) ?  0 :
+      ilog2_undefined());
 
-	return 31 - clz(x);
+  return 31 - clz(x);
 }
 
 //! @}
@@ -1019,7 +1019,7 @@ typedef U8                  Byte;       //!< 8-bit unsigned integer.
  *
  * \return (\a a / \a b) rounded up to the nearest integer.
  */
-#define div_ceil(a, b)	(((a) + (b) - 1) / (b))
+#define div_ceil(a, b)  (((a) + (b) - 1) / (b))
 
 #include "preprocessor.h"
 #include "progmem.h"

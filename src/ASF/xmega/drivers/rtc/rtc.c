@@ -60,14 +60,14 @@
  * \brief Driver private struct
  */
 struct rtc_data_struct {
-	//! High value of counter
-	uint16_t counter_high;
-	//! High value of alarm time
-	uint16_t alarm_high;
-	//! Low value of alarm time
-	uint16_t alarm_low;
-	//! Callback function to use on alarm
-	rtc_callback_t callback;
+    //! High value of counter
+    uint16_t counter_high;
+    //! High value of alarm time
+    uint16_t alarm_high;
+    //! Low value of alarm time
+    uint16_t alarm_low;
+    //! Callback function to use on alarm
+    rtc_callback_t callback;
 };
 
 /**
@@ -83,7 +83,7 @@ struct rtc_data_struct rtc_data;
 __always_inline bool rtc_is_busy(void);
 __always_inline bool rtc_is_busy(void)
 {
-	return RTC.STATUS & RTC_SYNCBUSY_bm;
+    return RTC.STATUS & RTC_SYNCBUSY_bm;
 }
 
 /**
@@ -95,7 +95,7 @@ __always_inline bool rtc_is_busy(void)
 __always_inline bool rtc_alarm_has_triggered(void);
 __always_inline bool rtc_alarm_has_triggered(void)
 {
-	return !(RTC.INTCTRL & RTC_COMPARE_INT_LEVEL );
+    return !(RTC.INTCTRL & RTC_COMPARE_INT_LEVEL );
 }
 
 /**
@@ -105,13 +105,13 @@ __always_inline bool rtc_alarm_has_triggered(void)
  */
 void rtc_set_time(uint32_t time)
 {
-	RTC.CTRL = RTC_PRESCALER_OFF_gc;
+    RTC.CTRL = RTC_PRESCALER_OFF_gc;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	RTC.CNT = time;
-	rtc_data.counter_high = time >> 16;
-	RTC.CTRL = CONFIG_RTC_PRESCALER;
+    RTC.CNT = time;
+    rtc_data.counter_high = time >> 16;
+    RTC.CTRL = CONFIG_RTC_PRESCALER;
 }
 
 /**
@@ -127,21 +127,21 @@ void rtc_set_time(uint32_t time)
  */
 uint32_t rtc_get_time(void)
 {
-	irqflags_t flags;
-	uint16_t   count_high;
-	uint16_t   count_low;
+    irqflags_t flags;
+    uint16_t   count_high;
+    uint16_t   count_low;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	flags = cpu_irq_save();
-	count_high = rtc_data.counter_high;
-	count_low = RTC.CNT;
-	// Test for possible pending increase of high count value
-	if ((count_low == 0) && (RTC.INTFLAGS & RTC_OVFIF_bm))
-		count_high++;
-	cpu_irq_restore(flags);
+    flags = cpu_irq_save();
+    count_high = rtc_data.counter_high;
+    count_low = RTC.CNT;
+    // Test for possible pending increase of high count value
+    if ((count_low == 0) && (RTC.INTFLAGS & RTC_OVFIF_bm))
+        count_high++;
+    cpu_irq_restore(flags);
 
-	return ((uint32_t)count_high << 16) | count_low;
+    return ((uint32_t)count_high << 16) | count_low;
 }
 
 /**
@@ -158,16 +158,16 @@ uint32_t rtc_get_time(void)
  */
 void rtc_set_alarm(uint32_t time)
 {
-	RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
-	RTC.COMP = time;
-	rtc_data.alarm_low = time;
-	rtc_data.alarm_high = time >> 16;
+    RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
+    RTC.COMP = time;
+    rtc_data.alarm_low = time;
+    rtc_data.alarm_high = time >> 16;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	RTC.INTFLAGS = RTC_COMPIF_bm;
-	RTC.INTCTRL = (uint8_t)RTC_COMPARE_INT_LEVEL
-		| (uint8_t)RTC_OVERFLOW_INT_LEVEL;
+    RTC.INTFLAGS = RTC_COMPIF_bm;
+    RTC.INTCTRL = (uint8_t)RTC_COMPARE_INT_LEVEL
+        | (uint8_t)RTC_OVERFLOW_INT_LEVEL;
 }
 
 /**
@@ -177,7 +177,7 @@ void rtc_set_alarm(uint32_t time)
  */
 void rtc_set_callback(rtc_callback_t callback)
 {
-	rtc_data.callback = callback;
+    rtc_data.callback = callback;
 }
 
 #if XMEGA_E
@@ -196,9 +196,9 @@ void rtc_set_callback(rtc_callback_t callback)
  */
 void rtc_load_calibration(uint8_t error_value, uint8_t sign)
 {
-	/* Error, if sign flag not either 0 or 1*/
-	Assert( sign <= 0x01);
-	RTC.CALIB = sign | error_value;
+    /* Error, if sign flag not either 0 or 1*/
+    Assert( sign <= 0x01);
+    RTC.CALIB = sign | error_value;
 }
 
 #endif /* XMEGA_E */
@@ -213,15 +213,15 @@ void rtc_load_calibration(uint8_t error_value, uint8_t sign)
  */
 void rtc_init(void)
 {
-	sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
-	RTC.PER = 0xffff;
-	RTC.CNT = 0;
-	/* Since overflow interrupt is needed all the time we limit sleep to
-	 * power-save.
-	 */
-	sleepmgr_lock_mode(SLEEPMGR_PSAVE);
-	RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
-	RTC.CTRL = CONFIG_RTC_PRESCALER;
+    sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
+    RTC.PER = 0xffff;
+    RTC.CNT = 0;
+    /* Since overflow interrupt is needed all the time we limit sleep to
+     * power-save.
+     */
+    sleepmgr_lock_mode(SLEEPMGR_PSAVE);
+    RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
+    RTC.CTRL = CONFIG_RTC_PRESCALER;
 }
 
 /**
@@ -230,7 +230,7 @@ void rtc_init(void)
  */
 ISR(RTC_OVF_vect)
 {
-	rtc_data.counter_high++;
+    rtc_data.counter_high++;
 }
 
 /**
@@ -239,20 +239,20 @@ ISR(RTC_OVF_vect)
  */
 ISR(RTC_COMP_vect)
 {
-	if (rtc_data.counter_high >= rtc_data.alarm_high) {
-		RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
-		if (rtc_data.callback) {
-			uint32_t count = ((uint32_t)rtc_data.counter_high << 16)
-					| RTC.CNT;
-			uint32_t alarm = ((uint32_t)rtc_data.alarm_high << 16)
-					| rtc_data.alarm_low;
-			/* Workaround for errata. Count might not be updated
-			 * when waking up from sleep, so in this case use alarm
-			 * time plus one.
-			 */
-			if (alarm >= count)
-				count = alarm + 1;
-			rtc_data.callback(count);
-		}
-	}
+    if (rtc_data.counter_high >= rtc_data.alarm_high) {
+        RTC.INTCTRL = RTC_OVERFLOW_INT_LEVEL;
+        if (rtc_data.callback) {
+            uint32_t count = ((uint32_t)rtc_data.counter_high << 16)
+                    | RTC.CNT;
+            uint32_t alarm = ((uint32_t)rtc_data.alarm_high << 16)
+                    | rtc_data.alarm_low;
+            /* Workaround for errata. Count might not be updated
+             * when waking up from sleep, so in this case use alarm
+             * time plus one.
+             */
+            if (alarm >= count)
+                count = alarm + 1;
+            rtc_data.callback(count);
+        }
+    }
 }

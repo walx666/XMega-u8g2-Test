@@ -65,16 +65,16 @@
  */
 bool usart_init_rs232(USART_t *usart, const usart_rs232_options_t *opt)
 {
-	bool result;
-	sysclk_enable_peripheral_clock(usart);
-	usart_set_mode(usart, USART_CMODE_ASYNCHRONOUS_gc);
-	usart_format_set(usart, opt->charlength, opt->paritytype,
-			opt->stopbits);
-	result = usart_set_baudrate(usart, opt->baudrate, sysclk_get_per_hz());
-	usart_tx_enable(usart);
-	usart_rx_enable(usart);
-	
-	return result;
+    bool result;
+    sysclk_enable_peripheral_clock(usart);
+    usart_set_mode(usart, USART_CMODE_ASYNCHRONOUS_gc);
+    usart_format_set(usart, opt->charlength, opt->paritytype,
+            opt->stopbits);
+    result = usart_set_baudrate(usart, opt->baudrate, sysclk_get_per_hz());
+    usart_tx_enable(usart);
+    usart_rx_enable(usart);
+    
+    return result;
 }
 
 /**
@@ -88,112 +88,112 @@ bool usart_init_rs232(USART_t *usart, const usart_rs232_options_t *opt)
  */
 void usart_init_spi(USART_t *usart, const usart_spi_options_t *opt)
 {
-	ioport_pin_t sck_pin;
-	bool invert_sck;
+    ioport_pin_t sck_pin;
+    bool invert_sck;
 
-	sysclk_enable_peripheral_clock(usart);
+    sysclk_enable_peripheral_clock(usart);
 
-	usart_rx_disable(usart);
+    usart_rx_disable(usart);
 
-	/* configure Clock polarity using INVEN bit of the correct SCK I/O port **/
-	invert_sck = (opt->spimode == 2) || (opt->spimode == 3);
-	UNUSED(invert_sck);
+    /* configure Clock polarity using INVEN bit of the correct SCK I/O port **/
+    invert_sck = (opt->spimode == 2) || (opt->spimode == 3);
+    UNUSED(invert_sck);
 
 #ifdef USARTC0
-	if ((uint16_t)usart == (uint16_t)&USARTC0) {
+    if ((uint16_t)usart == (uint16_t)&USARTC0) {
 #  ifdef PORT_USART0_bm
-		if (PORTC.REMAP & PORT_USART0_bm) {
-			sck_pin = IOPORT_CREATE_PIN(PORTC, 5);
-		} else {
-			sck_pin = IOPORT_CREATE_PIN(PORTC, 1);
-		}
+        if (PORTC.REMAP & PORT_USART0_bm) {
+            sck_pin = IOPORT_CREATE_PIN(PORTC, 5);
+        } else {
+            sck_pin = IOPORT_CREATE_PIN(PORTC, 1);
+        }
 #  else
-		sck_pin = IOPORT_CREATE_PIN(PORTC, 1);
+        sck_pin = IOPORT_CREATE_PIN(PORTC, 1);
 #  endif
-	}
+    }
 #endif
 #ifdef USARTC1
-	if ((uint16_t)usart == (uint16_t)&USARTC1) {
-		sck_pin = IOPORT_CREATE_PIN(PORTC, 5);
-	}
+    if ((uint16_t)usart == (uint16_t)&USARTC1) {
+        sck_pin = IOPORT_CREATE_PIN(PORTC, 5);
+    }
 #endif
 #ifdef USARTD0
-	if ((uint16_t)usart == (uint16_t)&USARTD0) {
+    if ((uint16_t)usart == (uint16_t)&USARTD0) {
 #  ifdef PORT_USART0_bm
-		if (PORTD.REMAP & PORT_USART0_bm) {
-			sck_pin = IOPORT_CREATE_PIN(PORTD, 5);
-		} else {
-			sck_pin = IOPORT_CREATE_PIN(PORTD, 1);
-		}
+        if (PORTD.REMAP & PORT_USART0_bm) {
+            sck_pin = IOPORT_CREATE_PIN(PORTD, 5);
+        } else {
+            sck_pin = IOPORT_CREATE_PIN(PORTD, 1);
+        }
 #  else
-		sck_pin = IOPORT_CREATE_PIN(PORTD, 1);
+        sck_pin = IOPORT_CREATE_PIN(PORTD, 1);
 #  endif
-	}
+    }
 #endif
 #ifdef USARTD1
-	if ((uint16_t)usart == (uint16_t)&USARTD1) {
-		sck_pin = IOPORT_CREATE_PIN(PORTD, 5);
-	}
+    if ((uint16_t)usart == (uint16_t)&USARTD1) {
+        sck_pin = IOPORT_CREATE_PIN(PORTD, 5);
+    }
 #endif
 #ifdef USARTE0
-	if ((uint16_t)usart == (uint16_t)&USARTE0) {
+    if ((uint16_t)usart == (uint16_t)&USARTE0) {
 #  ifdef PORT_USART0_bm
-		if(PORTE.REMAP & PORT_USART0_bm) {
-			sck_pin = IOPORT_CREATE_PIN(PORTE, 5);
-		} else {
-			sck_pin = IOPORT_CREATE_PIN(PORTE, 1);
-		}
+        if(PORTE.REMAP & PORT_USART0_bm) {
+            sck_pin = IOPORT_CREATE_PIN(PORTE, 5);
+        } else {
+            sck_pin = IOPORT_CREATE_PIN(PORTE, 1);
+        }
 #  else
-		sck_pin = IOPORT_CREATE_PIN(PORTE, 1);
+        sck_pin = IOPORT_CREATE_PIN(PORTE, 1);
 #  endif
-	}
+    }
 #endif
 #ifdef USARTE1
-	if ((uint16_t)usart == (uint16_t)&USARTE1) {
-		sck_pin = IOPORT_CREATE_PIN(PORTE, 5);
-	}
+    if ((uint16_t)usart == (uint16_t)&USARTE1) {
+        sck_pin = IOPORT_CREATE_PIN(PORTE, 5);
+    }
 #endif
 #ifdef USARTF0
-	if ((uint16_t)usart == (uint16_t)&USARTF0) {
+    if ((uint16_t)usart == (uint16_t)&USARTF0) {
 #  ifdef PORT_USART0_bm
-		if(PORTF.REMAP & PORT_USART0_bm) {
-			sck_pin = IOPORT_CREATE_PIN(PORTF, 5);
-		} else {
-			sck_pin = IOPORT_CREATE_PIN(PORTF, 1);
-		}
+        if(PORTF.REMAP & PORT_USART0_bm) {
+            sck_pin = IOPORT_CREATE_PIN(PORTF, 5);
+        } else {
+            sck_pin = IOPORT_CREATE_PIN(PORTF, 1);
+        }
 #  else
-		sck_pin = IOPORT_CREATE_PIN(PORTF, 1);
+        sck_pin = IOPORT_CREATE_PIN(PORTF, 1);
 # endif
-	}
+    }
 #endif
 #ifdef USARTF1
-	if ((uint16_t)usart == (uint16_t)&USARTF1) {
-		sck_pin = IOPORT_CREATE_PIN(PORTF, 5);
-	}
+    if ((uint16_t)usart == (uint16_t)&USARTF1) {
+        sck_pin = IOPORT_CREATE_PIN(PORTF, 5);
+    }
 #endif
 
-	/* Configure the USART output pin */
-	ioport_set_pin_dir(sck_pin, IOPORT_DIR_OUTPUT);
-	ioport_set_pin_mode(sck_pin,
-			IOPORT_MODE_TOTEM | (invert_sck? IOPORT_MODE_INVERT_PIN : 0));
-	ioport_set_pin_level(sck_pin, IOPORT_PIN_LEVEL_HIGH);
+    /* Configure the USART output pin */
+    ioport_set_pin_dir(sck_pin, IOPORT_DIR_OUTPUT);
+    ioport_set_pin_mode(sck_pin,
+            IOPORT_MODE_TOTEM | (invert_sck? IOPORT_MODE_INVERT_PIN : 0));
+    ioport_set_pin_level(sck_pin, IOPORT_PIN_LEVEL_HIGH);
 
-	usart_set_mode(usart, USART_CMODE_MSPI_gc);
+    usart_set_mode(usart, USART_CMODE_MSPI_gc);
 
-	if (opt->spimode == 1 || opt->spimode == 3) {
-		usart->CTRLC |= USART_UCPHA_bm;
-	} else {
-		usart->CTRLC &= ~USART_UCPHA_bm;
-	}
-	if (opt->data_order) {
-		(usart)->CTRLC |= USART_DORD_bm;
-	} else {
-		(usart)->CTRLC &= ~USART_DORD_bm;
-	}
+    if (opt->spimode == 1 || opt->spimode == 3) {
+        usart->CTRLC |= USART_UCPHA_bm;
+    } else {
+        usart->CTRLC &= ~USART_UCPHA_bm;
+    }
+    if (opt->data_order) {
+        (usart)->CTRLC |= USART_DORD_bm;
+    } else {
+        (usart)->CTRLC &= ~USART_DORD_bm;
+    }
 
-	usart_spi_set_baudrate(usart, opt->baudrate, sysclk_get_per_hz());
-	usart_tx_enable(usart);
-	usart_rx_enable(usart);
+    usart_spi_set_baudrate(usart, opt->baudrate, sysclk_get_per_hz());
+    usart_tx_enable(usart);
+    usart_rx_enable(usart);
 }
 
 /**
@@ -208,11 +208,11 @@ void usart_init_spi(USART_t *usart, const usart_spi_options_t *opt)
  */
 enum status_code usart_putchar(USART_t *usart, uint8_t c)
 {
-	while (usart_data_register_is_empty(usart) == false) {
-	}
-	
-	(usart)->DATA = c;
-	return STATUS_OK;
+    while (usart_data_register_is_empty(usart) == false) {
+    }
+    
+    (usart)->DATA = c;
+    return STATUS_OK;
 }
 
 /**
@@ -226,10 +226,10 @@ enum status_code usart_putchar(USART_t *usart, uint8_t c)
  */
 uint8_t usart_getchar(USART_t *usart)
 {
-	while (usart_rx_is_complete(usart) == false) {
-	}
-	
-	return ((uint8_t)(usart)->DATA);
+    while (usart_rx_is_complete(usart) == false) {
+    }
+    
+    return ((uint8_t)(usart)->DATA);
 }
 
 /**
@@ -242,31 +242,31 @@ uint8_t usart_getchar(USART_t *usart)
  */
 static uint8_t usart_get_baud_offset(uint32_t baud)
 {
-	switch (baud) {
-	case 1200:
-		return (uint8_t)USART_BAUD_1200;
+    switch (baud) {
+    case 1200:
+        return (uint8_t)USART_BAUD_1200;
 
-	case 2400:
-		return (uint8_t)USART_BAUD_2400;
+    case 2400:
+        return (uint8_t)USART_BAUD_2400;
 
-	case 4800:
-		return (uint8_t)USART_BAUD_4800;
+    case 4800:
+        return (uint8_t)USART_BAUD_4800;
 
-	case 9600:
-		return (uint8_t)USART_BAUD_9600;
+    case 9600:
+        return (uint8_t)USART_BAUD_9600;
 
-	case 19200:
-		return (uint8_t)USART_BAUD_19200;
+    case 19200:
+        return (uint8_t)USART_BAUD_19200;
 
-	case 38400:
-		return (uint8_t)USART_BAUD_38400;
+    case 38400:
+        return (uint8_t)USART_BAUD_38400;
 
-	case 57600:
-		return (uint8_t)USART_BAUD_57600;
+    case 57600:
+        return (uint8_t)USART_BAUD_57600;
 
-	default:
-		return (uint8_t)USART_BAUD_UNDEFINED;
-	}
+    default:
+        return (uint8_t)USART_BAUD_UNDEFINED;
+    }
 }
 
 /**
@@ -283,8 +283,8 @@ static uint8_t usart_get_baud_offset(uint32_t baud)
  */
 void usart_set_bsel_bscale_value(USART_t *usart, uint16_t bsel, uint8_t bscale)
 {
-	(usart)->BAUDCTRLA = (uint8_t)(bsel);
-	(usart)->BAUDCTRLB = (uint8_t)(((bsel >> 8) & 0X0F) | (bscale << 4));
+    (usart)->BAUDCTRLA = (uint8_t)(bsel);
+    (usart)->BAUDCTRLB = (uint8_t)(((bsel >> 8) & 0X0F) | (bscale << 4));
 }
 
 /**
@@ -299,27 +299,27 @@ void usart_set_bsel_bscale_value(USART_t *usart, uint16_t bsel, uint8_t bscale)
  *
  */
 void usart_set_baudrate_precalculated(USART_t *usart, uint32_t baud,
-		uint32_t cpu_hz)
+        uint32_t cpu_hz)
 {
-	uint8_t baud_offset;
-	uint16_t baudctrl = 0;
+    uint8_t baud_offset;
+    uint16_t baudctrl = 0;
 
-	baud_offset = usart_get_baud_offset(baud);
+    baud_offset = usart_get_baud_offset(baud);
 
-	if (cpu_hz == 2000000UL) {
-		baudctrl = PROGMEM_READ_WORD(baudctrl_2mhz + baud_offset);
-	} else if (cpu_hz == 32000000UL) {
-		baudctrl = PROGMEM_READ_WORD(baudctrl_32mhz + baud_offset);
-	} else {
-		/* Error, system clock speed or USART baud rate is not supported
-		 * by the look-up table */
-		Assert(false);
-	}
+    if (cpu_hz == 2000000UL) {
+        baudctrl = PROGMEM_READ_WORD(baudctrl_2mhz + baud_offset);
+    } else if (cpu_hz == 32000000UL) {
+        baudctrl = PROGMEM_READ_WORD(baudctrl_32mhz + baud_offset);
+    } else {
+        /* Error, system clock speed or USART baud rate is not supported
+         * by the look-up table */
+        Assert(false);
+    }
 
-	if (baud_offset != USART_BAUD_UNDEFINED) {
-		(usart)->BAUDCTRLB = (uint8_t)((uint16_t)baudctrl);
-		(usart)->BAUDCTRLA = (uint8_t)((uint16_t)baudctrl >> 8);
-	}
+    if (baud_offset != USART_BAUD_UNDEFINED) {
+        (usart)->BAUDCTRLB = (uint8_t)((uint16_t)baudctrl);
+        (usart)->BAUDCTRLA = (uint8_t)((uint16_t)baudctrl >> 8);
+    }
 }
 
 /**
@@ -340,93 +340,93 @@ void usart_set_baudrate_precalculated(USART_t *usart, uint32_t baud,
  */
 bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 {
-	int8_t exp;
-	uint32_t div;
-	uint32_t limit;
-	uint32_t ratio;
-	uint32_t min_rate;
-	uint32_t max_rate;
+    int8_t exp;
+    uint32_t div;
+    uint32_t limit;
+    uint32_t ratio;
+    uint32_t min_rate;
+    uint32_t max_rate;
 
-	/*
-	 * Check if the hardware supports the given baud rate
-	 */
-	/* 8 = (2^0) * 8 * (2^0) = (2^BSCALE_MIN) * 8 * (BSEL_MIN) */
-	max_rate = cpu_hz / 8;
-	/* 4194304 = (2^7) * 8 * (2^12) = (2^BSCALE_MAX) * 8 * (BSEL_MAX+1) */
-	min_rate = cpu_hz / 4194304;
+    /*
+     * Check if the hardware supports the given baud rate
+     */
+    /* 8 = (2^0) * 8 * (2^0) = (2^BSCALE_MIN) * 8 * (BSEL_MIN) */
+    max_rate = cpu_hz / 8;
+    /* 4194304 = (2^7) * 8 * (2^12) = (2^BSCALE_MAX) * 8 * (BSEL_MAX+1) */
+    min_rate = cpu_hz / 4194304;
 
-	if (!((usart)->CTRLB & USART_CLK2X_bm)) {
-		max_rate /= 2;
-		min_rate /= 2;
-	}
+    if (!((usart)->CTRLB & USART_CLK2X_bm)) {
+        max_rate /= 2;
+        min_rate /= 2;
+    }
 
-	if ((baud > max_rate) || (baud < min_rate)) {
-		return false;
-	}
+    if ((baud > max_rate) || (baud < min_rate)) {
+        return false;
+    }
 
-	/* Check if double speed is enabled. */
-	if (!((usart)->CTRLB & USART_CLK2X_bm)) {
-		baud *= 2;
-	}
+    /* Check if double speed is enabled. */
+    if (!((usart)->CTRLB & USART_CLK2X_bm)) {
+        baud *= 2;
+    }
 
-	/* Find the lowest possible exponent. */
-	limit = 0xfffU >> 4;
-	ratio = cpu_hz / baud;
+    /* Find the lowest possible exponent. */
+    limit = 0xfffU >> 4;
+    ratio = cpu_hz / baud;
 
-	for (exp = -7; exp < 7; exp++) {
-		if (ratio < limit) {
-			break;
-		}
+    for (exp = -7; exp < 7; exp++) {
+        if (ratio < limit) {
+            break;
+        }
 
-		limit <<= 1;
+        limit <<= 1;
 
-		if (exp < -3) {
-			limit |= 1;
-		}
-	}
+        if (exp < -3) {
+            limit |= 1;
+        }
+    }
 
-	/*
-	 * Depending on the value of exp, scale either the input frequency or
-	 * the target baud rate. By always scaling upwards, we never introduce
-	 * any additional inaccuracy.
-	 *
-	 * We are including the final divide-by-8 (aka. right-shift-by-3) in
-	 * this operation as it ensures that we never exceeed 2**32 at any
-	 * point.
-	 *
-	 * The formula for calculating BSEL is slightly different when exp is
-	 * negative than it is when exp is positive.
-	 */
-	if (exp < 0) {
-		/* We are supposed to subtract 1, then apply BSCALE. We want to
-		 * apply BSCALE first, so we need to turn everything inside the
-		 * parenthesis into a single fractional expression.
-		 */
-		cpu_hz -= 8 * baud;
+    /*
+     * Depending on the value of exp, scale either the input frequency or
+     * the target baud rate. By always scaling upwards, we never introduce
+     * any additional inaccuracy.
+     *
+     * We are including the final divide-by-8 (aka. right-shift-by-3) in
+     * this operation as it ensures that we never exceeed 2**32 at any
+     * point.
+     *
+     * The formula for calculating BSEL is slightly different when exp is
+     * negative than it is when exp is positive.
+     */
+    if (exp < 0) {
+        /* We are supposed to subtract 1, then apply BSCALE. We want to
+         * apply BSCALE first, so we need to turn everything inside the
+         * parenthesis into a single fractional expression.
+         */
+        cpu_hz -= 8 * baud;
 
-		/* If we end up with a left-shift after taking the final
-		 * divide-by-8 into account, do the shift before the divide.
-		 * Otherwise, left-shift the denominator instead (effectively
-		 * resulting in an overall right shift.)
-		 */
-		if (exp <= -3) {
-			div = ((cpu_hz << (-exp - 3)) + baud / 2) / baud;
-		} else {
-			baud <<= exp + 3;
-			div = (cpu_hz + baud / 2) / baud;
-		}
-	} else {
-		/* We will always do a right shift in this case, but we need to
-		 * shift three extra positions because of the divide-by-8.
-		 */
-		baud <<= exp + 3;
-		div = (cpu_hz + baud / 2) / baud - 1;
-	}
+        /* If we end up with a left-shift after taking the final
+         * divide-by-8 into account, do the shift before the divide.
+         * Otherwise, left-shift the denominator instead (effectively
+         * resulting in an overall right shift.)
+         */
+        if (exp <= -3) {
+            div = ((cpu_hz << (-exp - 3)) + baud / 2) / baud;
+        } else {
+            baud <<= exp + 3;
+            div = (cpu_hz + baud / 2) / baud;
+        }
+    } else {
+        /* We will always do a right shift in this case, but we need to
+         * shift three extra positions because of the divide-by-8.
+         */
+        baud <<= exp + 3;
+        div = (cpu_hz + baud / 2) / baud - 1;
+    }
 
-	(usart)->BAUDCTRLB = (uint8_t)(((div >> 8) & 0X0F) | (exp << 4));
-	(usart)->BAUDCTRLA = (uint8_t)div;
+    (usart)->BAUDCTRLB = (uint8_t)(((div >> 8) & 0X0F) | (exp << 4));
+    (usart)->BAUDCTRLA = (uint8_t)div;
 
-	return true;
+    return true;
 }
 
 /**
@@ -440,18 +440,18 @@ bool usart_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
  */
 void usart_spi_set_baudrate(USART_t *usart, uint32_t baud, uint32_t cpu_hz)
 {
-	uint16_t bsel_value;
+    uint16_t bsel_value;
 
-	/* Check if baudrate is less than the maximim limit specified in
-	 * datasheet */
-	if (baud < (cpu_hz / 2)) {
-		bsel_value = (cpu_hz / (baud * 2)) - 1;
-	} else {
-		/* If baudrate is not within the specfication in datasheet,
-		 * assign maximum baudrate possible for the current CPU frequency */
-		bsel_value = 0;
-	}
+    /* Check if baudrate is less than the maximim limit specified in
+     * datasheet */
+    if (baud < (cpu_hz / 2)) {
+        bsel_value = (cpu_hz / (baud * 2)) - 1;
+    } else {
+        /* If baudrate is not within the specfication in datasheet,
+         * assign maximum baudrate possible for the current CPU frequency */
+        bsel_value = 0;
+    }
 
-	(usart)->BAUDCTRLB = (uint8_t)((~USART_BSCALE_gm) & (bsel_value >> 8));
-	(usart)->BAUDCTRLA = (uint8_t)(bsel_value);
+    (usart)->BAUDCTRLB = (uint8_t)((~USART_BSCALE_gm) & (bsel_value >> 8));
+    (usart)->BAUDCTRLA = (uint8_t)(bsel_value);
 }

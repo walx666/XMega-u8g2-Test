@@ -84,9 +84,9 @@ extern "C" {
  */
 static inline void nvm_wait_until_ready( void )
 {
-	do {
-		// Block execution while waiting for the NVM to be ready
-	} while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
+    do {
+        // Block execution while waiting for the NVM to be ready
+    } while ((NVM.STATUS & NVM_NVMBUSY_bm) == NVM_NVMBUSY_bm);
 }
 
 /**
@@ -100,7 +100,7 @@ static inline void nvm_wait_until_ready( void )
  */
 static inline void nvm_exec(void)
 {
-	ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
+    ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
 }
 
 /**
@@ -117,12 +117,12 @@ static inline void nvm_exec(void)
  */
 static inline void nvm_issue_command(NVM_CMD_t nvm_command)
 {
-	uint8_t old_cmd;
+    uint8_t old_cmd;
 
-	old_cmd = NVM.CMD;
-	NVM.CMD = nvm_command;
-	ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
-	NVM.CMD = old_cmd;
+    old_cmd = NVM.CMD;
+    NVM.CMD = nvm_command;
+    ccp_write_io((uint8_t *)&NVM.CTRLA, NVM_CMDEX_bm);
+    NVM.CMD = old_cmd;
 }
 
 /**
@@ -190,14 +190,14 @@ void nvm_common_spm(uint32_t addr, uint8_t nvm_cmd);
  * This structure can be used to store the device ID of a device.
  */
 struct nvm_device_id {
-	union {
-		struct {
-			uint8_t devid0;
-			uint8_t devid1;
-			uint8_t devid2;
-		};
-		uint8_t byte[3];
-	};
+    union {
+        struct {
+            uint8_t devid0;
+            uint8_t devid1;
+            uint8_t devid2;
+        };
+        uint8_t byte[3];
+    };
 };
 
 /**
@@ -206,22 +206,22 @@ struct nvm_device_id {
  * This structure can be used to store the serial number of a device.
  */
 struct nvm_device_serial {
-	union {
-		struct {
-			uint8_t lotnum0;
-			uint8_t lotnum1;
-			uint8_t lotnum2;
-			uint8_t lotnum3;
-			uint8_t lotnum4;
-			uint8_t lotnum5;
-			uint8_t wafnum;
-			uint8_t coordx0;
-			uint8_t coordx1;
-			uint8_t coordy0;
-			uint8_t coordy1;
-		};
-		uint8_t byte[11];
-	};
+    union {
+        struct {
+            uint8_t lotnum0;
+            uint8_t lotnum1;
+            uint8_t lotnum2;
+            uint8_t lotnum3;
+            uint8_t lotnum4;
+            uint8_t lotnum5;
+            uint8_t wafnum;
+            uint8_t coordx0;
+            uint8_t coordx1;
+            uint8_t coordy0;
+            uint8_t coordy1;
+        };
+        uint8_t byte[11];
+    };
 };
 
 /**
@@ -232,7 +232,7 @@ struct nvm_device_serial {
  */
 #if defined(__GNUC__)
 # define nvm_get_production_signature_row_offset(regname) \
-		offsetof(NVM_PROD_SIGNATURES_t, regname)
+        offsetof(NVM_PROD_SIGNATURES_t, regname)
 #elif defined(__ICCAVR__)
 # define nvm_get_production_signature_row_offset(regname) (regname##_offset)
 #else
@@ -256,7 +256,7 @@ struct nvm_device_serial {
  */
 static inline uint8_t nvm_read_production_signature_row(uint8_t address)
 {
-	return nvm_read_byte(NVM_CMD_READ_CALIB_ROW_gc, address);
+    return nvm_read_byte(NVM_CMD_READ_CALIB_ROW_gc, address);
 }
 
 /**
@@ -275,7 +275,7 @@ static inline uint8_t nvm_read_production_signature_row(uint8_t address)
  */
 static inline uint8_t nvm_read_user_signature_row(uint16_t address)
 {
-	return nvm_read_byte(NVM_CMD_READ_USER_SIG_ROW_gc, address);
+    return nvm_read_byte(NVM_CMD_READ_USER_SIG_ROW_gc, address);
 }
 
 /**
@@ -287,9 +287,9 @@ static inline uint8_t nvm_read_user_signature_row(uint16_t address)
  */
 static inline void nvm_read_device_id(struct nvm_device_id *storage)
 {
-	storage->devid0 = MCU.DEVID0;
-	storage->devid1 = MCU.DEVID1;
-	storage->devid2 = MCU.DEVID2;
+    storage->devid0 = MCU.DEVID0;
+    storage->devid1 = MCU.DEVID1;
+    storage->devid2 = MCU.DEVID2;
 }
 
 /**
@@ -301,7 +301,7 @@ static inline void nvm_read_device_id(struct nvm_device_id *storage)
  */
 static inline uint8_t nvm_read_device_rev(void)
 {
-	return MCU.REVID;
+    return MCU.REVID;
 }
 
 void nvm_read_device_serial(struct nvm_device_serial *storage);
@@ -363,7 +363,7 @@ typedef uint16_t eeprom_addr_t;
 static inline void eeprom_enable_mapping(void)
 {
 #if !XMEGA_E
-	NVM_CTRLB = NVM_CTRLB | NVM_EEMAPEN_bm;
+    NVM_CTRLB = NVM_CTRLB | NVM_EEMAPEN_bm;
 #endif
 }
 
@@ -376,7 +376,7 @@ static inline void eeprom_enable_mapping(void)
 static inline void eeprom_disable_mapping(void)
 {
 #if !XMEGA_E
-	NVM_CTRLB = NVM_CTRLB & ~NVM_EEMAPEN_bm;
+    NVM_CTRLB = NVM_CTRLB & ~NVM_EEMAPEN_bm;
 #endif
 }
 
@@ -455,9 +455,9 @@ void nvm_eeprom_erase_all(void);
 
 // 16K devices
 #  elif AVR8_PART_IS_DEFINED(ATxmega16A4)            | \
-		AVR8_PART_IS_DEFINED(ATxmega16A4U) | \
-		AVR8_PART_IS_DEFINED(ATxmega16D4)  | \
-		AVR8_PART_IS_DEFINED(ATxmega16C4)
+        AVR8_PART_IS_DEFINED(ATxmega16A4U) | \
+        AVR8_PART_IS_DEFINED(ATxmega16D4)  | \
+        AVR8_PART_IS_DEFINED(ATxmega16C4)
 #    define FLASH_SIZE      (16*1024L)
 #    define FLASH_PAGE_SIZE (256)
 
@@ -467,9 +467,9 @@ void nvm_eeprom_erase_all(void);
 
 // 32K devices
 #  elif AVR8_PART_IS_DEFINED(ATxmega32A4)          | \
-		AVR8_PART_IS_DEFINED(ATxmega32A4U) | \
-		AVR8_PART_IS_DEFINED(ATxmega32D4)  | \
-		AVR8_PART_IS_DEFINED(ATxmega32C4)
+        AVR8_PART_IS_DEFINED(ATxmega32A4U) | \
+        AVR8_PART_IS_DEFINED(ATxmega32D4)  | \
+        AVR8_PART_IS_DEFINED(ATxmega32C4)
 #    define FLASH_SIZE      (32*1024L)
 #    define FLASH_PAGE_SIZE (256)
 
@@ -478,50 +478,50 @@ void nvm_eeprom_erase_all(void);
 #    define FLASH_PAGE_SIZE (128)
 
 // 64K devices
-#  elif AVR8_PART_IS_DEFINED(ATxmega64A1)          | \
-		AVR8_PART_IS_DEFINED(ATxmega64A1U) | \
-		AVR8_PART_IS_DEFINED(ATxmega64A3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega64A3U) | \
-		AVR8_PART_IS_DEFINED(ATxmega64A4U) | \
-		AVR8_PART_IS_DEFINED(ATxmega64B1)  | \
-		AVR8_PART_IS_DEFINED(ATxmega64B3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega64C3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega64D3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega64D4)
+#  elif AVR8_PART_IS_DEFINED(ATxmega64A1)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64A1U) | \
+        AVR8_PART_IS_DEFINED(ATxmega64A3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64A3U) | \
+        AVR8_PART_IS_DEFINED(ATxmega64A4U) | \
+        AVR8_PART_IS_DEFINED(ATxmega64B1)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64B3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64C3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64D3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega64D4)
 #    define FLASH_SIZE      (64*1024L)
 #    define FLASH_PAGE_SIZE (256)
 
 // 128K devices
-#  elif AVR8_PART_IS_DEFINED(ATxmega128A1)          | \
-		AVR8_PART_IS_DEFINED(ATxmega128A1U) | \
-		AVR8_PART_IS_DEFINED(ATxmega128A3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega128A3U) | \
-		AVR8_PART_IS_DEFINED(ATxmega128C3) 	| \
-		AVR8_PART_IS_DEFINED(ATxmega128D3)  
+#  elif AVR8_PART_IS_DEFINED(ATxmega128A1)  | \
+        AVR8_PART_IS_DEFINED(ATxmega128A1U) | \
+        AVR8_PART_IS_DEFINED(ATxmega128A3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega128A3U) | \
+        AVR8_PART_IS_DEFINED(ATxmega128C3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega128D3)  
 #    define FLASH_SIZE      (128*1024L)
 #    define FLASH_PAGE_SIZE (512)
 
-#  elif AVR8_PART_IS_DEFINED(ATxmega128A4U)         | \
-		AVR8_PART_IS_DEFINED(ATxmega128B1)  | \
-		AVR8_PART_IS_DEFINED(ATxmega128B3)	| \
-		AVR8_PART_IS_DEFINED(ATxmega128D4)	
+#  elif AVR8_PART_IS_DEFINED(ATxmega128A4U) | \
+        AVR8_PART_IS_DEFINED(ATxmega128B1)  | \
+        AVR8_PART_IS_DEFINED(ATxmega128B3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega128D4)  
 #    define FLASH_SIZE      (128*1024L)
 #    define FLASH_PAGE_SIZE (256)
 
 // 192K devices
 #  elif AVR8_PART_IS_DEFINED(ATxmega192A3U) | \
-		AVR8_PART_IS_DEFINED(ATxmega192C3)  | \
-		AVR8_PART_IS_DEFINED(ATxmega192D3)
+        AVR8_PART_IS_DEFINED(ATxmega192C3)  | \
+        AVR8_PART_IS_DEFINED(ATxmega192D3)
 #    define FLASH_SIZE      (192*1024L)
 #    define FLASH_PAGE_SIZE (512)
 
 // 256K devices
-#  elif AVR8_PART_IS_DEFINED(ATxmega256A3)           | \
-		AVR8_PART_IS_DEFINED(ATxmega256A3U)  | \
-		AVR8_PART_IS_DEFINED(ATxmega256A3B)  | \
-		AVR8_PART_IS_DEFINED(ATxmega256A3BU) | \
-		AVR8_PART_IS_DEFINED(ATxmega256C3)   | \
-		AVR8_PART_IS_DEFINED(ATxmega256D3)
+#  elif AVR8_PART_IS_DEFINED(ATxmega256A3)   | \
+        AVR8_PART_IS_DEFINED(ATxmega256A3U)  | \
+        AVR8_PART_IS_DEFINED(ATxmega256A3B)  | \
+        AVR8_PART_IS_DEFINED(ATxmega256A3BU) | \
+        AVR8_PART_IS_DEFINED(ATxmega256C3)   | \
+        AVR8_PART_IS_DEFINED(ATxmega256D3)
 #    define FLASH_SIZE      (256*1024L)
 #    define FLASH_PAGE_SIZE (512)
 
@@ -569,10 +569,10 @@ typedef uint16_t flash_addr_t;
 static inline uint8_t nvm_flash_read_byte(flash_addr_t addr)
 {
 #if defined(__GNUC__)
-	return pgm_read_byte_far(addr);
+    return pgm_read_byte_far(addr);
 #elif defined(__ICCAVR__)
-	uint8_t IAR_FLASH_PTR *flashptr = (uint8_t IAR_FLASH_PTR *)addr;
-	return *flashptr;
+    uint8_t IAR_FLASH_PTR *flashptr = (uint8_t IAR_FLASH_PTR *)addr;
+    return *flashptr;
 #else
 #  error Unknown compiler
 #endif
@@ -591,10 +591,10 @@ static inline uint8_t nvm_flash_read_byte(flash_addr_t addr)
 static inline uint16_t nvm_flash_read_word(flash_addr_t addr)
 {
 #if defined(__GNUC__)
-	return pgm_read_word_far(addr);
+    return pgm_read_word_far(addr);
 #elif defined(__ICCAVR__)
-	uint16_t IAR_FLASH_PTR *flashptr = (uint16_t IAR_FLASH_PTR *)addr;
-	return *flashptr;
+    uint16_t IAR_FLASH_PTR *flashptr = (uint16_t IAR_FLASH_PTR *)addr;
+    return *flashptr;
 #endif
 }
 
@@ -609,8 +609,8 @@ static inline uint16_t nvm_flash_read_word(flash_addr_t addr)
  */
 static inline void nvm_flash_flush_buffer(void)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(0, NVM_CMD_ERASE_FLASH_BUFFER_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(0, NVM_CMD_ERASE_FLASH_BUFFER_gc);
 }
 
 
@@ -635,8 +635,8 @@ void nvm_flash_load_word_to_buffer(uint32_t word_addr, uint16_t data);
  */
 static inline void nvm_flash_erase_app(void)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(0, NVM_CMD_ERASE_APP_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(0, NVM_CMD_ERASE_APP_gc);
 }
 
 /**
@@ -648,8 +648,8 @@ static inline void nvm_flash_erase_app(void)
  */
 static inline void nvm_flash_erase_app_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_ERASE_APP_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_ERASE_APP_PAGE_gc);
 }
 
 /**
@@ -663,8 +663,8 @@ static inline void nvm_flash_erase_app_page(flash_addr_t page_addr)
  */
 static inline void nvm_flash_split_write_app_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_WRITE_APP_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_WRITE_APP_PAGE_gc);
 }
 
 /**
@@ -677,8 +677,8 @@ static inline void nvm_flash_split_write_app_page(flash_addr_t page_addr)
  */
 static inline void nvm_flash_atomic_write_app_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_ERASE_WRITE_APP_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_ERASE_WRITE_APP_PAGE_gc);
 }
 
 void nvm_issue_flash_range_crc(flash_addr_t start_addr, flash_addr_t end_addr);
@@ -686,7 +686,7 @@ void nvm_issue_flash_range_crc(flash_addr_t start_addr, flash_addr_t end_addr);
 void nvm_flash_read_buffer(flash_addr_t address, void *buf, uint16_t len);
 
 void nvm_flash_erase_and_write_buffer(flash_addr_t address, const void *buf,
-	uint16_t len, bool b_blank_check);
+    uint16_t len, bool b_blank_check);
 
 /**
  * \brief Erase a page within the boot section
@@ -697,8 +697,8 @@ void nvm_flash_erase_and_write_buffer(flash_addr_t address, const void *buf,
  */
 static inline void nvm_flash_erase_boot_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_ERASE_BOOT_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_ERASE_BOOT_PAGE_gc);
 }
 
 /**
@@ -712,8 +712,8 @@ static inline void nvm_flash_erase_boot_page(flash_addr_t page_addr)
  */
 static inline void nvm_flash_split_write_boot_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_WRITE_BOOT_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_WRITE_BOOT_PAGE_gc);
 }
 
 /**
@@ -726,13 +726,13 @@ static inline void nvm_flash_split_write_boot_page(flash_addr_t page_addr)
  */
 static inline void nvm_flash_atomic_write_boot_page(flash_addr_t page_addr)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(page_addr, NVM_CMD_ERASE_WRITE_BOOT_PAGE_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(page_addr, NVM_CMD_ERASE_WRITE_BOOT_PAGE_gc);
 }
 
 void nvm_user_sig_read_buffer(flash_addr_t address, void *buf, uint16_t len);
 void nvm_user_sig_write_buffer(flash_addr_t address, const void *buf,
-	uint16_t len, bool b_blank_check);
+    uint16_t len, bool b_blank_check);
 
 /**
  * \brief Erase the user calibration section page
@@ -742,8 +742,8 @@ void nvm_user_sig_write_buffer(flash_addr_t address, const void *buf,
  */
 static inline void nvm_flash_erase_user_section(void)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(0, NVM_CMD_ERASE_USER_SIG_ROW_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(0, NVM_CMD_ERASE_USER_SIG_ROW_gc);
 }
 
 /**
@@ -756,8 +756,8 @@ static inline void nvm_flash_erase_user_section(void)
  */
 static inline void nvm_flash_write_user_page(void)
 {
-	nvm_wait_until_ready();
-	nvm_common_spm(0, NVM_CMD_WRITE_USER_SIG_ROW_gc);
+    nvm_wait_until_ready();
+    nvm_common_spm(0, NVM_CMD_WRITE_USER_SIG_ROW_gc);
 }
 
 //! @}
@@ -792,12 +792,12 @@ static inline void nvm_flash_write_user_page(void)
 
 // The different fuse bytes
 enum fuse_byte_t {
-	FUSEBYTE0 = 0,
-	FUSEBYTE1 = 1,
-	FUSEBYTE2 = 2,
-	FUSEBYTE3 = 3, // not used on current devices
-	FUSEBYTE4 = 4,
-	FUSEBYTE5 = 5,
+    FUSEBYTE0 = 0,
+    FUSEBYTE1 = 1,
+    FUSEBYTE2 = 2,
+    FUSEBYTE3 = 3, // not used on current devices
+    FUSEBYTE4 = 4,
+    FUSEBYTE5 = 5,
 };
 
 uint8_t nvm_fuses_read(enum fuse_byte_t fuse);
@@ -815,13 +815,13 @@ uint8_t nvm_fuses_read(enum fuse_byte_t fuse);
  * \param lb_lock Flash/eeprom lock bits to program
  */
 static inline void nvm_lock_bits_write(enum NVM_BLBB_enum blbb_lock,
-	enum NVM_BLBA_enum blba_lock, enum NVM_BLBAT_enum blbat_lock,
-	enum NVM_LB_enum lb_lock)
+    enum NVM_BLBA_enum blba_lock, enum NVM_BLBAT_enum blbat_lock,
+    enum NVM_LB_enum lb_lock)
 {
-	nvm_wait_until_ready();
-	NVM.DATA0 = (uint8_t)blbb_lock | (uint8_t)blba_lock | (uint8_t)blbat_lock |
-		(uint8_t)lb_lock;
-	nvm_issue_command(NVM_CMD_WRITE_LOCK_BITS_gc);
+    nvm_wait_until_ready();
+    NVM.DATA0 = (uint8_t)blbb_lock | (uint8_t)blba_lock | (uint8_t)blbat_lock |
+        (uint8_t)lb_lock;
+    nvm_issue_command(NVM_CMD_WRITE_LOCK_BITS_gc);
 }
 
 /**
@@ -834,8 +834,8 @@ static inline void nvm_lock_bits_write(enum NVM_BLBB_enum blbb_lock,
  */
 static inline void nvm_blbb_lock_bits_write(enum NVM_BLBB_enum blbb_lock)
 {
-	nvm_lock_bits_write(blbb_lock, NVM_BLBA_NOLOCK_gc, NVM_BLBAT_NOLOCK_gc,
-		NVM_LB_NOLOCK_gc);
+    nvm_lock_bits_write(blbb_lock, NVM_BLBA_NOLOCK_gc, NVM_BLBAT_NOLOCK_gc,
+        NVM_LB_NOLOCK_gc);
 }
 
 /**
@@ -848,8 +848,8 @@ static inline void nvm_blbb_lock_bits_write(enum NVM_BLBB_enum blbb_lock)
  */
 static inline void nvm_blba_lock_bits_write(enum NVM_BLBA_enum blba_lock)
 {
-	nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, blba_lock, NVM_BLBAT_NOLOCK_gc,
-		NVM_LB_NOLOCK_gc);
+    nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, blba_lock, NVM_BLBAT_NOLOCK_gc,
+        NVM_LB_NOLOCK_gc);
 }
 
 /**
@@ -862,8 +862,8 @@ static inline void nvm_blba_lock_bits_write(enum NVM_BLBA_enum blba_lock)
  */
 static inline void nvm_blbat_lock_bits_write(enum NVM_BLBAT_enum blbat_lock)
 {
-	nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, NVM_BLBA_NOLOCK_gc, blbat_lock,
-		NVM_LB_NOLOCK_gc);
+    nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, NVM_BLBA_NOLOCK_gc, blbat_lock,
+        NVM_LB_NOLOCK_gc);
 }
 
 /**
@@ -876,8 +876,8 @@ static inline void nvm_blbat_lock_bits_write(enum NVM_BLBAT_enum blbat_lock)
  */
 static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
 {
-	nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, NVM_BLBA_NOLOCK_gc,
-		NVM_BLBAT_NOLOCK_gc, lb_lock);
+    nvm_lock_bits_write(NVM_BLBB_NOLOCK_gc, NVM_BLBA_NOLOCK_gc,
+        NVM_BLBAT_NOLOCK_gc, lb_lock);
 }
 
 //! @}
@@ -911,22 +911,22 @@ static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
  * \subsection nvm_quickstart_eeprom_case_example_code Example code
  *
  * \code
-	 #define EXAMPLE_PAGE 2
-	 #define EXAMPLE_ADDR EXAMPLE_PAGE * EEPROM_PAGE_SIZE
+     #define EXAMPLE_PAGE 2
+     #define EXAMPLE_ADDR EXAMPLE_PAGE * EEPROM_PAGE_SIZE
 
-	 uint8_t write_page[EEPROM_PAGE_SIZE];
-	 uint8_t read_page[EEPROM_PAGE_SIZE];
+     uint8_t write_page[EEPROM_PAGE_SIZE];
+     uint8_t read_page[EEPROM_PAGE_SIZE];
 
-	 fill_page_with_known_data(write_page);
-	 fill_page_with_zeroes(read_page);
+     fill_page_with_known_data(write_page);
+     fill_page_with_zeroes(read_page);
 
-	 nvm_eeprom_load_page_to_buffer(write_page);
-	 nvm_eeprom_atomic_write_page(EXAMPLE_PAGE);
+     nvm_eeprom_load_page_to_buffer(write_page);
+     nvm_eeprom_atomic_write_page(EXAMPLE_PAGE);
 
-	 nvm_eeprom_read_buffer(EXAMPLE_ADDR,
-	         read_page, EEPROM_PAGE_SIZE);
+     nvm_eeprom_read_buffer(EXAMPLE_ADDR,
+             read_page, EEPROM_PAGE_SIZE);
 
-	 check_if_pages_are_equal(write_page, read_page);
+     check_if_pages_are_equal(write_page, read_page);
 \endcode
  *
  * \subsection nvm_quickstart_eeprom_case_workflow Workflow
@@ -934,43 +934,43 @@ static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
  * -# We define where we would like to store our data, and we arbitrarily
  *    choose page 2 of EEPROM:
  *     - \code
-	#define EXAMPLE_PAGE 2
-	#define EXAMPLE_ADDR EXAMPLE_PAGE * EEPROM_PAGE_SIZE
+    #define EXAMPLE_PAGE 2
+    #define EXAMPLE_ADDR EXAMPLE_PAGE * EEPROM_PAGE_SIZE
 \endcode
  * -# Define two tables, one which contains the data which we will write,
  *    and one which we will read the data into:
  *     - \code
-	uint8_t write_page[EEPROM_PAGE_SIZE];
-	uint8_t read_page[EEPROM_PAGE_SIZE];
+    uint8_t write_page[EEPROM_PAGE_SIZE];
+    uint8_t read_page[EEPROM_PAGE_SIZE];
 \endcode
  * -# Fill the tables with our data, and zero out the read table:
  *     - \code
-	fill_page_with_known_data(write_page);
-	fill_page_with_zeroes(read_page);
+    fill_page_with_known_data(write_page);
+    fill_page_with_zeroes(read_page);
 \endcode
  *     - \note These functions are undeclared, you should replace them with
  *             your own appropriate functions.
  * -# We load our page into a temporary EEPROM page buffer:
  *     - \code
-	nvm_eeprom_load_page_to_buffer(write_page);
+    nvm_eeprom_load_page_to_buffer(write_page);
 \endcode
  *     - \attention The function used above will not work if memory mapping
  *                  is enabled.
  * -# Do an atomic write of the page from buffer into the specified page:
  *     - \code
-	nvm_eeprom_atomic_write_page(EXAMPLE_PAGE);
+    nvm_eeprom_atomic_write_page(EXAMPLE_PAGE);
 \endcode
  *     - \note The function \ref nvm_eeprom_atomic_write_page() erases the
  *             page before writing the new one. For non-atomic (split)
  *             writing without deleting, see \ref nvm_eeprom_split_write_page()
  * -# Read the page back into our read_page[] table:
  *     - \code
-	nvm_eeprom_read_buffer(EXAMPLE_ADDR,
-	        read_page, EEPROM_PAGE_SIZE);
+    nvm_eeprom_read_buffer(EXAMPLE_ADDR,
+            read_page, EEPROM_PAGE_SIZE);
 \endcode
  * -# Verify that the page is equal to the one that was written earlier:
  *     - \code
-	check_if_pages_are_equal(write_page, read_page);
+    check_if_pages_are_equal(write_page, read_page);
 \endcode
  *     - \note This function is not declared, you should replace it with your
  *             own appropriate function.
@@ -990,32 +990,32 @@ static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
  *
  * \subsection nvm_quickstart_fuse_case_example_code Example code
  * \code
-	 uint8_t fuse_value;
-	 fuse_value = nvm_fuses_read(FUSEBYTE5);
+     uint8_t fuse_value;
+     fuse_value = nvm_fuses_read(FUSEBYTE5);
 
-	 if ((fuse_value & NVM_FUSES_BODLVL_gm) == BODLVL_2V1_gc) {
-	     gpio_set_pin_low(LED0_GPIO);
-	 }
+     if ((fuse_value & NVM_FUSES_BODLVL_gm) == BODLVL_2V1_gc) {
+         gpio_set_pin_low(LED0_GPIO);
+     }
 \endcode
  *
  * \subsection nvm_quickstart_fuse_case_workflow Workflow
  *
  * -# Create a variable to store the fuse contents:
  *     - \code
-	uint8_t fuse_value;
+    uint8_t fuse_value;
 \endcode
  * -# The fuse value we are interested in, BODLVL, is stored in FUSEBYTE5.
  *    We call the function \ref nvm_fuses_read() to read the fuse into our
  *    variable:
  *     - \code
-	fuse_value = nvm_fuses_read(FUSEBYTE5);
+    fuse_value = nvm_fuses_read(FUSEBYTE5);
 \endcode
  * -# This ends the reading portion, but we would like to see whether the
  *    BOD-level is correct, and if it is, light up an LED:
  *     - \code
-	if ((fuse_value & NVM_FUSES_BODLVL_gm) == BODLVL_2V1_gc) {
-	    gpio_set_pin_low(LED0_GPIO);
-	}
+    if ((fuse_value & NVM_FUSES_BODLVL_gm) == BODLVL_2V1_gc) {
+        gpio_set_pin_low(LED0_GPIO);
+    }
 \endcode
  *
  * \section xmega_nvm_quickstart_signature_case Use case 3: Signature row
@@ -1030,15 +1030,15 @@ static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
  * \subsection xmega_nvm_quickstart_signature_row_example_code Example code
  *
  * \code
-	 #define START_ADDR 0x10
-	 #define DATA_LENGTH 16
+     #define START_ADDR 0x10
+     #define DATA_LENGTH 16
 
-	 uint8_t values[LENGTH];
-	 uint8_t i;
+     uint8_t values[LENGTH];
+     uint8_t i;
 
-	 for (i = 0; i < DATA_LENGTH; i++) {
-	     values[i] = nvm_read_user_signature_row(START_ADDR + i);
-	 }
+     for (i = 0; i < DATA_LENGTH; i++) {
+         values[i] = nvm_read_user_signature_row(START_ADDR + i);
+     }
 \endcode
  *
  * \subsection nvm_quickstart_signature_case_workflow Workflow
@@ -1046,17 +1046,17 @@ static inline void nvm_lb_lock_bits_write(enum NVM_LB_enum lb_lock)
  * -# Define starting address and length of data segment, and create
  *    variables needed to store and process the data:
  *     - \code
-	       #define START_ADDR 0x10
-	       #define DATA_LENGTH 16
+           #define START_ADDR 0x10
+           #define DATA_LENGTH 16
 
-	       uint8_t values[LENGTH];
-	       uint8_t i;
+           uint8_t values[LENGTH];
+           uint8_t i;
 \endcode
  * -# Iterate through the user signature row, and store our desired data:
  *     - \code
-	for (i = 0; i < DATA_LENGTH; i++) {
-	    values[i] = nvm_read_user_signature_row(START_ADDR + i);
-	}
+    for (i = 0; i < DATA_LENGTH; i++) {
+        values[i] = nvm_read_user_signature_row(START_ADDR + i);
+    }
 \endcode
  *
  */

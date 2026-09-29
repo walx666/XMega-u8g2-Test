@@ -59,25 +59,25 @@
  */
 __always_inline static uint8_t clz8(uint8_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (x & 0xf0) {
-		x >>= 4;
-	} else {
-		bit += 4;
-	}
+    if (x & 0xf0) {
+        x >>= 4;
+    } else {
+        bit += 4;
+    }
 
-	if (x & 0x0c) {
-		x >>= 2;
-	} else {
-		bit += 2;
-	}
+    if (x & 0x0c) {
+        x >>= 2;
+    } else {
+        bit += 2;
+    }
 
-	if (!(x & 0x02)) {
-		bit++;
-	}
+    if (!(x & 0x02)) {
+        bit++;
+    }
 
-	return bit;
+    return bit;
 
 }
 
@@ -91,15 +91,15 @@ __always_inline static uint8_t clz8(uint8_t x)
  */
 __always_inline static uint8_t clz16(uint16_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (x & 0xff00) {
-		x >>= 8;
-	} else {
-		bit += 8;
-	}
+    if (x & 0xff00) {
+        x >>= 8;
+    } else {
+        bit += 8;
+    }
 
-	return bit + clz8(x);
+    return bit + clz8(x);
 }
 
 /**
@@ -112,15 +112,15 @@ __always_inline static uint8_t clz16(uint16_t x)
  */
 __always_inline static uint8_t clz32(uint32_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (x & 0xffff0000) {
-		x >>= 16;
-	} else {
-		bit += 16;
-	}
+    if (x & 0xffff0000) {
+        x >>= 16;
+    } else {
+        bit += 16;
+    }
 
-	return bit + clz16(x);
+    return bit + clz16(x);
 }
 
 /**
@@ -146,20 +146,20 @@ __always_inline static uint8_t clz32(uint32_t x)
  */
 __always_inline static uint8_t ctz8(uint8_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (!(x & 0x0f)) {
-		bit += 4;
-		x >>= 4;
-	}
-	if (!(x & 0x03)) {
-		bit += 2;
-		x >>= 2;
-	}
-	if (!(x & 0x01))
-		bit++;
+    if (!(x & 0x0f)) {
+        bit += 4;
+        x >>= 4;
+    }
+    if (!(x & 0x03)) {
+        bit += 2;
+        x >>= 2;
+    }
+    if (!(x & 0x01))
+        bit++;
 
-	return bit;
+    return bit;
 }
 
 /**
@@ -172,14 +172,14 @@ __always_inline static uint8_t ctz8(uint8_t x)
  */
 __always_inline static uint8_t ctz16(uint16_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (!(x & 0x00ff)) {
-		bit += 8;
-		x >>= 8;
-	}
+    if (!(x & 0x00ff)) {
+        bit += 8;
+        x >>= 8;
+    }
 
-	return bit + ctz8(x);
+    return bit + ctz8(x);
 }
 
 /**
@@ -192,14 +192,14 @@ __always_inline static uint8_t ctz16(uint16_t x)
  */
 __always_inline static uint8_t ctz32(uint32_t x)
 {
-	uint8_t bit = 0;
+    uint8_t bit = 0;
 
-	if (!(x & 0x0000ffff)) {
-		bit += 16;
-		x >>= 16;
-	}
+    if (!(x & 0x0000ffff)) {
+        bit += 16;
+        x >>= 16;
+    }
 
-	return bit + ctz16(x);
+    return bit + ctz16(x);
 }
 
 #endif /* CLZ_CTZ_H */

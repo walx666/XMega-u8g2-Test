@@ -41,33 +41,33 @@
 #include "ioport.h"
 
 #define gpio_pin_is_low(io_id) \
-	ioport_pin_is_low(io_id)
+    ioport_pin_is_low(io_id)
 
 #define gpio_pin_is_high(io_id) \
-	ioport_pin_is_high(io_id)
+    ioport_pin_is_high(io_id)
 
 #define gpio_set_pin_high(io_id) \
-	ioport_set_value(io_id,1)
+    ioport_set_value(io_id,1)
 
 #define gpio_set_pin_low(io_id) \
-	ioport_set_value(io_id,0)
+    ioport_set_value(io_id,0)
 
 #define gpio_toggle_pin(io_id) \
-	ioport_toggle_pin(io_id)
+    ioport_toggle_pin(io_id)
 
 #define gpio_configure_pin(io_id,io_flags) \
-	ioport_configure_pin(io_id,io_flags)
+    ioport_configure_pin(io_id,io_flags)
 
 #define gpio_configure_group(port_id,port_mask,io_flags) \
-	ioport_configure_group(port_id,port_mask,io_flags)
+    ioport_configure_group(port_id,port_mask,io_flags)
 
 #define gpio_set_pin_group_high(port_id,mask) \
-	ioport_set_group_high(port_id,mask)
+    ioport_set_group_high(port_id,mask)
 
 #define gpio_set_pin_group_low(port_id,mask) \
-	ioport_set_group_low(port_id,mask)
+    ioport_set_group_low(port_id,mask)
 
 #define gpio_toggle_pin_group(port_id,mask) \
-	ioport_tgl_group(port_id,mask)
+    ioport_tgl_group(port_id,mask)
 
 #endif  // _XMEGA_GPIO_H_

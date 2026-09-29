@@ -71,7 +71,7 @@
 #define USART_PORT_SYSCLK   SYSCLK_PORT_D
 #define USART_PORT          PORTD
 #define USART_PORT_PIN_TX   (1<<3)  /* PD3 (TXD0) */
-#define USART_PORT_PIN_RX	(1<<2)  /* PD2 (RXD0) */
+#define USART_PORT_PIN_RX   (1<<2)  /* PD2 (RXD0) */
 #endif
 
 // Initialize IO pins for use with USART 0 on port E

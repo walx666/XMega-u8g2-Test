@@ -37,7 +37,7 @@
 #define ASSEMBLER_H_INCLUDED
 
 #if !defined(__ASSEMBLER__) && !defined(__IAR_SYSTEMS_ASM__) \
-		&& !defined(__DOXYGEN__)
+        && !defined(__DOXYGEN__)
 # error This file may only be included from assembly files
 #endif
 

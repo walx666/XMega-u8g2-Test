@@ -61,28 +61,28 @@
  * disabled.
  */
 enum pmic_level {
-	PMIC_LVL_LOW    = PMIC_LOLVLEN_bm,    //!< Low-level interrupts
-	PMIC_LVL_MEDIUM = PMIC_MEDLVLEN_bm,   //!< Medium-level interrupts
-	PMIC_LVL_HIGH   = PMIC_HILVLEN_bm,    //!< High-level interrupts
-	/**
-	 * \brief Non-maskable interrupts
-	 * \note These cannot be enabled nor disabled.
-	 */
-	PMIC_LVL_NMI    = PMIC_NMIEX_bp,
+    PMIC_LVL_LOW    = PMIC_LOLVLEN_bm,    //!< Low-level interrupts
+    PMIC_LVL_MEDIUM = PMIC_MEDLVLEN_bm,   //!< Medium-level interrupts
+    PMIC_LVL_HIGH   = PMIC_HILVLEN_bm,    //!< High-level interrupts
+    /**
+     * \brief Non-maskable interrupts
+     * \note These cannot be enabled nor disabled.
+     */
+    PMIC_LVL_NMI    = PMIC_NMIEX_bp,
 };
 
 //! Interrupt vector locations
 enum pmic_vector {
-	PMIC_VEC_APPLICATION,    //!< Application section
-	PMIC_VEC_BOOT,           //!< Boot section
-	PMIC_NR_OF_VECTORS,      //!< Number of interrupt vector locations
+    PMIC_VEC_APPLICATION,    //!< Application section
+    PMIC_VEC_BOOT,           //!< Boot section
+    PMIC_NR_OF_VECTORS,      //!< Number of interrupt vector locations
 };
 
 //! Interrupt scheduling schemes
 enum pmic_schedule {
-	PMIC_SCH_FIXED_PRIORITY, //!< Default, fixed priority scheduling
-	PMIC_SCH_ROUND_ROBIN,    //!< Round-robin scheduling
-	PMIC_NR_OF_SCHEDULES,    //!< Number of interrupt scheduling schemes
+    PMIC_SCH_FIXED_PRIORITY, //!< Default, fixed priority scheduling
+    PMIC_SCH_ROUND_ROBIN,    //!< Round-robin scheduling
+    PMIC_NR_OF_SCHEDULES,    //!< Number of interrupt scheduling schemes
 };
 
 /**
@@ -93,8 +93,8 @@ enum pmic_schedule {
  */
 static inline void pmic_init(void)
 {
-	PMIC.CTRL = PMIC_LVL_LOW | PMIC_LVL_MEDIUM |
-			PMIC_LVL_HIGH;
+    PMIC.CTRL = PMIC_LVL_LOW | PMIC_LVL_MEDIUM |
+            PMIC_LVL_HIGH;
 }
 
 /**
@@ -104,9 +104,9 @@ static inline void pmic_init(void)
  */
 static inline void pmic_enable_level(enum pmic_level level)
 {
-	Assert((level & PMIC_LVL_NMI));
+    Assert((level & PMIC_LVL_NMI));
 
-	PMIC.CTRL |= level;
+    PMIC.CTRL |= level;
 }
 
 /**
@@ -116,9 +116,9 @@ static inline void pmic_enable_level(enum pmic_level level)
  */
 static inline void pmic_disable_level(enum pmic_level level)
 {
-	Assert((level & PMIC_LVL_NMI));
+    Assert((level & PMIC_LVL_NMI));
 
-	PMIC.CTRL &= ~level;
+    PMIC.CTRL &= ~level;
 }
 
 /**
@@ -130,9 +130,9 @@ static inline void pmic_disable_level(enum pmic_level level)
  */
 static inline bool pmic_level_is_enabled(enum pmic_level level)
 {
-	Assert((level & PMIC_LVL_NMI));
+    Assert((level & PMIC_LVL_NMI));
 
-	return PMIC.CTRL & level;
+    return PMIC.CTRL & level;
 }
 
 /**
@@ -142,8 +142,8 @@ static inline bool pmic_level_is_enabled(enum pmic_level level)
  */
 static inline enum pmic_level pmic_get_enabled_levels(void)
 {
-	return (enum pmic_level)(PMIC.CTRL & (PMIC_LVL_LOW | PMIC_LVL_MEDIUM
-				| PMIC_LVL_HIGH));
+    return (enum pmic_level)(PMIC.CTRL & (PMIC_LVL_LOW | PMIC_LVL_MEDIUM
+                | PMIC_LVL_HIGH));
 }
 
 /**
@@ -155,7 +155,7 @@ static inline enum pmic_level pmic_get_enabled_levels(void)
  */
 static inline bool pmic_level_is_executing(enum pmic_level level)
 {
-	return PMIC.STATUS & level;
+    return PMIC.STATUS & level;
 }
 
 /**
@@ -168,21 +168,21 @@ static inline bool pmic_level_is_executing(enum pmic_level level)
  */
 static inline void pmic_set_scheduling(enum pmic_schedule schedule)
 {
-	Assert(schedule < PMIC_NR_OF_SCHEDULES);
+    Assert(schedule < PMIC_NR_OF_SCHEDULES);
 
-	switch (schedule) {
-	case PMIC_SCH_FIXED_PRIORITY:
-		PMIC.CTRL &= ~PMIC_RREN_bm;
-		PMIC.INTPRI = 0;
-		break;
+    switch (schedule) {
+    case PMIC_SCH_FIXED_PRIORITY:
+        PMIC.CTRL &= ~PMIC_RREN_bm;
+        PMIC.INTPRI = 0;
+        break;
 
-	case PMIC_SCH_ROUND_ROBIN:
-		PMIC.CTRL |= PMIC_RREN_bm;
-		break;
+    case PMIC_SCH_ROUND_ROBIN:
+        PMIC.CTRL |= PMIC_RREN_bm;
+        break;
 
-	default:
-		break;
-	};
+    default:
+        break;
+    };
 }
 
 /**
@@ -192,24 +192,24 @@ static inline void pmic_set_scheduling(enum pmic_schedule schedule)
  */
 static inline void pmic_set_vector_location(enum pmic_vector vector)
 {
-	uint8_t ctrl = PMIC.CTRL;
+    uint8_t ctrl = PMIC.CTRL;
 
-	Assert(vector < PMIC_NR_OF_VECTORS);
+    Assert(vector < PMIC_NR_OF_VECTORS);
 
-	switch (vector) {
-	case PMIC_VEC_APPLICATION:
-		ctrl &= ~PMIC_IVSEL_bm;
-		break;
+    switch (vector) {
+    case PMIC_VEC_APPLICATION:
+        ctrl &= ~PMIC_IVSEL_bm;
+        break;
 
-	case PMIC_VEC_BOOT:
-		ctrl |= PMIC_IVSEL_bm;
-		break;
+    case PMIC_VEC_BOOT:
+        ctrl |= PMIC_IVSEL_bm;
+        break;
 
-	default:
-		break;
-	}
+    default:
+        break;
+    }
 
-	ccp_write_io((uint8_t*)&PMIC.CTRL, ctrl);
+    ccp_write_io((uint8_t*)&PMIC.CTRL, ctrl);
 }
 
 //! @}
@@ -244,17 +244,17 @@ static inline void pmic_set_vector_location(enum pmic_vector vector)
  *    defined, where the interrupt vectors available are defined by toolchain and 
  *    listed in the subsection 'Interrupt Vector Summary' in the data sheet.
  * \code
-	ISR(interrupt_vector){
-	    //Interrupt Service Routine
-	}
+    ISR(interrupt_vector){
+        //Interrupt Service Routine
+    }
 \endcode
  *
  * \subsection pmic_basic_use_case_setup_code Example code
  * Add to the initialization code:
  * \code
-	pmic_init();
-	pmic_set_scheduling(PMIC_SCH_ROUND_ROBIN);
-	cpu_irq_enable();
+    pmic_init();
+    pmic_set_scheduling(PMIC_SCH_ROUND_ROBIN);
+    cpu_irq_enable();
 \endcode
  *
  * \subsection pmic_basic_use_case_setup_flow Workflow
@@ -295,16 +295,16 @@ static inline void pmic_set_vector_location(enum pmic_vector vector)
  *    defined, where the interrupt vectors available are defined by toolchain and 
  *    listed in the subsection 'Interrupt Vector Summary' in the data sheet.
  * \code
-	ISR(interrupt_vector){
-	    //Interrupt Service Routine
-	}
+    ISR(interrupt_vector){
+        //Interrupt Service Routine
+    }
 \endcode
  *
  * \subsection pmic_use_case_1_setup_code Example code
  * Add to application initialization:
  * \code
-	pmic_init();
-	cpu_irq_enable();
+    pmic_init();
+    cpu_irq_enable();
 \endcode
  *
  * \subsection pmic_use_case_1_setup_flow Workflow
@@ -317,17 +317,17 @@ static inline void pmic_set_vector_location(enum pmic_vector vector)
  *
  * \subsection pmic_use_case_1_usage_code Example code
  * \code
-	 Add to application:
-	 void atomic_operation(void)
-	 {
-	     irqflags_t flags;
+     Add to application:
+     void atomic_operation(void)
+     {
+         irqflags_t flags;
 
-	     flags = cpu_irq_save();
+         flags = cpu_irq_save();
 
-	     // Uninterruptible block of code
+         // Uninterruptible block of code
 
-	     cpu_irq_restore(flags);
-	 }
+         cpu_irq_restore(flags);
+     }
 \endcode
  *
  * \subsection pmic_use_case_1_usage_flow Workflow

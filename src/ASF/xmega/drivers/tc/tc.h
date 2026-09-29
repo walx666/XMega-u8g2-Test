@@ -80,57 +80,57 @@ typedef void (*tc_callback_t) (void);
 
 //! Timer Counter Capture Compare Channel index
 enum tc_cc_channel_t {
-	//! Channel A
-	TC_CCA = 1,
-	//! Channel B
-	TC_CCB = 2,
-	//! Channel C
-	TC_CCC = 3,
-	//! Channel D
-	TC_CCD = 4,
+    //! Channel A
+    TC_CCA = 1,
+    //! Channel B
+    TC_CCB = 2,
+    //! Channel C
+    TC_CCC = 3,
+    //! Channel D
+    TC_CCD = 4,
 };
 
 //! Timer Counter Capture Compare Channel index
 enum tc_cc_channel_mask_enable_t {
-	//! Channel A Enable mask
-	TC_CCAEN = TC0_CCAEN_bm,
-	//! Channel B Enable mask
-	TC_CCBEN = TC0_CCBEN_bm,
-	//! Channel C Enable mask
-	TC_CCCEN = TC0_CCCEN_bm,
-	//! Channel D Enable mask
-	TC_CCDEN = TC0_CCDEN_bm,
+    //! Channel A Enable mask
+    TC_CCAEN = TC0_CCAEN_bm,
+    //! Channel B Enable mask
+    TC_CCBEN = TC0_CCBEN_bm,
+    //! Channel C Enable mask
+    TC_CCCEN = TC0_CCCEN_bm,
+    //! Channel D Enable mask
+    TC_CCDEN = TC0_CCDEN_bm,
 };
 
 //! Timer Counter Direction
 enum tc_dir_t {
-	//! Counting up
-	TC_UP = 0,
-	//! Down Counting B
-	TC_DOWN = 1
+    //! Counting up
+    TC_UP = 0,
+    //! Down Counting B
+    TC_DOWN = 1
 };
 //! Timer Counter Waveform Generator mode
 enum tc_wg_mode_t {
-	//! TC in normal Mode
-	TC_WG_NORMAL = TC_WGMODE_NORMAL_gc,
-	//! TC in Frequency Generator mode
-	TC_WG_FRQ = TC_WGMODE_FRQ_gc,
-	//! TC in single slope PWM mode
-	TC_WG_SS = TC_WGMODE_SS_gc,
-	//! TC in dual slope Top PWM mode
-	TC_WG_DS_T = TC_WGMODE_DS_T_gc,
-	//! TC in dual slope Top Bottom PWM mode
-	TC_WG_DS_TB = TC_WGMODE_DS_TB_gc,
-	//! TC in dual slope Bottom PWM mode
-	TC_WG_DS_B = TC_WGMODE_DS_B_gc
+    //! TC in normal Mode
+    TC_WG_NORMAL = TC_WGMODE_NORMAL_gc,
+    //! TC in Frequency Generator mode
+    TC_WG_FRQ = TC_WGMODE_FRQ_gc,
+    //! TC in single slope PWM mode
+    TC_WG_SS = TC_WGMODE_SS_gc,
+    //! TC in dual slope Top PWM mode
+    TC_WG_DS_T = TC_WGMODE_DS_T_gc,
+    //! TC in dual slope Top Bottom PWM mode
+    TC_WG_DS_TB = TC_WGMODE_DS_TB_gc,
+    //! TC in dual slope Bottom PWM mode
+    TC_WG_DS_B = TC_WGMODE_DS_B_gc
 };
 
 //! TC interrupt levels
 enum TC_INT_LEVEL_t {
-	TC_INT_LVL_OFF = 0x00,
-	TC_INT_LVL_LO = 0x01,
-	TC_INT_LVL_MED = 0x02,
-	TC_INT_LVL_HI = 0x03,
+    TC_INT_LVL_OFF = 0x00,
+    TC_INT_LVL_LO = 0x01,
+    TC_INT_LVL_MED = 0x02,
+    TC_INT_LVL_HI = 0x03,
 };
 
 //! Macro to check if type of passed TC is TC1_t
@@ -185,7 +185,7 @@ void tc_disable(volatile void *tc);
  * \param callback Reference to a callback function
  */
 void tc_set_overflow_interrupt_callback(volatile void *tc,
-		tc_callback_t callback);
+        tc_callback_t callback);
 
 /**
  * \brief Set TC error interrupt callback function
@@ -275,11 +275,11 @@ void tc_set_ccd_interrupt_callback(volatile void *tc, tc_callback_t callback);
  * \note  Configures OVFINTLVL in INTCTRLA
  */
 static inline void tc_set_overflow_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLA = ((TC0_t *)tc)->INTCTRLA & ~TC0_OVFINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLA =
-			((TC0_t *)tc)->INTCTRLA | (level << TC0_OVFINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLA = ((TC0_t *)tc)->INTCTRLA & ~TC0_OVFINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLA =
+            ((TC0_t *)tc)->INTCTRLA | (level << TC0_OVFINTLVL_gp);
 }
 
 /**
@@ -290,11 +290,11 @@ static inline void tc_set_overflow_interrupt_level(volatile void *tc,
  * \note  Configures ERRINTLVL in INTCTRLA
  */
 static inline void tc_set_error_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLA = ((TC0_t *)tc)->INTCTRLA & ~TC0_ERRINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLA =
-			((TC0_t *)tc)->INTCTRLA | (level << TC0_ERRINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLA = ((TC0_t *)tc)->INTCTRLA & ~TC0_ERRINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLA =
+            ((TC0_t *)tc)->INTCTRLA | (level << TC0_ERRINTLVL_gp);
 }
 
 /**
@@ -305,11 +305,11 @@ static inline void tc_set_error_interrupt_level(volatile void *tc,
  * \note Configures CCAINTLVL in INTCTRLB
  */
 static inline void tc_set_cca_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCAINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLB =
-			((TC0_t *)tc)->INTCTRLB | (level << TC0_CCAINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCAINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLB =
+            ((TC0_t *)tc)->INTCTRLB | (level << TC0_CCAINTLVL_gp);
 }
 
 /**
@@ -320,11 +320,11 @@ static inline void tc_set_cca_interrupt_level(volatile void *tc,
  * \note Configures CCBINTLVL in INTCTRLB
  */
 static inline void tc_set_ccb_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCBINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLB =
-			((TC0_t *)tc)->INTCTRLB | (level << TC0_CCBINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCBINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLB =
+            ((TC0_t *)tc)->INTCTRLB | (level << TC0_CCBINTLVL_gp);
 }
 
 /**
@@ -335,11 +335,11 @@ static inline void tc_set_ccb_interrupt_level(volatile void *tc,
  * \note Configures CCCINTLVL in INTCTRLB
  */
 static inline void tc_set_ccc_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCCINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLB =
-			((TC0_t *)tc)->INTCTRLB | (level << TC0_CCCINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCCINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLB =
+            ((TC0_t *)tc)->INTCTRLB | (level << TC0_CCCINTLVL_gp);
 }
 
   /**
@@ -350,11 +350,11 @@ static inline void tc_set_ccc_interrupt_level(volatile void *tc,
  * \note Configures CCDINTLVL in INTCTRLB
  */
 static inline void tc_set_ccd_interrupt_level(volatile void *tc,
-		enum TC_INT_LEVEL_t level)
+        enum TC_INT_LEVEL_t level)
 {
-	((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCDINTLVL_gm;
-	((TC0_t *)tc)->INTCTRLB =
-			((TC0_t *)tc)->INTCTRLB | (level << TC0_CCDINTLVL_gp);
+    ((TC0_t *)tc)->INTCTRLB = ((TC0_t *)tc)->INTCTRLB & ~TC0_CCDINTLVL_gm;
+    ((TC0_t *)tc)->INTCTRLB =
+            ((TC0_t *)tc)->INTCTRLB | (level << TC0_CCDINTLVL_gp);
 }
 
 //@}
@@ -367,11 +367,11 @@ static inline void tc_set_ccd_interrupt_level(volatile void *tc,
  * \note Configuring the clock also starts the timer
  */
 static inline void tc_write_clock_source(volatile void *tc,
-		TC_CLKSEL_t TC_CLKSEL_enum)
+        TC_CLKSEL_t TC_CLKSEL_enum)
 {
-	((TC0_t *)tc)->CTRLA =
-			(((TC0_t *)tc)->CTRLA & ~TC0_CLKSEL_gm) |
-			TC_CLKSEL_enum;
+    ((TC0_t *)tc)->CTRLA =
+            (((TC0_t *)tc)->CTRLA & ~TC0_CLKSEL_gm) |
+            TC_CLKSEL_enum;
 }
 
 /**
@@ -382,7 +382,7 @@ static inline void tc_write_clock_source(volatile void *tc,
  */
 static inline TC_CLKSEL_t tc_read_clock_source(volatile void *tc)
 {
-	return (TC_CLKSEL_t)(((TC0_t *)tc)->CTRLA & TC0_CLKSEL_gm);
+    return (TC_CLKSEL_t)(((TC0_t *)tc)->CTRLA & TC0_CLKSEL_gm);
 }
 
 /**
@@ -400,23 +400,23 @@ static inline TC_CLKSEL_t tc_read_clock_source(volatile void *tc)
  */
 static inline void tc_set_resolution(volatile void *tc, uint32_t resolution)
 {
-	uint32_t tc_clk_rate = sysclk_get_per_hz();
+    uint32_t tc_clk_rate = sysclk_get_per_hz();
 
-	if (resolution <= (tc_clk_rate / 1024)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV1024_gc);
-	} else if (resolution <= (tc_clk_rate / 256)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV256_gc);
-	} else if (resolution <= (tc_clk_rate / 64)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV64_gc);
-	} else if (resolution <= (tc_clk_rate / 8)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV8_gc);
-	} else if (resolution <= (tc_clk_rate / 4)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV4_gc);
-	} else if (resolution <= (tc_clk_rate / 2)) {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV2_gc);
-	} else {
-		tc_write_clock_source(tc, TC_CLKSEL_DIV1_gc);
-	}
+    if (resolution <= (tc_clk_rate / 1024)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV1024_gc);
+    } else if (resolution <= (tc_clk_rate / 256)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV256_gc);
+    } else if (resolution <= (tc_clk_rate / 64)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV64_gc);
+    } else if (resolution <= (tc_clk_rate / 8)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV8_gc);
+    } else if (resolution <= (tc_clk_rate / 4)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV4_gc);
+    } else if (resolution <= (tc_clk_rate / 2)) {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV2_gc);
+    } else {
+        tc_write_clock_source(tc, TC_CLKSEL_DIV1_gc);
+    }
 }
 
 /**
@@ -434,44 +434,44 @@ static inline void tc_set_resolution(volatile void *tc, uint32_t resolution)
  */
 static inline uint32_t tc_get_resolution(volatile void *tc)
 {
-	uint32_t tc_clk_rate = sysclk_get_per_hz();
-	switch (tc_read_clock_source(tc)) {
-	case TC_CLKSEL_OFF_gc:
-		tc_clk_rate = 0;
-		break;
+    uint32_t tc_clk_rate = sysclk_get_per_hz();
+    switch (tc_read_clock_source(tc)) {
+    case TC_CLKSEL_OFF_gc:
+        tc_clk_rate = 0;
+        break;
 
-	case TC_CLKSEL_DIV1024_gc:
-		tc_clk_rate /= 1024;
-		break;
+    case TC_CLKSEL_DIV1024_gc:
+        tc_clk_rate /= 1024;
+        break;
 
-	case TC_CLKSEL_DIV256_gc:
-		tc_clk_rate /= 256;
-		break;
+    case TC_CLKSEL_DIV256_gc:
+        tc_clk_rate /= 256;
+        break;
 
-	case TC_CLKSEL_DIV64_gc:
-		tc_clk_rate /= 64;
-		break;
+    case TC_CLKSEL_DIV64_gc:
+        tc_clk_rate /= 64;
+        break;
 
-	case TC_CLKSEL_DIV8_gc:
-		tc_clk_rate /= 8;
-		break;
+    case TC_CLKSEL_DIV8_gc:
+        tc_clk_rate /= 8;
+        break;
 
-	case TC_CLKSEL_DIV4_gc:
-		tc_clk_rate /= 4;
-		break;
+    case TC_CLKSEL_DIV4_gc:
+        tc_clk_rate /= 4;
+        break;
 
-	case TC_CLKSEL_DIV2_gc:
-		tc_clk_rate /= 2;
-		break;
+    case TC_CLKSEL_DIV2_gc:
+        tc_clk_rate /= 2;
+        break;
 
-	case TC_CLKSEL_DIV1_gc:
-		break;
+    case TC_CLKSEL_DIV1_gc:
+        break;
 
-	default:
-		tc_clk_rate = 0;
-		break;
-	}
-	return (tc_clk_rate);
+    default:
+        tc_clk_rate = 0;
+        break;
+    }
+    return (tc_clk_rate);
 }
 
 /**
@@ -482,11 +482,11 @@ static inline uint32_t tc_get_resolution(volatile void *tc)
  */
 static inline void tc_set_direction(volatile void *tc, enum tc_dir_t dir)
 {
-	if (dir == TC_UP) {
-		((TC0_t *)tc)->CTRLFCLR |= ~TC0_DIR_bm;
-	} else {
-		((TC0_t *)tc)->CTRLFSET |= TC0_DIR_bm;
-	}
+    if (dir == TC_UP) {
+        ((TC0_t *)tc)->CTRLFCLR |= ~TC0_DIR_bm;
+    } else {
+        ((TC0_t *)tc)->CTRLFSET |= TC0_DIR_bm;
+    }
 }
 
 /**
@@ -497,7 +497,7 @@ static inline void tc_set_direction(volatile void *tc, enum tc_dir_t dir)
  */
 static inline void tc_write_count(volatile void *tc, uint16_t cnt_value)
 {
-	((TC0_t *)tc)->CNT = cnt_value;
+    ((TC0_t *)tc)->CNT = cnt_value;
 }
 
 /**
@@ -508,7 +508,7 @@ static inline void tc_write_count(volatile void *tc, uint16_t cnt_value)
  */
 static inline uint16_t tc_read_count(volatile void *tc)
 {
-	return (((TC0_t *)tc)->CNT);
+    return (((TC0_t *)tc)->CNT);
 }
 
 /**
@@ -519,7 +519,7 @@ static inline uint16_t tc_read_count(volatile void *tc)
  */
 static inline void tc_write_period(volatile void *tc, uint16_t per_value)
 {
-	((TC0_t *)tc)->PER = per_value;
+    ((TC0_t *)tc)->PER = per_value;
 }
 
 /**
@@ -530,7 +530,7 @@ static inline void tc_write_period(volatile void *tc, uint16_t per_value)
  */
 static inline uint16_t tc_read_period(volatile void *tc)
 {
-	return (((TC0_t *)tc)->PER);
+    return (((TC0_t *)tc)->PER);
 }
 
 /**
@@ -541,7 +541,7 @@ static inline uint16_t tc_read_period(volatile void *tc)
  */
 static inline void tc_write_period_buffer(volatile void *tc, uint16_t per_buf)
 {
-	((TC0_t *)tc)->PERBUF = per_buf;
+    ((TC0_t *)tc)->PERBUF = per_buf;
 }
 
 /**
@@ -552,7 +552,7 @@ static inline void tc_write_period_buffer(volatile void *tc, uint16_t per_buf)
  */
 static inline uint16_t tc_read_period_buffer(volatile void *tc)
 {
-	return (((TC0_t *)tc)->PERBUF);
+    return (((TC0_t *)tc)->PERBUF);
 }
 
 /**
@@ -563,7 +563,7 @@ static inline uint16_t tc_read_period_buffer(volatile void *tc)
  */
 static inline bool tc_period_buffer_is_valid(volatile void *tc)
 {
-	return (((TC0_t *)tc)->CTRLGCLR & TC0_PERBV_bm);
+    return (((TC0_t *)tc)->CTRLGCLR & TC0_PERBV_bm);
 }
 
 /**
@@ -574,8 +574,8 @@ static inline bool tc_period_buffer_is_valid(volatile void *tc)
  */
 static inline void tc_enable_delay(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLD = (((TC0_t *)tc)->CTRLD &
-			~TC0_EVDLY_bm) | (1 << TC0_EVDLY_bp);
+    ((TC0_t *)tc)->CTRLD = (((TC0_t *)tc)->CTRLD &
+            ~TC0_EVDLY_bm) | (1 << TC0_EVDLY_bp);
 }
 
 /**
@@ -586,7 +586,7 @@ static inline void tc_enable_delay(volatile void *tc)
  */
 static inline void tc_disable_delay(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLD = ((TC0_t *)tc)->CTRLD & ~TC0_EVDLY_bm;
+    ((TC0_t *)tc)->CTRLD = ((TC0_t *)tc)->CTRLD & ~TC0_EVDLY_bm;
 }
 
 /**
@@ -597,7 +597,7 @@ static inline void tc_disable_delay(volatile void *tc)
  */
 static inline bool tc_is_overflow(volatile void *tc)
 {
-	return (((TC0_t *)tc)->INTFLAGS & TC0_OVFIF_bm);
+    return (((TC0_t *)tc)->INTFLAGS & TC0_OVFIF_bm);
 }
 
 /**
@@ -608,7 +608,7 @@ static inline bool tc_is_overflow(volatile void *tc)
  */
 static inline void tc_clear_overflow(volatile void *tc)
 {
-	((TC0_t *)tc)->INTFLAGS |= TC0_OVFIF_bm;
+    ((TC0_t *)tc)->INTFLAGS |= TC0_OVFIF_bm;
 }
 
 /**
@@ -619,7 +619,7 @@ static inline void tc_clear_overflow(volatile void *tc)
  */
 static inline bool tc_read_error(volatile void *tc)
 {
-	return (((TC0_t *)tc)->INTFLAGS & TC0_ERRIF_bm);
+    return (((TC0_t *)tc)->INTFLAGS & TC0_ERRIF_bm);
 }
 
 /**
@@ -630,7 +630,7 @@ static inline bool tc_read_error(volatile void *tc)
  */
 static inline void tc_clear_error(volatile void *tc)
 {
-	((TC0_t *)tc)->INTFLAGS |= TC0_ERRIF_bm;
+    ((TC0_t *)tc)->INTFLAGS |= TC0_ERRIF_bm;
 }
 
 /**
@@ -641,7 +641,7 @@ static inline void tc_clear_error(volatile void *tc)
  */
 static inline void tc_restart(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLFSET = TC_CMD_RESTART_gc;
+    ((TC0_t *)tc)->CTRLFSET = TC_CMD_RESTART_gc;
 }
 
 /**
@@ -652,7 +652,7 @@ static inline void tc_restart(volatile void *tc)
  */
 static inline void tc_reset(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLFSET = TC_CMD_RESET_gc;
+    ((TC0_t *)tc)->CTRLFSET = TC_CMD_RESET_gc;
 }
 
 /**
@@ -663,7 +663,7 @@ static inline void tc_reset(volatile void *tc)
  */
 static inline void tc_update(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLFSET = TC_CMD_UPDATE_gc;
+    ((TC0_t *)tc)->CTRLFSET = TC_CMD_UPDATE_gc;
 }
 
 /**
@@ -675,9 +675,9 @@ static inline void tc_update(volatile void *tc)
 static inline void tc_set_8bits_mode(volatile void *tc)
 {
 #ifdef TC0_BYTEM0_bm
-	((TC0_t *)tc)->CTRLE |= TC0_BYTEM0_bm;
+    ((TC0_t *)tc)->CTRLE |= TC0_BYTEM0_bm;
 #else
-	((TC0_t *)tc)->CTRLE |= TC0_BYTEM_bm;
+    ((TC0_t *)tc)->CTRLE |= TC0_BYTEM_bm;
 #endif
 }
 
@@ -689,7 +689,7 @@ static inline void tc_set_8bits_mode(volatile void *tc)
  *  */
 static inline void tc_lock_update_buffers(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLFSET |= TC0_LUPD_bm;
+    ((TC0_t *)tc)->CTRLFSET |= TC0_LUPD_bm;
 }
 
 /**
@@ -700,7 +700,7 @@ static inline void tc_lock_update_buffers(volatile void *tc)
  */
 static inline void tc_unlock_update_buffers(volatile void *tc)
 {
-	((TC0_t *)tc)->CTRLFCLR |= TC0_LUPD_bm;
+    ((TC0_t *)tc)->CTRLFCLR |= TC0_LUPD_bm;
 }
 
 /**
@@ -710,14 +710,14 @@ static inline void tc_unlock_update_buffers(volatile void *tc)
  * \param enablemask CC channel
  */
 static inline void tc_enable_cc_channels(volatile void *tc,
-		enum tc_cc_channel_mask_enable_t enablemask)
+        enum tc_cc_channel_mask_enable_t enablemask)
 {
-	if (tc_is_tc0(void *tc)) {
-		((TC0_t *)tc)->CTRLB |= enablemask;
-	} else if (tc_is_tc1(void *tc)) {
-		((TC1_t *)tc)->CTRLB |=
-				enablemask & (TC1_CCAEN_bm | TC1_CCBEN_bm);
-	}
+    if (tc_is_tc0(void *tc)) {
+        ((TC0_t *)tc)->CTRLB |= enablemask;
+    } else if (tc_is_tc1(void *tc)) {
+        ((TC1_t *)tc)->CTRLB |=
+                enablemask & (TC1_CCAEN_bm | TC1_CCBEN_bm);
+    }
 }
 
 /**
@@ -727,14 +727,14 @@ static inline void tc_enable_cc_channels(volatile void *tc,
  * \param disablemask CC channel
  */
 static inline void tc_disable_cc_channels(volatile void *tc,
-		enum tc_cc_channel_mask_enable_t disablemask)
+        enum tc_cc_channel_mask_enable_t disablemask)
 {
-	if (tc_is_tc0(void *tc)) {
-		((TC0_t *)tc)->CTRLB &= ~disablemask;
-	} else if (tc_is_tc1(void *tc)) {
-		((TC1_t *)tc)->CTRLB &=
-				~(disablemask | TC1_CCAEN_bm | TC1_CCBEN_bm);
-	}
+    if (tc_is_tc0(void *tc)) {
+        ((TC0_t *)tc)->CTRLB &= ~disablemask;
+    } else if (tc_is_tc1(void *tc)) {
+        ((TC1_t *)tc)->CTRLB &=
+                ~(disablemask | TC1_CCAEN_bm | TC1_CCBEN_bm);
+    }
 }
 
 /**
@@ -745,10 +745,10 @@ static inline void tc_disable_cc_channels(volatile void *tc,
  * \param eventaction Event action capture type
  */
 static inline void tc_set_input_capture(volatile void *tc,
-		TC_EVSEL_t eventsource, TC_EVACT_t eventaction)
+        TC_EVSEL_t eventsource, TC_EVACT_t eventaction)
 {
-	((TC0_t *)tc)->CTRLD &= ~(TC0_EVSEL_gm | TC0_EVACT_gm);
-	((TC0_t *)tc)->CTRLD |= ((uint8_t)eventsource | (uint8_t)eventaction);
+    ((TC0_t *)tc)->CTRLD &= ~(TC0_EVSEL_gm | TC0_EVACT_gm);
+    ((TC0_t *)tc)->CTRLD |= ((uint8_t)eventsource | (uint8_t)eventaction);
 }
 
 /**
@@ -759,30 +759,30 @@ static inline void tc_set_input_capture(volatile void *tc,
  * \return  Read value of CCx
  */
 static inline uint16_t tc_read_cc(volatile void *tc,
-		enum tc_cc_channel_t channel_index)
+        enum tc_cc_channel_t channel_index)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			return (((TC0_t *)tc)->CCA);
-		case TC_CCB:
-			return (((TC0_t *)tc)->CCB);
-		case TC_CCC:
-			return (((TC0_t *)tc)->CCC);
-		case TC_CCD:
-			return (((TC0_t *)tc)->CCD);
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				return (((TC1_t *)tc)->CCA);
-			case TC_CCB:
-				return (((TC1_t *)tc)->CCB);
-			default:
-				return (0);
-			}
-		}
-	return (0);
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            return (((TC0_t *)tc)->CCA);
+        case TC_CCB:
+            return (((TC0_t *)tc)->CCB);
+        case TC_CCC:
+            return (((TC0_t *)tc)->CCC);
+        case TC_CCD:
+            return (((TC0_t *)tc)->CCD);
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                return (((TC1_t *)tc)->CCA);
+            case TC_CCB:
+                return (((TC1_t *)tc)->CCB);
+            default:
+                return (0);
+            }
+        }
+    return (0);
 }
 
 /**
@@ -793,35 +793,35 @@ static inline uint16_t tc_read_cc(volatile void *tc,
  * \param value Counter value
  */
 static inline void tc_write_cc(volatile void *tc,
-		enum tc_cc_channel_t channel_index, uint16_t value)
+        enum tc_cc_channel_t channel_index, uint16_t value)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			((TC0_t *)tc)->CCA = value;
-			break;
-		case TC_CCB:
-			((TC0_t *)tc)->CCB = value;
-			break;
-		case TC_CCC:
-			((TC0_t *)tc)->CCC = value;
-			break;
-		case TC_CCD:
-			((TC0_t *)tc)->CCD = value;
-			break;
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				((TC1_t *)tc)->CCA = value;
-				break;
-			case TC_CCB:
-				((TC1_t *)tc)->CCB = value;
-				break;
-			default:
-				return ;
-			}
-		}
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            ((TC0_t *)tc)->CCA = value;
+            break;
+        case TC_CCB:
+            ((TC0_t *)tc)->CCB = value;
+            break;
+        case TC_CCC:
+            ((TC0_t *)tc)->CCC = value;
+            break;
+        case TC_CCD:
+            ((TC0_t *)tc)->CCD = value;
+            break;
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                ((TC1_t *)tc)->CCA = value;
+                break;
+            case TC_CCB:
+                ((TC1_t *)tc)->CCB = value;
+                break;
+            default:
+                return ;
+            }
+        }
 }
 
 /**
@@ -832,35 +832,35 @@ static inline void tc_write_cc(volatile void *tc,
  * \param buffer_value Counter Buffer value
  */
 static inline void tc_write_cc_buffer(volatile void *tc,
-		enum tc_cc_channel_t channel_index, uint16_t buffer_value)
+        enum tc_cc_channel_t channel_index, uint16_t buffer_value)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			((TC0_t *)tc)->CCABUF = buffer_value;
-			break;
-		case TC_CCB:
-			((TC0_t *)tc)->CCBBUF = buffer_value;
-			break;
-		case TC_CCC:
-			((TC0_t *)tc)->CCCBUF = buffer_value;
-			break;
-		case TC_CCD:
-			((TC0_t *)tc)->CCDBUF = buffer_value;
-			break;
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				((TC1_t *)tc)->CCABUF = buffer_value;
-				break;
-			case TC_CCB:
-				((TC1_t *)tc)->CCBBUF = buffer_value;
-				break;
-			default:
-				return;
-			}
-		}
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            ((TC0_t *)tc)->CCABUF = buffer_value;
+            break;
+        case TC_CCB:
+            ((TC0_t *)tc)->CCBBUF = buffer_value;
+            break;
+        case TC_CCC:
+            ((TC0_t *)tc)->CCCBUF = buffer_value;
+            break;
+        case TC_CCD:
+            ((TC0_t *)tc)->CCDBUF = buffer_value;
+            break;
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                ((TC1_t *)tc)->CCABUF = buffer_value;
+                break;
+            case TC_CCB:
+                ((TC1_t *)tc)->CCBBUF = buffer_value;
+                break;
+            default:
+                return;
+            }
+        }
 }
 
 /**
@@ -871,30 +871,30 @@ static inline void tc_write_cc_buffer(volatile void *tc,
  * \return  CCx Buffer value
  */
 static inline uint16_t tc_read_cc_buffer(volatile void *tc,
-		enum tc_cc_channel_t channel_index)
+        enum tc_cc_channel_t channel_index)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			return (((TC0_t *)tc)->CCABUF);
-		case TC_CCB:
-			return (((TC0_t *)tc)->CCBBUF);
-		case TC_CCC:
-			return (((TC0_t *)tc)->CCCBUF);
-		case TC_CCD:
-			return (((TC0_t *)tc)->CCDBUF);
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				return (((TC1_t *)tc)->CCABUF);
-			case TC_CCB:
-				return (((TC1_t *)tc)->CCBBUF);
-			default:
-				return (0);
-			}
-		}
-	return (0);
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            return (((TC0_t *)tc)->CCABUF);
+        case TC_CCB:
+            return (((TC0_t *)tc)->CCBBUF);
+        case TC_CCC:
+            return (((TC0_t *)tc)->CCCBUF);
+        case TC_CCD:
+            return (((TC0_t *)tc)->CCDBUF);
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                return (((TC1_t *)tc)->CCABUF);
+            case TC_CCB:
+                return (((TC1_t *)tc)->CCBBUF);
+            default:
+                return (0);
+            }
+        }
+    return (0);
 }
 
 /**
@@ -905,32 +905,32 @@ static inline uint16_t tc_read_cc_buffer(volatile void *tc,
  * \return  CCx Buffer is valid or not
  */
 static inline bool tc_cc_buffer_is_valid(volatile void *tc,
-		enum tc_cc_channel_t channel_index)
+        enum tc_cc_channel_t channel_index)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			return ((TC0_t *)tc)->CTRLGCLR & TC0_CCABV_bm;
-		case TC_CCB:
-			return ((TC0_t *)tc)->CTRLGCLR & TC0_CCBBV_bm;
-		case TC_CCC:
-			return ((TC0_t *)tc)->CTRLGCLR & TC0_CCCBV_bm;
-		case TC_CCD:
-			return ((TC0_t *)tc)->CTRLGCLR & TC0_CCDBV_bm;
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				return (((TC1_t *)tc)->CTRLGCLR &
-						TC1_CCABV_bm);
-			case TC_CCB:
-				return (((TC1_t *)tc)->CTRLGCLR &
-						TC1_CCBBV_bm);
-			default:
-				return (0);
-			}
-		}
-	return (0);
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            return ((TC0_t *)tc)->CTRLGCLR & TC0_CCABV_bm;
+        case TC_CCB:
+            return ((TC0_t *)tc)->CTRLGCLR & TC0_CCBBV_bm;
+        case TC_CCC:
+            return ((TC0_t *)tc)->CTRLGCLR & TC0_CCCBV_bm;
+        case TC_CCD:
+            return ((TC0_t *)tc)->CTRLGCLR & TC0_CCDBV_bm;
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                return (((TC1_t *)tc)->CTRLGCLR &
+                        TC1_CCABV_bm);
+            case TC_CCB:
+                return (((TC1_t *)tc)->CTRLGCLR &
+                        TC1_CCBBV_bm);
+            default:
+                return (0);
+            }
+        }
+    return (0);
 }
 
 /**
@@ -941,32 +941,32 @@ static inline bool tc_cc_buffer_is_valid(volatile void *tc,
  * \return  CCx Interrupt or not
  */
 static inline bool tc_is_cc_interrupt(volatile void *tc,
-		enum tc_cc_channel_t channel_index)
+        enum tc_cc_channel_t channel_index)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			return (((TC0_t *)tc)->INTFLAGS & TC0_CCAIF_bm);
-		case TC_CCB:
-			return (((TC0_t *)tc)->INTFLAGS & TC0_CCBIF_bm);
-		case TC_CCC:
-			return (((TC0_t *)tc)->INTFLAGS & TC0_CCCIF_bm);
-		case TC_CCD:
-			return (((TC0_t *)tc)->INTFLAGS & TC0_CCDIF_bm);
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				return (((TC1_t *)tc)->INTFLAGS &
-						TC1_CCAIF_bm);
-			case TC_CCB:
-				return (((TC1_t *)tc)->INTFLAGS &
-						TC1_CCBIF_bm);
-			default:
-				return (0);
-			}
-		}
-	return (0);
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            return (((TC0_t *)tc)->INTFLAGS & TC0_CCAIF_bm);
+        case TC_CCB:
+            return (((TC0_t *)tc)->INTFLAGS & TC0_CCBIF_bm);
+        case TC_CCC:
+            return (((TC0_t *)tc)->INTFLAGS & TC0_CCCIF_bm);
+        case TC_CCD:
+            return (((TC0_t *)tc)->INTFLAGS & TC0_CCDIF_bm);
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                return (((TC1_t *)tc)->INTFLAGS &
+                        TC1_CCAIF_bm);
+            case TC_CCB:
+                return (((TC1_t *)tc)->INTFLAGS &
+                        TC1_CCBIF_bm);
+            default:
+                return (0);
+            }
+        }
+    return (0);
 }
 
 /**
@@ -976,35 +976,35 @@ static inline bool tc_is_cc_interrupt(volatile void *tc,
  * \param channel_index CC Channel
  */
 static inline void tc_clear_cc_interrupt(volatile void *tc,
-		enum tc_cc_channel_t channel_index)
+        enum tc_cc_channel_t channel_index)
 {
-	if (tc_is_tc0(void *tc)) {
-		switch (channel_index) {
-		case TC_CCA:
-			((TC0_t *)tc)->INTFLAGS = TC0_CCAIF_bm;
-			break;
-		case TC_CCB:
-			((TC0_t *)tc)->INTFLAGS = TC0_CCBIF_bm;
-			break;
-		case TC_CCC:
-			((TC0_t *)tc)->INTFLAGS = TC0_CCCIF_bm;
-			break;
-		case TC_CCD:
-			((TC0_t *)tc)->INTFLAGS = TC0_CCDIF_bm;
-			break;
-		}
-	} else if (tc_is_tc1(void *tc)) {
-			switch (channel_index) {
-			case TC_CCA:
-				((TC1_t *)tc)->INTFLAGS = TC1_CCAIF_bm;
-				break;
-			case TC_CCB:
-				((TC1_t *)tc)->INTFLAGS = TC1_CCBIF_bm;
-				break;
-			default:
-				return;
-			}
-		}
+    if (tc_is_tc0(void *tc)) {
+        switch (channel_index) {
+        case TC_CCA:
+            ((TC0_t *)tc)->INTFLAGS = TC0_CCAIF_bm;
+            break;
+        case TC_CCB:
+            ((TC0_t *)tc)->INTFLAGS = TC0_CCBIF_bm;
+            break;
+        case TC_CCC:
+            ((TC0_t *)tc)->INTFLAGS = TC0_CCCIF_bm;
+            break;
+        case TC_CCD:
+            ((TC0_t *)tc)->INTFLAGS = TC0_CCDIF_bm;
+            break;
+        }
+    } else if (tc_is_tc1(void *tc)) {
+            switch (channel_index) {
+            case TC_CCA:
+                ((TC1_t *)tc)->INTFLAGS = TC1_CCAIF_bm;
+                break;
+            case TC_CCB:
+                ((TC1_t *)tc)->INTFLAGS = TC1_CCBIF_bm;
+                break;
+            default:
+                return;
+            }
+        }
 }
 
 /**
@@ -1015,7 +1015,7 @@ static inline void tc_clear_cc_interrupt(volatile void *tc,
  */
 static inline void tc_set_wgm(volatile void *tc, enum tc_wg_mode_t wgm)
 {
-	((TC0_t *)tc)->CTRLB = (((TC0_t *)tc)->CTRLB & ~TC0_WGMODE_gm) | wgm;
+    ((TC0_t *)tc)->CTRLB = (((TC0_t *)tc)->CTRLB & ~TC0_WGMODE_gm) | wgm;
 }
 
 /**
@@ -1032,7 +1032,7 @@ static inline void tc_set_wgm(volatile void *tc, enum tc_wg_mode_t wgm)
  */
 static inline void tc_awex_enable_cwcm(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_CWCM_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_CWCM_bm;
 }
 
 /**
@@ -1042,7 +1042,7 @@ static inline void tc_awex_enable_cwcm(AWEX_t *awex)
  */
 static inline void tc_awex_disable_cwcm(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_CWCM_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_CWCM_bm;
 }
 
 /**
@@ -1052,7 +1052,7 @@ static inline void tc_awex_disable_cwcm(AWEX_t *awex)
  */
 static inline void tc_awex_enable_pgm(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_PGM_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_PGM_bm;
 }
 
 /**
@@ -1062,7 +1062,7 @@ static inline void tc_awex_enable_pgm(AWEX_t *awex)
  */
 static inline void tc_awex_disable_pgm(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_PGM_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_PGM_bm;
 }
 
 /**
@@ -1072,7 +1072,7 @@ static inline void tc_awex_disable_pgm(AWEX_t *awex)
  */
 static inline void tc_awex_enable_cca_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_DTICCAEN_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_DTICCAEN_bm;
 }
 
 /**
@@ -1082,7 +1082,7 @@ static inline void tc_awex_enable_cca_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_disable_cca_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCAEN_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCAEN_bm;
 }
 
 /**
@@ -1092,7 +1092,7 @@ static inline void tc_awex_disable_cca_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_enable_ccb_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_DTICCBEN_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_DTICCBEN_bm;
 }
 
 /**
@@ -1102,7 +1102,7 @@ static inline void tc_awex_enable_ccb_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_disable_ccb_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCBEN_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCBEN_bm;
 }
 
 /**
@@ -1112,7 +1112,7 @@ static inline void tc_awex_disable_ccb_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_enable_ccc_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_DTICCCEN_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_DTICCCEN_bm;
 }
 
 /**
@@ -1122,7 +1122,7 @@ static inline void tc_awex_enable_ccc_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_disable_ccc_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCCEN_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCCEN_bm;
 }
 
 /**
@@ -1132,7 +1132,7 @@ static inline void tc_awex_disable_ccc_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_enable_ccd_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL |= AWEX_DTICCDEN_bm;
+    ((AWEX_t *)awex)->CTRL |= AWEX_DTICCDEN_bm;
 }
 
 /**
@@ -1142,7 +1142,7 @@ static inline void tc_awex_enable_ccd_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_disable_ccd_deadtime(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCDEN_bm;
+    ((AWEX_t *)awex)->CTRL &= ~AWEX_DTICCDEN_bm;
 }
 /**
  * \brief AWeX extension : configures high side deadtime
@@ -1152,7 +1152,7 @@ static inline void tc_awex_disable_ccd_deadtime(AWEX_t *awex)
  */
 static inline void tc_awex_set_dti_high(AWEX_t *awex, int16_t value)
 {
-	((AWEX_t *)awex)->DTHS = value;
+    ((AWEX_t *)awex)->DTHS = value;
 }
 /**
  * \brief AWeX extension : configures low side deadtime
@@ -1162,7 +1162,7 @@ static inline void tc_awex_set_dti_high(AWEX_t *awex, int16_t value)
  */
 static inline void tc_awex_set_dti_low(AWEX_t *awex, int16_t value)
 {
-	((AWEX_t *)awex)->DTLS = value;
+    ((AWEX_t *)awex)->DTLS = value;
 }
 /**
  * \brief AWeX extension : configures symmetrical deadtime
@@ -1172,7 +1172,7 @@ static inline void tc_awex_set_dti_low(AWEX_t *awex, int16_t value)
  */
 static inline void tc_awex_set_dti_both(AWEX_t *awex, int16_t value)
 {
-	((AWEX_t *)awex)->DTBOTH = value;
+    ((AWEX_t *)awex)->DTBOTH = value;
 }
 
 /**
@@ -1182,9 +1182,9 @@ static inline void tc_awex_set_dti_both(AWEX_t *awex, int16_t value)
  * \param value : deadtime buffer value
  */
 static inline void tc_awex_set_dti_both_buffer(AWEX_t *awex,
-		int16_t value)
+        int16_t value)
 {
-	((AWEX_t *)awex)->DTBOTHBUF = value;
+    ((AWEX_t *)awex)->DTBOTHBUF = value;
 }
 
 /**
@@ -1195,7 +1195,7 @@ static inline void tc_awex_set_dti_both_buffer(AWEX_t *awex,
  */
 static inline int8_t tc_awex_get_dti_high_buffer(AWEX_t *awex)
 {
-	return (((AWEX_t *)awex)->DTHSBUF);
+    return (((AWEX_t *)awex)->DTHSBUF);
 }
 
 /**
@@ -1206,7 +1206,7 @@ static inline int8_t tc_awex_get_dti_high_buffer(AWEX_t *awex)
  */
 static inline int8_t tc_awex_get_dti_low_buffer(AWEX_t *awex)
 {
-	return (((AWEX_t *)awex)->DTLSBUF);
+    return (((AWEX_t *)awex)->DTLSBUF);
 }
 
 /**
@@ -1217,7 +1217,7 @@ static inline int8_t tc_awex_get_dti_low_buffer(AWEX_t *awex)
  */
 static inline bool tc_awex_is_dti_high_buffer_valid(AWEX_t *awex)
 {
-	return (((AWEX_t *)awex)->STATUS & AWEX_DTHSBUFV_bm);
+    return (((AWEX_t *)awex)->STATUS & AWEX_DTHSBUFV_bm);
 }
 
 /**
@@ -1228,7 +1228,7 @@ static inline bool tc_awex_is_dti_high_buffer_valid(AWEX_t *awex)
  */
 static inline bool tc_awex_is_dti_low_buffer_valid(AWEX_t *awex)
 {
-	return (((AWEX_t *)awex)->STATUS & AWEX_DTLSBUFV_bm);
+    return (((AWEX_t *)awex)->STATUS & AWEX_DTLSBUFV_bm);
 }
 
 /**
@@ -1238,7 +1238,7 @@ static inline bool tc_awex_is_dti_low_buffer_valid(AWEX_t *awex)
  */
 static inline void tc_awex_fdmode_restart_latched(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->FDCTRL &= ~AWEX_FDMODE_bm;
+    ((AWEX_t *)awex)->FDCTRL &= ~AWEX_FDMODE_bm;
 }
 
 /**
@@ -1248,7 +1248,7 @@ static inline void tc_awex_fdmode_restart_latched(AWEX_t *awex)
  */
 static inline void tc_awex_fdmode_restart_cycle(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->FDCTRL |= AWEX_FDMODE_bm;
+    ((AWEX_t *)awex)->FDCTRL |= AWEX_FDMODE_bm;
 }
 
 /**
@@ -1258,7 +1258,7 @@ static inline void tc_awex_fdmode_restart_cycle(AWEX_t *awex)
  */
 static inline bool tc_awex_fault_is_detected(AWEX_t *awex)
 {
-	return (((AWEX_t *)awex)->STATUS & AWEX_FDF_bm);
+    return (((AWEX_t *)awex)->STATUS & AWEX_FDF_bm);
 }
 
 /**
@@ -1268,7 +1268,7 @@ static inline bool tc_awex_fault_is_detected(AWEX_t *awex)
  */
 static inline void tc_awex_clear_fault(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->STATUS = AWEX_FDF_bm;
+    ((AWEX_t *)awex)->STATUS = AWEX_FDF_bm;
 }
 
 /**
@@ -1278,10 +1278,10 @@ static inline void tc_awex_clear_fault(AWEX_t *awex)
  * \param fd_act Fault action
  */
 static inline void tc_awex_set_fault_detection_action(AWEX_t *
-		awex, AWEX_FDACT_t fd_act)
+        awex, AWEX_FDACT_t fd_act)
 {
-	((AWEX_t *)awex)->FDCTRL = (((AWEX_t *)awex)->FDCTRL & ~AWEX_FDACT_gm) |
-		(fd_act & AWEX_FDACT_gm);
+    ((AWEX_t *)awex)->FDCTRL = (((AWEX_t *)awex)->FDCTRL & ~AWEX_FDACT_gm) |
+        (fd_act & AWEX_FDACT_gm);
 
 }
 
@@ -1292,9 +1292,9 @@ static inline void tc_awex_set_fault_detection_action(AWEX_t *
  * \param eventmask Fault detection event
  */
 static inline void tc_awex_set_fault_detection_event(AWEX_t *awex,
-		int8_t eventmask)
+        int8_t eventmask)
 {
-	((AWEX_t *)awex)->FDEMASK = eventmask;
+    ((AWEX_t *)awex)->FDEMASK = eventmask;
 }
 
 /**
@@ -1304,9 +1304,9 @@ static inline void tc_awex_set_fault_detection_event(AWEX_t *awex,
  * \param value Output override configuration
  */
 static inline void tc_awex_set_output_override(AWEX_t * awex,
-		int8_t value)
+        int8_t value)
 {
-	((AWEX_t *)awex)->OUTOVEN = value;
+    ((AWEX_t *)awex)->OUTOVEN = value;
 }
 
 /**
@@ -1316,7 +1316,7 @@ static inline void tc_awex_set_output_override(AWEX_t * awex,
  */
 static inline void tc_awex_enable_fault_debug_break(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->FDCTRL &= ~AWEX_FDDBD_bm;
+    ((AWEX_t *)awex)->FDCTRL &= ~AWEX_FDDBD_bm;
 }
 
 /**
@@ -1326,7 +1326,7 @@ static inline void tc_awex_enable_fault_debug_break(AWEX_t *awex)
  */
 static inline void tc_awex_disable_fault_debug_break(AWEX_t *awex)
 {
-	((AWEX_t *)awex)->FDCTRL |= AWEX_FDDBD_bm;
+    ((AWEX_t *)awex)->FDCTRL |= AWEX_FDDBD_bm;
 }
 //@}
 /**
@@ -1344,7 +1344,7 @@ static inline void tc_awex_disable_fault_debug_break(AWEX_t *awex)
  */
 static inline void tc_hires_set_mode(HIRES_t * hires, HIRES_HREN_t hi_res_mode)
 {
-	((HIRES_t *)hires)->CTRLA = hi_res_mode;
+    ((HIRES_t *)hires)->CTRLA = hi_res_mode;
 }
 //@}
 
@@ -1397,24 +1397,24 @@ static inline void tc_hires_set_mode(HIRES_t * hires, HIRES_HREN_t hi_res_mode)
  * Add a callback function that will be executed when the overflow interrupt
  * trigger.
  * \code
-	static void my_callback(void)
-	{
-		// User code to execute when the overflow occurs here
-		//Important to clear Interrupt Flag
-		tc_clear_overflow(&TCC0);
-	}
+    static void my_callback(void)
+    {
+        // User code to execute when the overflow occurs here
+        //Important to clear Interrupt Flag
+        tc_clear_overflow(&TCC0);
+    }
 \endcode
  * Add to, e.g., the main loop in the application C-file:
  * \code
-	pmic_init();
-	sysclk_init();
-	tc_enable(&TCC0);
-	tc_set_overflow_interrupt_callback(&TCC0, my_callback);
-	tc_set_wgm(&TCC0, TC_WG_NORMAL);
-	tc_write_period(&TCC0, 1000);
-	tc_set_overflow_interrupt_level(&TCC0, TC_INT_LVL_LO);
-	cpu_irq_enable();
-	tc_write_clock_source(&TCC0, TC_CLKSEL_DIV1_gc);
+    pmic_init();
+    sysclk_init();
+    tc_enable(&TCC0);
+    tc_set_overflow_interrupt_callback(&TCC0, my_callback);
+    tc_set_wgm(&TCC0, TC_WG_NORMAL);
+    tc_write_period(&TCC0, 1000);
+    tc_set_overflow_interrupt_level(&TCC0, TC_INT_LVL_LO);
+    cpu_irq_enable();
+    tc_write_clock_source(&TCC0, TC_CLKSEL_DIV1_gc);
 \endcode
  *
  * \subsection xmega_tc_qs_ovf_setup_code_workflow Workflow
@@ -1483,31 +1483,31 @@ static inline void tc_hires_set_mode(HIRES_t * hires, HIRES_HREN_t hi_res_mode)
  * Add two callback functions that will be executed when compare match A and
  * compare match B occurs
  * \code
-	static void my_cca_callback(void)
-	{
-	   // User code here to execute when a channel A compare match occurs
-	}
-	static void my_ccb_callback(void)
-	{
-	   // User code here to execute when a channel B compare match occurs
-	}
+    static void my_cca_callback(void)
+    {
+       // User code here to execute when a channel A compare match occurs
+    }
+    static void my_ccb_callback(void)
+    {
+       // User code here to execute when a channel B compare match occurs
+    }
 \endcode
  * Add to, e.g., the main loop in the application C-file:
  * \code
-	pmic_init();
-	sysclk_init();
-	cpu_irq_enable();
-	tc_enable(&TCC0);
-	tc_set_cca_interrupt_callback(&TCC0, my_cca_callback);
-	tc_set_ccb_interrupt_callback(&TCC0, my_ccb_callback);
-	tc_set_wgm(&TCC0, TC_WG_NORMAL);
-	tc_write_period(&TCC0, 10000);
-	tc_write_cc(&TCC0, TC_CCA, 100);
-	tc_write_cc(&TCC0, TC_CCB, 1000);
-	tc_enable_cc_channels(&TCC0,(TC_CCAEN | TC_CCBEN));
-	tc_set_cca_interrupt_level(&TCC0, TC_INT_LVL_LO);
-	tc_set_ccb_interrupt_level(&TCC0, TC_INT_LVL_MED);
-	tc_write_clock_source(&TCC0, TC_CLKSEL_DIV1_gc);
+    pmic_init();
+    sysclk_init();
+    cpu_irq_enable();
+    tc_enable(&TCC0);
+    tc_set_cca_interrupt_callback(&TCC0, my_cca_callback);
+    tc_set_ccb_interrupt_callback(&TCC0, my_ccb_callback);
+    tc_set_wgm(&TCC0, TC_WG_NORMAL);
+    tc_write_period(&TCC0, 10000);
+    tc_write_cc(&TCC0, TC_CCA, 100);
+    tc_write_cc(&TCC0, TC_CCB, 1000);
+    tc_enable_cc_channels(&TCC0,(TC_CCAEN | TC_CCBEN));
+    tc_set_cca_interrupt_level(&TCC0, TC_INT_LVL_LO);
+    tc_set_ccb_interrupt_level(&TCC0, TC_INT_LVL_MED);
+    tc_write_clock_source(&TCC0, TC_CLKSEL_DIV1_gc);
 \endcode
  *
  * \subsection xmega_tc_qs_cc_setup_code_workflow Workflow
@@ -1579,14 +1579,14 @@ static inline void tc_hires_set_mode(HIRES_t * hires, HIRES_HREN_t hi_res_mode)
  *
  * Add to, e.g., the main loop in the application C-file:
  * \code
-	board_init();
-	sysclk_init();
-	tc_enable(&TCE0);
-	tc_set_wgm(&TCE0, TC_WG_SS);
-	tc_write_period(&TCE0, 1950);
-	tc_write_cc(&TCE0, TC_CCA, 195);
-	tc_enable_cc_channels(&TCE0,TC_CCAEN);
-	tc_write_clock_source(&TCE0, TC_CLKSEL_DIV1024_gc);
+    board_init();
+    sysclk_init();
+    tc_enable(&TCE0);
+    tc_set_wgm(&TCE0, TC_WG_SS);
+    tc_write_period(&TCE0, 1950);
+    tc_write_cc(&TCE0, TC_CCA, 195);
+    tc_enable_cc_channels(&TCE0,TC_CCAEN);
+    tc_write_clock_source(&TCE0, TC_CLKSEL_DIV1024_gc);
 \endcode
  *
  * \subsection xmega_tc_qs_pwm_setup_code_workflow Workflow

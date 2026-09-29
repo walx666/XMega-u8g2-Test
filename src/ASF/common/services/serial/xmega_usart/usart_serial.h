@@ -61,61 +61,61 @@ typedef USART_t *usart_if;
  * \retval false if initialization failed (error in baud rate calculation)
  */
 static inline bool usart_serial_init(usart_if usart, const
-		usart_serial_options_t *options)
+        usart_serial_options_t *options)
 {
-	// USART options.
-	usart_rs232_options_t usart_rs232_options;
-	usart_rs232_options.charlength   = options->charlength;
-	usart_rs232_options.paritytype   = options->paritytype;
-	usart_rs232_options.stopbits     = options->stopbits;
-	usart_rs232_options.baudrate     = options->baudrate;
+    // USART options.
+    usart_rs232_options_t usart_rs232_options;
+    usart_rs232_options.charlength   = options->charlength;
+    usart_rs232_options.paritytype   = options->paritytype;
+    usart_rs232_options.stopbits     = options->stopbits;
+    usart_rs232_options.baudrate     = options->baudrate;
 
 #ifdef USARTC0
-	if((uint16_t)usart == (uint16_t)&USARTC0) {
-		sysclk_enable_module(SYSCLK_PORT_C,PR_USART0_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTC0) {
+        sysclk_enable_module(SYSCLK_PORT_C,PR_USART0_bm);
+    }
 #endif
 #ifdef USARTC1
-	if((uint16_t)usart == (uint16_t)&USARTC1) {
-		sysclk_enable_module(SYSCLK_PORT_C,PR_USART1_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTC1) {
+        sysclk_enable_module(SYSCLK_PORT_C,PR_USART1_bm);
+    }
 #endif
 #ifdef USARTD0
-	if((uint16_t)usart == (uint16_t)&USARTD0) {
-		sysclk_enable_module(SYSCLK_PORT_D,PR_USART0_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTD0) {
+        sysclk_enable_module(SYSCLK_PORT_D,PR_USART0_bm);
+    }
 #endif
 #ifdef USARTD1
-	if((uint16_t)usart == (uint16_t)&USARTD1) {
-		sysclk_enable_module(SYSCLK_PORT_D,PR_USART1_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTD1) {
+        sysclk_enable_module(SYSCLK_PORT_D,PR_USART1_bm);
+    }
 #endif
 #ifdef USARTE0
-	if((uint16_t)usart == (uint16_t)&USARTE0) {
-		sysclk_enable_module(SYSCLK_PORT_E,PR_USART0_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTE0) {
+        sysclk_enable_module(SYSCLK_PORT_E,PR_USART0_bm);
+    }
 #endif
 #ifdef USARTE1
-	if((uint16_t)usart == (uint16_t)&USARTE1) {
-		sysclk_enable_module(SYSCLK_PORT_E,PR_USART1_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTE1) {
+        sysclk_enable_module(SYSCLK_PORT_E,PR_USART1_bm);
+    }
 #endif
 #ifdef USARTF0
-	if((uint16_t)usart == (uint16_t)&USARTF0) {
-		sysclk_enable_module(SYSCLK_PORT_F,PR_USART0_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTF0) {
+        sysclk_enable_module(SYSCLK_PORT_F,PR_USART0_bm);
+    }
 #endif
 #ifdef USARTF1
-	if((uint16_t)usart == (uint16_t)&USARTF1) {
-		sysclk_enable_module(SYSCLK_PORT_F,PR_USART1_bm);
-	}
+    if((uint16_t)usart == (uint16_t)&USARTF1) {
+        sysclk_enable_module(SYSCLK_PORT_F,PR_USART1_bm);
+    }
 #endif
-	if (usart_init_rs232(usart, &usart_rs232_options)) {
-		return true;
-	}
-	else {
-		return false;
-	}
+    if (usart_init_rs232(usart, &usart_rs232_options)) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 /*! \brief Sends a character with the USART.
@@ -127,7 +127,7 @@ static inline bool usart_serial_init(usart_if usart, const
  */
 static inline enum status_code usart_serial_putchar(usart_if usart, uint8_t c)
 {
-	return usart_putchar(usart, c);
+    return usart_putchar(usart, c);
 }
 /*! \brief Waits until a character is received, and returns it.
  *
@@ -137,7 +137,7 @@ static inline enum status_code usart_serial_putchar(usart_if usart, uint8_t c)
  */
 static inline void usart_serial_getchar(usart_if usart, uint8_t *data)
 {
-	*data = usart_getchar(usart);
+    *data = usart_getchar(usart);
 }
 
 /**

@@ -76,37 +76,37 @@ extern "C" {
 /**
  * \brief Clock phase
  */
-#define SPI_CPHA	(1 << 0)
+#define SPI_CPHA    (1 << 0)
 
 /**
  * \brief Clock polarity
  */
-#define SPI_CPOL	(1 << 1)
+#define SPI_CPOL    (1 << 1)
 
 /**
  * \brief SPI mode 0
  */
-#define SPI_MODE_0	0
+#define SPI_MODE_0  0
 /**
  * \brief SPI mode 1
  */
-#define SPI_MODE_1	(SPI_CPHA)
+#define SPI_MODE_1  (SPI_CPHA)
 /**
  * \brief SPI mode 2
  */
-#define SPI_MODE_2	(SPI_CPOL)
+#define SPI_MODE_2  (SPI_CPOL)
 /**
  * \brief SPI mode 3
  */
-#define SPI_MODE_3	(SPI_CPOL | SPI_CPHA)
+#define SPI_MODE_3  (SPI_CPOL | SPI_CPHA)
 
 typedef uint8_t spi_flags_t;
 typedef uint32_t board_spi_select_id_t;
 
 //! \brief Polled SPI device definition
 struct spi_device {
-	//! Board specific select id
-	port_pin_t	id;
+    //! Board specific select id
+    port_pin_t  id;
 };
 
 /*! \brief Initializes the SPI in master mode.
@@ -190,7 +190,7 @@ extern void spi_deselect_device(SPI_t *spi, struct spi_device *device);
  */
 __always_inline static void spi_write_single(SPI_t *spi, uint8_t data)
 {
-	spi_put(spi,data);
+    spi_put(spi,data);
 }
 
 /**
@@ -215,7 +215,7 @@ extern status_code_t spi_write_packet(SPI_t *spi,const uint8_t *data, size_t len
  */
 inline static void spi_read_single(SPI_t *spi, uint8_t *data)
 {
-	*data=spi_get(spi);
+    *data=spi_get(spi);
 }
 
 /**
@@ -241,7 +241,7 @@ extern status_code_t spi_read_packet(SPI_t *spi, uint8_t *data, size_t len);
  */
 inline static bool spi_is_tx_empty(SPI_t *spi)
 {
-	return spi_is_tx_ok(spi);
+    return spi_is_tx_ok(spi);
 }
 
 /*! \brief Checks if all transmissions is ready.
@@ -254,7 +254,7 @@ inline static bool spi_is_tx_empty(SPI_t *spi)
  */
 inline static bool spi_is_tx_ready(SPI_t *spi)
 {
-	return spi_is_tx_ok(spi);
+    return spi_is_tx_ok(spi);
 }
 
 /*! \brief Tests if the SPI contains a received character.
@@ -265,7 +265,7 @@ inline static bool spi_is_tx_ready(SPI_t *spi)
  */
 inline static bool spi_is_rx_full(SPI_t *spi)
 {
-	return spi_is_tx_ok(spi);
+    return spi_is_tx_ok(spi);
 }
 
 /*! \brief Checks if all reception is ready.
@@ -276,7 +276,7 @@ inline static bool spi_is_rx_full(SPI_t *spi)
  */
 inline static bool spi_is_rx_ready(SPI_t *spi)
 {
-	return spi_is_tx_ok(spi);
+    return spi_is_tx_ok(spi);
 }
 
 //! @}
@@ -301,26 +301,26 @@ inline static bool spi_is_rx_ready(SPI_t *spi)
  * \subsection spi_master_xmega_basic_setup_code Example code
  * Add to application C-file (e.g. main.c):
  * \code
-	   void spi_init_pins(void)
-	   {
-	       ioport_configure_port_pin(&PORTD, PIN1_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+       void spi_init_pins(void)
+       {
+           ioport_configure_port_pin(&PORTD, PIN1_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
 
-	       ioport_configure_port_pin(&PORTD, PIN4_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
-	       ioport_configure_port_pin(&PORTD, PIN5_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
-	       ioport_configure_port_pin(&PORTD, PIN6_bm, IOPORT_DIR_INPUT);
-	       ioport_configure_port_pin(&PORTD, PIN7_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
-	   }
+           ioport_configure_port_pin(&PORTD, PIN4_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
+           ioport_configure_port_pin(&PORTD, PIN5_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+           ioport_configure_port_pin(&PORTD, PIN6_bm, IOPORT_DIR_INPUT);
+           ioport_configure_port_pin(&PORTD, PIN7_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+       }
 
-	   void spi_init_module(void)
-	   {
-	      struct spi_device spi_device_conf = {
-	          .id = IOPORT_CREATE_PIN(PORTD, 1)
-	      };
+       void spi_init_module(void)
+       {
+          struct spi_device spi_device_conf = {
+              .id = IOPORT_CREATE_PIN(PORTD, 1)
+          };
 
-	      spi_master_init(&SPID);
-	      spi_master_setup_device(&SPID, &spi_device_conf, SPI_MODE_0, 1000000, 0);
-	      spi_enable(&SPID);
-	   }
+          spi_master_init(&SPID);
+          spi_master_setup_device(&SPID, &spi_device_conf, SPI_MODE_0, 1000000, 0);
+          spi_enable(&SPID);
+       }
 \endcode
  *
  * \subsection spi_master_xmega_basic_setup Workflow
@@ -331,58 +331,58 @@ inline static bool spi_is_rx_ready(SPI_t *spi)
  * the ATxmega32A4U device).
  *  -# Set the pin used for slave select as output high:
  *    \code
-	ioport_configure_port_pin(&PORTD, PIN1_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+    ioport_configure_port_pin(&PORTD, PIN1_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
 \endcode
  *  -# Enable pull-up on own chip select (SS):
  *    \code
-	ioport_configure_port_pin(&PORTD, PIN4_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
+    ioport_configure_port_pin(&PORTD, PIN4_bm, IOPORT_PULL_UP | IOPORT_DIR_INPUT);
 \endcode
  *    \attention If this pin is pulled low the SPI module will go into slave mode.
  *  -# Set MOSI and SCL as output high, and set MISO as input:
  *    \code
-	ioport_configure_port_pin(&PORTD, PIN5_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
-	ioport_configure_port_pin(&PORTD, PIN6_bm, IOPORT_DIR_INPUT);
-	ioport_configure_port_pin(&PORTD, PIN7_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+    ioport_configure_port_pin(&PORTD, PIN5_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
+    ioport_configure_port_pin(&PORTD, PIN6_bm, IOPORT_DIR_INPUT);
+    ioport_configure_port_pin(&PORTD, PIN7_bm, IOPORT_INIT_HIGH | IOPORT_DIR_OUTPUT);
 \endcode
  * -# Define the SPI device configuration struct to describe which pin the
  * slave select (slave chip select) is connected to, in this case the slave
  * select pin has been connected to PORTD pin 1 (PD1):
  *  - \code
-	struct spi_device spi_device_conf = {
-	    .id = IOPORT_CREATE_PIN(PORTD, 1)
-	};
+    struct spi_device spi_device_conf = {
+        .id = IOPORT_CREATE_PIN(PORTD, 1)
+    };
 \endcode
  * -# Initialize the SPI module, in this case SPI on PORTD has been chosen:
  *  - \code
-	spi_master_init(&SPID);
+    spi_master_init(&SPID);
 \endcode
  * -# Setup the SPI master module for a specific device:
  *  - \code
-	spi_master_setup_device(&SPID, &spi_device_conf, SPI_MODE_0, 1000000, 0);
+    spi_master_setup_device(&SPID, &spi_device_conf, SPI_MODE_0, 1000000, 0);
 \endcode
  *  - \note The last argument, which is zero in this case, can be ignored and is
  *  only included for compatibility purposes.
  * -# Then enable the SPI:
  *  - \code
-	spi_enable(&SPID);
+    spi_enable(&SPID);
 \endcode
  *
  * \section spi_master_xmega_basic_usage Usage steps
  * \subsection spi_master_xmega_basic_usage_code Example code
  * Add to, e.g., the main loop in the application C-file:
  * \code
-	   uint8_t data_buffer[1] = {0xAA};
+       uint8_t data_buffer[1] = {0xAA};
 
-	   struct spi_device spi_device_conf = {
-	       .id = IOPORT_CREATE_PIN(PORTD, 1)
-	   };
+       struct spi_device spi_device_conf = {
+           .id = IOPORT_CREATE_PIN(PORTD, 1)
+       };
 
-	   spi_select_device(&SPID, &spi_device_conf);
+       spi_select_device(&SPID, &spi_device_conf);
 
-	   spi_write_packet(&SPID, data_buffer, 1);
-	   spi_read_packet(&SPID, data_buffer, 1);
+       spi_write_packet(&SPID, data_buffer, 1);
+       spi_read_packet(&SPID, data_buffer, 1);
 
-	   spi_deselect_device(&SPID, &spi_device_conf);
+       spi_deselect_device(&SPID, &spi_device_conf);
 \endcode
  *
  * \subsection spi_master_xmega_basic_usage_flow Workflow
@@ -390,15 +390,15 @@ inline static bool spi_is_rx_ready(SPI_t *spi)
  * a single byte buffer is used. The buffer can be of arbitrary size as long as
  * there is space left in SRAM:
  *  - \code
-	uint8_t data_buffer[1] = {0xAA};
+    uint8_t data_buffer[1] = {0xAA};
 \endcode
  * -# Define the SPI device configuration struct to describe which pin the
  * slave select (slave chip select) is connected to, in this case the slave
  * select pin has been connected to PORTD pin 1 (PD1):
  *  - \code
-	struct spi_device spi_device_conf = {
-	    .id = IOPORT_CREATE_PIN(PORTD, 1)
-	};
+    struct spi_device spi_device_conf = {
+        .id = IOPORT_CREATE_PIN(PORTD, 1)
+    };
 \endcode
  *  - \note As this struct is the same for both the initializing part and the usage
  * part it could be a good idea to make the struct global, and hence accessible
@@ -406,24 +406,24 @@ inline static bool spi_is_rx_ready(SPI_t *spi)
  * create the struct in the main function and pass the address of the struct to
  * the spi_init_module() function, e.g.:
  *  \code
-	   void spi_init_module(struct spi_device *spi_device_conf)
-	   {
-	       ...
+       void spi_init_module(struct spi_device *spi_device_conf)
+       {
+           ...
 
-	       spi_master_setup_device(&SPID, spi_device_conf, SPI_MODE_0, 1000000, 0);
+           spi_master_setup_device(&SPID, spi_device_conf, SPI_MODE_0, 1000000, 0);
 
-	       ...
-	   }
+           ...
+       }
 \endcode
  * -# Write data to the SPI slave device, in this case write one byte from the
  * data_buffer:
  *  - \code
-	spi_write_packet(&SPID, data_buffer, 1);
+    spi_write_packet(&SPID, data_buffer, 1);
 \endcode
  * -# Read data from the SPI slave device, in this case read one byte and put it
  * into the data_buffer:
  *  - \code
-	spi_read_packet(&SPID, data_buffer, 1);
+    spi_read_packet(&SPID, data_buffer, 1);
 \endcode
  *  - \attention As the SPI works as a shift register so that data is shifted in at
  * the same time as data is shifted out a read operation will mean that a dummy
@@ -432,7 +432,7 @@ inline static bool spi_is_rx_ready(SPI_t *spi)
  * file.
  * -# When read and write operations is done de-select the slave:
  *  - \code
-	spi_deselect_device(&SPID, &spi_device_conf);
+    spi_deselect_device(&SPID, &spi_device_conf);
 \endcode
  *
  */

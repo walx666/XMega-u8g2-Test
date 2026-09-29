@@ -49,13 +49,13 @@
  * \todo Remove when header files are fixed if WinAVR release
  */
 typedef struct RTC32_struct2 {
-	register8_t CTRL;
-	register8_t SYNCCTRL;
-	register8_t INTCTRL;
-	register8_t INTFLAGS;
-	_DWORDREGISTER(CNT);
-	_DWORDREGISTER(PER);
-	_DWORDREGISTER(COMP);
+    register8_t CTRL;
+    register8_t SYNCCTRL;
+    register8_t INTCTRL;
+    register8_t INTFLAGS;
+    _DWORDREGISTER(CNT);
+    _DWORDREGISTER(PER);
+    _DWORDREGISTER(COMP);
 } RTC32_t2;
 
 #undef RTC32
@@ -84,8 +84,8 @@ typedef struct RTC32_struct2 {
  * \brief Driver private struct
  */
 struct rtc_data_struct {
-	//! Callback function to use on alarm
-	rtc_callback_t callback;
+    //! Callback function to use on alarm
+    rtc_callback_t callback;
 };
 
 /**
@@ -103,7 +103,7 @@ struct rtc_data_struct rtc_data;
  */
 static __always_inline bool rtc_is_busy(void)
 {
-	return RTC32.SYNCCTRL & RTC32_SYNCBUSY_bm;
+    return RTC32.SYNCCTRL & RTC32_SYNCBUSY_bm;
 }
 
 /**
@@ -114,9 +114,9 @@ static __always_inline bool rtc_is_busy(void)
  */
 static inline uint32_t rtc_get_counter(void)
 {
-	RTC32.SYNCCTRL = RTC32_SYNCCNT_bm;
-	while (RTC32.SYNCCTRL & RTC32_SYNCCNT_bm);
-	return RTC32.CNT;
+    RTC32.SYNCCTRL = RTC32_SYNCCNT_bm;
+    while (RTC32.SYNCCTRL & RTC32_SYNCCNT_bm);
+    return RTC32.CNT;
 }
 
 /**
@@ -126,12 +126,12 @@ static inline uint32_t rtc_get_counter(void)
  */
 void rtc_set_time(uint32_t time)
 {
-	RTC32.CTRL = 0;
+    RTC32.CTRL = 0;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	RTC32.CNT = time;
-	RTC32.CTRL = RTC32_ENABLE_bm;
+    RTC32.CNT = time;
+    RTC32.CTRL = RTC32_ENABLE_bm;
 }
 
 /**
@@ -141,7 +141,7 @@ void rtc_set_time(uint32_t time)
  */
 uint32_t rtc_get_time(void)
 {
-	return rtc_get_counter();
+    return rtc_get_counter();
 }
 
 /**
@@ -158,9 +158,9 @@ uint32_t rtc_get_time(void)
  */
 void rtc_set_alarm(uint32_t time)
 {
-	RTC32.INTCTRL = RTC32_COMPARE_INT_LEVEL;
-	RTC32.COMP = time;
-	RTC32.INTFLAGS = RTC32_COMPIF_bm;
+    RTC32.INTCTRL = RTC32_COMPARE_INT_LEVEL;
+    RTC32.COMP = time;
+    RTC32.INTFLAGS = RTC32_COMPIF_bm;
 }
 
 /**
@@ -171,8 +171,8 @@ void rtc_set_alarm(uint32_t time)
  */
 bool rtc_alarm_has_triggered(void)
 {
-	// Interrupt enable is used on pending alarm
-	return !(RTC32.INTCTRL & RTC32_COMPARE_INT_LEVEL);
+    // Interrupt enable is used on pending alarm
+    return !(RTC32.INTCTRL & RTC32_COMPARE_INT_LEVEL);
 }
 
 /**
@@ -182,7 +182,7 @@ bool rtc_alarm_has_triggered(void)
  */
 void rtc_set_callback(rtc_callback_t callback)
 {
-	rtc_data.callback = callback;
+    rtc_data.callback = callback;
 }
 
 /**
@@ -204,43 +204,43 @@ void rtc_set_callback(rtc_callback_t callback)
  */
 enum vbat_status_code rtc_vbat_system_check(bool first_time_startup)
 {
-	enum vbat_status_code vbat_status;
-	uint8_t flags = VBAT.STATUS;
+    enum vbat_status_code vbat_status;
+    uint8_t flags = VBAT.STATUS;
 
-	/* Ensure the module is clocked to be able to check the registers */
-	sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
+    /* Ensure the module is clocked to be able to check the registers */
+    sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
 
-	/*
-	 * Check if a sufficient voltage was detected on the VBAT input.
-	 * The brown-out detector (BBBOD) will be sampled once when the
-	 * device starts up and the result is visible as the BBPWR flag.
-	 */
-	if (flags & VBAT_BBPWR_bm) {
-		vbat_status = VBAT_STATUS_NO_POWER;
-	} else {
-		/*
-		 * We have sufficient power, now we check if a power-on-reset
-		 * (BBPOR) was detected on VBAT. This is visible from the BBPORF
-		 * flag which is also only updated once when the device starts.
-		 */
-		if (flags & VBAT_BBPORF_bm) {
-			if (first_time_startup) {
-				vbat_status = VBAT_STATUS_INIT;
-			} else {
-				vbat_status = VBAT_STATUS_BBPOR;
-			}
-		} else if (flags & VBAT_BBBORF_bm) {
-			vbat_status = VBAT_STATUS_BBBOD;
-		} else {
-			VBAT.CTRL = VBAT_ACCEN_bm;
-			if (flags & VBAT_XOSCFAIL_bm) {
-				vbat_status = VBAT_STATUS_XOSCFAIL;
-			} else {
-				vbat_status = VBAT_STATUS_OK;
-			}
-		}
-	}
-	return vbat_status;
+    /*
+     * Check if a sufficient voltage was detected on the VBAT input.
+     * The brown-out detector (BBBOD) will be sampled once when the
+     * device starts up and the result is visible as the BBPWR flag.
+     */
+    if (flags & VBAT_BBPWR_bm) {
+        vbat_status = VBAT_STATUS_NO_POWER;
+    } else {
+        /*
+         * We have sufficient power, now we check if a power-on-reset
+         * (BBPOR) was detected on VBAT. This is visible from the BBPORF
+         * flag which is also only updated once when the device starts.
+         */
+        if (flags & VBAT_BBPORF_bm) {
+            if (first_time_startup) {
+                vbat_status = VBAT_STATUS_INIT;
+            } else {
+                vbat_status = VBAT_STATUS_BBPOR;
+            }
+        } else if (flags & VBAT_BBBORF_bm) {
+            vbat_status = VBAT_STATUS_BBBOD;
+        } else {
+            VBAT.CTRL = VBAT_ACCEN_bm;
+            if (flags & VBAT_XOSCFAIL_bm) {
+                vbat_status = VBAT_STATUS_XOSCFAIL;
+            } else {
+                vbat_status = VBAT_STATUS_OK;
+            }
+        }
+    }
+    return vbat_status;
 }
 
 /**
@@ -256,19 +256,19 @@ enum vbat_status_code rtc_vbat_system_check(bool first_time_startup)
  */
 static void vbat_init(void)
 {
-	// Enable access to VBAT
-	VBAT.CTRL |= VBAT_ACCEN_bm;
+    // Enable access to VBAT
+    VBAT.CTRL |= VBAT_ACCEN_bm;
 
-	ccp_write_io((void *)&VBAT.CTRL, VBAT_RESET_bm);
+    ccp_write_io((void *)&VBAT.CTRL, VBAT_RESET_bm);
 
-	VBAT.CTRL |= VBAT_XOSCFDEN_bm;
-	/* This delay is needed to give the voltage in the backup system some
-	* time to stabilize before we turn on the oscillator. If we do not
-	* have this delay we may get a failure detection.
-	*/
-	delay_us(200);
-	VBAT.CTRL |= VBAT_XOSCEN_bm | RTC32_CLOCK;
-	while (!(VBAT.STATUS & VBAT_XOSCRDY_bm));
+    VBAT.CTRL |= VBAT_XOSCFDEN_bm;
+    /* This delay is needed to give the voltage in the backup system some
+    * time to stabilize before we turn on the oscillator. If we do not
+    * have this delay we may get a failure detection.
+    */
+    delay_us(200);
+    VBAT.CTRL |= VBAT_XOSCEN_bm | RTC32_CLOCK;
+    while (!(VBAT.STATUS & VBAT_XOSCRDY_bm));
 }
 
 /**
@@ -283,26 +283,26 @@ static void vbat_init(void)
  */
 void rtc_init(void)
 {
-	sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
-	// Set up VBAT system and start oscillator
-	vbat_init();
+    sysclk_enable_module(SYSCLK_PORT_GEN, SYSCLK_RTC);
+    // Set up VBAT system and start oscillator
+    vbat_init();
 
-	// Disable the RTC32 module before setting it up
-	RTC32.CTRL = 0;
+    // Disable the RTC32 module before setting it up
+    RTC32.CTRL = 0;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	// Set up maximum period and start at 0
-	RTC32.PER = 0xffffffff;
-	RTC32.CNT = 0;
+    // Set up maximum period and start at 0
+    RTC32.PER = 0xffffffff;
+    RTC32.CNT = 0;
 
-	while (rtc_is_busy());
+    while (rtc_is_busy());
 
-	RTC32.INTCTRL = 0;
-	RTC32.CTRL = RTC32_ENABLE_bm;
+    RTC32.INTCTRL = 0;
+    RTC32.CTRL = RTC32_ENABLE_bm;
 
-	// Make sure it's sync'ed before return
-	while (rtc_is_busy());
+    // Make sure it's sync'ed before return
+    while (rtc_is_busy());
 }
 
 /**
@@ -314,7 +314,7 @@ void rtc_init(void)
  */
 ISR(RTC32_COMP_vect)
 {
-	RTC32.INTCTRL = 0;
-	if (rtc_data.callback)
-		rtc_data.callback(rtc_get_time());
+    RTC32.INTCTRL = 0;
+    if (rtc_data.callback)
+        rtc_data.callback(rtc_get_time());
 }

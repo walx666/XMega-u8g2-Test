@@ -64,30 +64,30 @@
  */
 static inline void usb_pad_init(void)
 {
-	uint8_t cal;
+    uint8_t cal;
 
 #ifdef USB_PAD_USER_CAL0
-	USB_CAL0 = USB_PAD_USER_CAL0;
+    USB_CAL0 = USB_PAD_USER_CAL0;
 #else
-	cal = nvm_read_production_signature_row
-			(nvm_get_production_signature_row_offset(USBCAL0));
-	if (cal != 0xFF) {
-		USB_CAL0 = cal;
-	} else {
-		USB_CAL0 = 0x1F;
-	}
+    cal = nvm_read_production_signature_row
+            (nvm_get_production_signature_row_offset(USBCAL0));
+    if (cal != 0xFF) {
+        USB_CAL0 = cal;
+    } else {
+        USB_CAL0 = 0x1F;
+    }
 #endif
 
 #ifdef USB_PAD_USER_CAL1
-	USB_CAL1 = USB_PAD_USER_CAL1;
+    USB_CAL1 = USB_PAD_USER_CAL1;
 #else
-	cal = nvm_read_production_signature_row
-			(nvm_get_production_signature_row_offset(USBCAL1));
-	if (cal != 0xFF) {
-		USB_CAL1 = cal;
-	} else {
-		USB_CAL1 = 0x1F;
-	}
+    cal = nvm_read_production_signature_row
+            (nvm_get_production_signature_row_offset(USBCAL1));
+    if (cal != 0xFF) {
+        USB_CAL1 = cal;
+    } else {
+        USB_CAL1 = 0x1F;
+    }
 #endif
 }
 
